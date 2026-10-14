@@ -1,0 +1,9 @@
+argi.chat.memory.repository.redis:
+  enabled: true
+  client-type: lettuce
+  mode: standalone
+  host: ${REDIS_HOST:127.0.0.1}
+  port: ${REDIS_PORT:6379}
+  password: ${REDIS_PASSWORD:}
+  database: 0
+  key-prefix: "argi-example:"

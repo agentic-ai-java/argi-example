@@ -1,0 +1,11 @@
+argi.vectorstore.analyticdb:
+  enabled: true
+  collect-name: argi_examples
+  access-key-id: ${ALIBABA_ACCESS_KEY_ID}
+  access-key-secret: ${ALIBABA_ACCESS_KEY_SECRET}
+  region-id: ${ANALYTICDB_REGION}
+  db-instance-id: ${ANALYTICDB_INSTANCE}
+  manager-account: ${ANALYTICDB_ACCOUNT}
+  manager-account-password: ${ANALYTICDB_PASSWORD}
+  namespace: ${ANALYTICDB_NAMESPACE}
+  namespace-password: ${ANALYTICDB_NAMESPACE_PASSWORD}

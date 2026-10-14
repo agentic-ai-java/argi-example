@@ -1,0 +1,27 @@
+argi.mcp.nacos:
+  server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+  namespace: ${NACOS_NAMESPACE:public}
+  username: ${NACOS_USERNAME:}
+  password: ${NACOS_PASSWORD:}
+server.port: ${SERVER_PORT:8093}
+spring.ai.mcp.server.enabled: false
+argi.mcp.gateway:
+  enabled: false
+  registry: nacos
+  tool-timeout: 15s
+  multi-server:
+    enabled: true
+    servers:
+      - name: catalog-http
+        transport: STREAMABLE
+        mcp-endpoint: /catalog/mcp
+        server-name: argi-catalog-gateway
+        server-version: 1.0.0
+        service-names: [argi-catalog]
+      - name: catalog-events
+        transport: SSE
+        sse-endpoint: /catalog/sse
+        message-endpoint: /catalog/message
+        server-name: argi-catalog-events
+        server-version: 1.0.0
+        service-names: [argi-catalog]

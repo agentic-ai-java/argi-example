@@ -1,0 +1,8 @@
+argi.chat.memory.repository.mongodb:
+  enabled: true
+  host: ${MONGODB_HOST:127.0.0.1}
+  port: ${MONGODB_PORT:27017}
+  user-name: ${MONGODB_USERNAME}
+  password: ${MONGODB_PASSWORD}
+  auth-database-name: ${MONGODB_AUTH_DATABASE:admin}
+  database-name: argi_examples

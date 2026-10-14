@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.github.agentic-ai-java.examples</groupId>
+    <artifactId>argi-examples</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>argi-graph-example</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+    <module>cancellation</module>
+    <module>conditional-routing</module>
+    <module>hello-graph</module>
+    <module>hitl</module>
+    <module>human-in-the-loop</module>
+    <module>observation</module>
+    <module>parallel-nodes</module>
+    <module>parallel-subgraph</module>
+    <module>persistence</module>
+    <module>plantuml</module>
+    <module>runtime-store</module>
+    <module>scheduling</module>
+    <module>spring-ai-integration</module>
+    <module>state-serialization</module>
+    <module>subgraph-as-compiled-graph</module>
+    <module>subgraph-as-node</module>
+    <module>subgraphs</module>
+  </modules>
+</project>

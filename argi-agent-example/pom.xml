@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.github.agentic-ai-java.examples</groupId>
+    <artifactId>argi-examples</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>argi-agent-example</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+    <module>a2a</module>
+    <module>agent-as-tool</module>
+    <module>agent-hitl</module>
+    <module>agentic-rag</module>
+    <module>builtin-tools</module>
+    <module>context-compaction</module>
+    <module>context-engineering</module>
+    <module>hooks-and-retries</module>
+    <module>interceptors</module>
+    <module>multi-agent</module>
+    <module>planner</module>
+    <module>react-tools</module>
+    <module>routing-streaming</module>
+    <module>skills</module>
+    <module>structured-output</module>
+    <module>studio-chatbot</module>
+    <module>support-workflow</module>
+  </modules>
+</project>

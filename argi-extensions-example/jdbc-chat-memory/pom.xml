@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.github.agentic-ai-java.examples</groupId>
+    <artifactId>argi-extensions-example</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>example-jdbc-chat-memory</artifactId>
+  <name>ARGI Example: jdbc-chat-memory</name>
+  <properties>
+    <example.mainClass>io.github.agentic.ai.examples.JdbcChatMemory</example.mainClass>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>io.github.agentic-ai-java</groupId>
+      <artifactId>argi-model-chat-memory-repository-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+  </dependencies>
+</project>

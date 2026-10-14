@@ -1,0 +1,10 @@
+argi.mcp.nacos:
+  server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+  namespace: ${NACOS_NAMESPACE:public}
+  username: ${NACOS_USERNAME:}
+  password: ${NACOS_PASSWORD:}
+spring.ai.mcp.server.enabled: false
+argi.mcp.router:
+  enabled: true
+  discovery-order: [nacos]
+  service-names: [argi-catalog]

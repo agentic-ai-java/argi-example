@@ -1,0 +1,1089 @@
+{
+  "reviewDate": "2026-10-14",
+  "verification": "Static authoring review only; no execution after the user instruction.",
+  "modules": [
+    {
+      "path": "argi-adapter-example/agentscope",
+      "artifact": "example-agentscope",
+      "mainClass": "io.github.agentic.ai.examples.AgentScopeExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/AgentScopeExample.java",
+      "description": "Wraps an AgentScope OpenAI-compatible model in the neutral ARGI ChatClient.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/AgentScopeExampleTest.java"
+      ]
+    },
+    {
+      "path": "argi-adapter-example/google-adk",
+      "artifact": "example-google-adk",
+      "mainClass": "io.github.agentic.ai.examples.GoogleAdkExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/GoogleAdkExample.java",
+      "description": "Uses the Google ADK Apigee OpenAI-compatible transport through an ARGI adapter.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/GoogleAdkExampleTest.java"
+      ]
+    },
+    {
+      "path": "argi-adapter-example/langchain4j",
+      "artifact": "example-langchain4j",
+      "mainClass": "io.github.agentic.ai.examples.LangChain4jExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/LangChain4jExample.java",
+      "description": "Wraps LangChain4j chat and streaming models in the neutral ARGI ChatClient.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/LangChain4jExampleTest.java"
+      ]
+    },
+    {
+      "path": "argi-adapter-example/spring-ai",
+      "artifact": "example-spring-ai",
+      "mainClass": "io.github.agentic.ai.examples.SpringAiExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/SpringAiExample.java",
+      "description": "Wraps a Spring AI OpenAI-compatible model in the neutral ARGI ChatClient.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/SpringAiExampleTest.java"
+      ]
+    },
+    {
+      "path": "argi-agent-example/a2a",
+      "artifact": "example-a2a",
+      "mainClass": "io.github.agentic.ai.examples.A2aExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/A2aExample.java",
+      "description": "Discovers a remote A2A agent card and delegates a task over the A2A protocol.",
+      "runtime": "service",
+      "requirements": "An existing A2A service with a public agent card; set A2A_BASE_URL.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-agent-example/agent-as-tool",
+      "artifact": "example-agent-as-tool",
+      "mainClass": "io.github.agentic.ai.examples.AgentAsToolExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/AgentAsToolExample.java",
+      "description": "Registers a specialist as a neutral Tool, letting a coordinator delegate work.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-agent-example/agent-hitl",
+      "artifact": "example-agent-hitl",
+      "mainClass": "io.github.agentic.ai.examples.AgentApproval",
+      "entry": "src/main/java/io/github/agentic/ai/examples/AgentApproval.java",
+      "description": "Pauses tool calls and accepts approved, rejected, or edited human feedback.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-agent-example/agentic-rag",
+      "artifact": "example-agentic-rag",
+      "mainClass": "io.github.agentic.ai.examples.AgenticRag",
+      "entry": "src/main/java/io/github/agentic/ai/examples/AgenticRag.java",
+      "description": "Makes retrieval an agent tool and adds evidence through a MessagesModelHook.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-agent-example/builtin-tools",
+      "artifact": "example-builtin-tools",
+      "mainClass": "io.github.agentic.ai.examples.BuiltinToolsExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/BuiltinToolsExample.java",
+      "description": "Registers built-in filesystem, search, and todo tools with neutral bindings.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-agent-example/context-compaction",
+      "artifact": "example-context-compaction",
+      "mainClass": "io.github.agentic.ai.examples.ContextCompaction",
+      "entry": "src/main/java/io/github/agentic/ai/examples/ContextCompaction.java",
+      "description": "Uses SummarizationHook to bound model context while retaining recent turns.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-agent-example/context-engineering",
+      "artifact": "example-context-engineering",
+      "mainClass": "io.github.agentic.ai.examples.ContextEngineering",
+      "entry": "src/main/java/io/github/agentic/ai/examples/ContextEngineering.java",
+      "description": "Preserves per-thread conversation history and enforces model call budgets.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/ContextEngineeringTest.java"
+      ]
+    },
+    {
+      "path": "argi-agent-example/hooks-and-retries",
+      "artifact": "example-hooks-and-retries",
+      "mainClass": "io.github.agentic.ai.examples.HooksAndRetries",
+      "entry": "src/main/java/io/github/agentic/ai/examples/HooksAndRetries.java",
+      "description": "Combines PII redaction, model/tool budgets, and bounded retries for read-only tools.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-agent-example/interceptors",
+      "artifact": "example-interceptors",
+      "mainClass": "io.github.agentic.ai.examples.InterceptorsExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/InterceptorsExample.java",
+      "description": "Custom model and tool interceptors measure duration and cache a read-only lookup.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-agent-example/multi-agent",
+      "artifact": "example-multi-agent",
+      "mainClass": "io.github.agentic.ai.examples.MultiAgent",
+      "entry": "src/main/java/io/github/agentic/ai/examples/MultiAgent.java",
+      "description": "Parallel reviewers feed sequential writing and a bounded revision loop.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/MultiAgentTest.java"
+      ]
+    },
+    {
+      "path": "argi-agent-example/planner",
+      "artifact": "example-planner",
+      "mainClass": "io.github.agentic.ai.examples.PlannerExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/PlannerExample.java",
+      "description": "Produces validated direct or decomposed plans from an explicit capability catalog.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-agent-example/react-tools",
+      "artifact": "example-react-tools",
+      "mainClass": "io.github.agentic.ai.examples.ReactTools",
+      "entry": "src/main/java/io/github/agentic/ai/examples/ReactTools.java",
+      "description": "Runs a ReAct tool loop against a local order-tracking catalog.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/ReactToolsTest.java"
+      ]
+    },
+    {
+      "path": "argi-agent-example/routing-streaming",
+      "artifact": "example-routing-streaming",
+      "mainClass": "io.github.agentic.ai.examples.RoutingStreaming",
+      "entry": "src/main/java/io/github/agentic/ai/examples/RoutingStreaming.java",
+      "description": "Uses LLM routing to choose a specialist and demonstrates neutral streamed messages.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-agent-example/skills",
+      "artifact": "example-skills",
+      "mainClass": "io.github.agentic.ai.examples.SkillsExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/SkillsExample.java",
+      "description": "Loads packaged skills, decorates neutral prompts, and exposes progressive skill disclosure.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-agent-example/structured-output",
+      "artifact": "example-structured-output",
+      "mainClass": "io.github.agentic.ai.examples.StructuredOutput",
+      "entry": "src/main/java/io/github/agentic/ai/examples/StructuredOutput.java",
+      "description": "Requests a JSON schema and validates the parsed domain record.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-agent-example/studio-chatbot",
+      "artifact": "example-studio-chatbot",
+      "mainClass": "io.github.agentic.ai.examples.StudioChatbot",
+      "entry": "src/main/java/io/github/agentic/ai/examples/StudioChatbot.java",
+      "description": "Publishes a stateful agent bean through the embedded ARGI Studio.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/StudioChatbotTest.java"
+      ]
+    },
+    {
+      "path": "argi-agent-example/support-workflow",
+      "artifact": "example-support-workflow",
+      "mainClass": "io.github.agentic.ai.examples.SupportWorkflow",
+      "entry": "src/main/java/io/github/agentic/ai/examples/SupportWorkflow.java",
+      "description": "Embeds a ReAct writer in a deterministic support workflow with human review.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-extensions-example/a2a-nacos",
+      "artifact": "example-a2a-nacos",
+      "mainClass": "io.github.agentic.ai.examples.NacosA2aExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/NacosA2aExample.java",
+      "description": "Resolves an A2A agent by registered name in Nacos before delegation.",
+      "runtime": "service",
+      "requirements": "Nacos A2A discovery and a registered remote agent; set A2A_AGENT_NAME and NACOS_SERVER_ADDR.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-extensions-example/docker-execution",
+      "artifact": "example-docker-execution",
+      "mainClass": "io.github.agentic.ai.examples.DockerExecution",
+      "entry": "src/main/java/io/github/agentic/ai/examples/DockerExecution.java",
+      "description": "Executes a fixed Python calculation through the Extensions Docker code executor.",
+      "runtime": "service",
+      "requirements": "A running Docker daemon and a pre-pulled Python image; set DOCKER_HOST for the daemon socket and optionally ARGI_DOCKER_IMAGE.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/DockerExecutionTest.java"
+      ]
+    },
+    {
+      "path": "argi-extensions-example/document-parsing",
+      "artifact": "example-document-parsing",
+      "mainClass": "io.github.agentic.ai.examples.DocumentParsing",
+      "entry": "src/main/java/io/github/agentic/ai/examples/DocumentParsing.java",
+      "description": "Parses UTF-8 text and JSON records while preserving source metadata.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/DocumentParsingTest.java"
+      ]
+    },
+    {
+      "path": "argi-extensions-example/http-node",
+      "artifact": "example-http-node",
+      "mainClass": "io.github.agentic.ai.examples.HttpNodeExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/HttpNodeExample.java",
+      "description": "Retrieves an HTTP order resource as a graph step with explicit timeout and network policy.",
+      "runtime": "service",
+      "requirements": "An existing tracking HTTP endpoint; set TRACKING_BASE_URL and ALLOW_PRIVATE_NETWORK=true only for a trusted local endpoint.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/HttpNodeExampleTest.java"
+      ]
+    },
+    {
+      "path": "argi-extensions-example/jdbc-chat-memory",
+      "artifact": "example-jdbc-chat-memory",
+      "mainClass": "io.github.agentic.ai.examples.JdbcChatMemory",
+      "entry": "src/main/java/io/github/agentic/ai/examples/JdbcChatMemory.java",
+      "description": "Persists a bounded Spring AI conversation with the Extensions H2 repository.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/JdbcChatMemoryTest.java"
+      ]
+    },
+    {
+      "path": "argi-extensions-example/jdbc-checkpoint",
+      "artifact": "example-jdbc-checkpoint",
+      "mainClass": "io.github.agentic.ai.examples.JdbcCheckpoint",
+      "entry": "src/main/java/io/github/agentic/ai/examples/JdbcCheckpoint.java",
+      "description": "Restores a pending approval through an H2 JDBC checkpoint saver and a new graph.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/JdbcCheckpointTest.java"
+      ]
+    },
+    {
+      "path": "argi-extensions-example/mcp-client",
+      "artifact": "example-mcp-client",
+      "mainClass": "io.github.agentic.ai.examples.McpClientExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/McpClientExample.java",
+      "description": "Initializes a Streamable HTTP MCP client and enumerates all tool pages.",
+      "runtime": "service",
+      "requirements": "An existing Streamable HTTP MCP server; set MCP_BASE_URL and optionally MCP_ENDPOINT.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/McpClientExampleTest.java"
+      ]
+    },
+    {
+      "path": "argi-extensions-example/mcp-discovery",
+      "artifact": "example-mcp-discovery",
+      "mainClass": "io.github.agentic.ai.examples.McpDiscoveryAgent",
+      "entry": "src/main/java/io/github/agentic/ai/examples/McpDiscoveryAgent.java",
+      "description": "Discovers registered MCP tools through Nacos and adapts callbacks for ReAct.",
+      "runtime": "service",
+      "requirements": "Nacos plus the mcp-registry example already running, and model credentials.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-extensions-example/mcp-gateway",
+      "artifact": "example-mcp-gateway",
+      "mainClass": "io.github.agentic.ai.examples.McpGatewayExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/McpGatewayExample.java",
+      "description": "Aggregates Nacos MCP services into independently routed SSE and Streamable endpoints.",
+      "runtime": "service",
+      "requirements": "Nacos plus the registered argi-catalog service. This application serves gateway endpoints on port 8093.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-extensions-example/mcp-registry",
+      "artifact": "example-mcp-registry",
+      "mainClass": "io.github.agentic.ai.examples.McpRegistryServer",
+      "entry": "src/main/java/io/github/agentic/ai/examples/McpRegistryServer.java",
+      "description": "Publishes a read-only MCP tool and registers the server in Nacos.",
+      "runtime": "service",
+      "requirements": "Nacos 3 with MCP registry support; this application serves and registers argi-catalog on port 8092.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-extensions-example/mcp-router",
+      "artifact": "example-mcp-router",
+      "mainClass": "io.github.agentic.ai.examples.McpRouterAgent",
+      "entry": "src/main/java/io/github/agentic/ai/examples/McpRouterAgent.java",
+      "description": "Exposes semantic MCP routing tools to a neutral ARGI agent.",
+      "runtime": "service",
+      "requirements": "Nacos plus the mcp-registry example, a model endpoint, and an embedding endpoint.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-extensions-example/mem0-memory",
+      "artifact": "example-mem0-memory",
+      "mainClass": "io.github.agentic.ai.examples.Mem0MemoryExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/Mem0MemoryExample.java",
+      "description": "Writes semantic memories to Mem0 and retrieves them with an explicit user scope.",
+      "runtime": "service",
+      "requirements": "An existing compatible Mem0 server and model credentials. The startup configures the Mem0 server.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-extensions-example/memory-backends",
+      "artifact": "example-memory-backends",
+      "mainClass": "io.github.agentic.ai.examples.MemoryBackends",
+      "entry": "src/main/java/io/github/agentic/ai/examples/MemoryBackends.java",
+      "description": "Profile-selected Redis, MongoDB, Elasticsearch, TableStore, Memcached, and JDBC chat repositories.",
+      "runtime": "service",
+      "requirements": "The selected repository service and one Maven/Spring profile pair. See the backend configuration table below.",
+      "profiles": [
+        "memory-redis",
+        "memory-mongodb",
+        "memory-elasticsearch",
+        "memory-tablestore",
+        "memory-memcached",
+        "memory-mysql",
+        "memory-postgresql"
+      ],
+      "tests": []
+    },
+    {
+      "path": "argi-extensions-example/mongodb-checkpoint",
+      "artifact": "example-mongodb-checkpoint",
+      "mainClass": "io.github.agentic.ai.examples.MongoCheckpoint",
+      "entry": "src/main/java/io/github/agentic/ai/examples/MongoCheckpoint.java",
+      "description": "Persists neutral graph state in the Extensions MongoDB checkpoint saver.",
+      "runtime": "service",
+      "requirements": "An existing MongoDB service; set MONGODB_URI.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-extensions-example/nacos-prompt",
+      "artifact": "example-nacos-prompt",
+      "mainClass": "io.github.agentic.ai.examples.NacosPrompt",
+      "entry": "src/main/java/io/github/agentic/ai/examples/NacosPrompt.java",
+      "description": "Loads and watches a configurable prompt through Nacos and the Extensions prompt factory.",
+      "runtime": "service",
+      "requirements": "An existing Nacos Config service; set NACOS_SERVER_ADDR and optional NACOS_USERNAME/NACOS_PASSWORD.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/NacosPromptTest.java"
+      ]
+    },
+    {
+      "path": "argi-extensions-example/rag-retrieval",
+      "artifact": "example-rag-retrieval",
+      "mainClass": "io.github.agentic.ai.examples.RagRetrieval",
+      "entry": "src/main/java/io/github/agentic/ai/examples/RagRetrieval.java",
+      "description": "Expands a query with HyDE and retrieves evidence through the RAG graph node.",
+      "runtime": "service",
+      "requirements": "A real chat and embedding endpoint; set ARGI_API_KEY, ARGI_MODEL, and optionally ARGI_EMBEDDING_MODEL.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/RagRetrievalTest.java"
+      ]
+    },
+    {
+      "path": "argi-extensions-example/redis-checkpoint",
+      "artifact": "example-redis-checkpoint",
+      "mainClass": "io.github.agentic.ai.examples.RedisCheckpoint",
+      "entry": "src/main/java/io/github/agentic/ai/examples/RedisCheckpoint.java",
+      "description": "Stores and reloads neutral graph checkpoints with the Extensions Redis saver.",
+      "runtime": "service",
+      "requirements": "An existing Redis service; set REDIS_URL and optional REDIS_PASSWORD.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-extensions-example/sandbox-tools",
+      "artifact": "example-sandbox-tools",
+      "mainClass": "io.github.agentic.ai.examples.SandboxToolsExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/SandboxToolsExample.java",
+      "description": "Adapts an Extensions sandbox Python tool into a neutral ReAct agent.",
+      "runtime": "service",
+      "requirements": "An existing AgentScope Runtime sandbox manager; set SANDBOX_MANAGER_URL, optional SANDBOX_MANAGER_TOKEN, and model credentials.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-extensions-example/tair-vector-store",
+      "artifact": "example-tair-vector-store",
+      "mainClass": "io.github.agentic.ai.examples.TairVectorStoreExample",
+      "entry": "src/main/java/io/github/agentic/ai/examples/TairVectorStoreExample.java",
+      "description": "Writes real embeddings to a Tair Vector index and searches for relevant documents.",
+      "runtime": "service",
+      "requirements": "A Tair Vector-capable service (ordinary Redis is insufficient), real embeddings, TAIR_URI, and matching ARGI_EMBEDDING_DIMENSIONS.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/TairVectorStoreExampleTest.java"
+      ]
+    },
+    {
+      "path": "argi-extensions-example/vector-backends",
+      "artifact": "example-vector-backends",
+      "mainClass": "io.github.agentic.ai.examples.VectorBackends",
+      "entry": "src/main/java/io/github/agentic/ai/examples/VectorBackends.java",
+      "description": "Profile-selected AnalyticDB, OceanBase, OpenSearch, TableStore, and Tair indexing and search.",
+      "runtime": "service",
+      "requirements": "The selected vector service, a real embedding endpoint, and one Maven/Spring profile pair.",
+      "profiles": [
+        "vector-analyticdb",
+        "vector-oceanbase",
+        "vector-opensearch",
+        "vector-tablestore",
+        "vector-tair"
+      ],
+      "tests": []
+    },
+    {
+      "path": "argi-graph-example/cancellation",
+      "artifact": "example-cancellation",
+      "mainClass": "io.github.agentic.ai.examples.Cancellation",
+      "entry": "src/main/java/io/github/agentic/ai/examples/Cancellation.java",
+      "description": "Cancels exactly one graph subscription and releases its asynchronous worker.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/CancellationTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/conditional-routing",
+      "artifact": "example-conditional-routing",
+      "mainClass": "io.github.agentic.ai.examples.ConditionalRouting",
+      "entry": "src/main/java/io/github/agentic/ai/examples/ConditionalRouting.java",
+      "description": "Routes support tickets into urgent and normal queues using conditional edges.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/ConditionalRoutingTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/hello-graph",
+      "artifact": "example-hello-graph",
+      "mainClass": "io.github.agentic.ai.examples.HelloGraph",
+      "entry": "src/main/java/io/github/agentic/ai/examples/HelloGraph.java",
+      "description": "A two-step model-free workflow that normalizes a name and creates a greeting.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/HelloGraphTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/hitl",
+      "artifact": "example-hitl",
+      "mainClass": "io.github.agentic.ai.examples.DynamicApproval",
+      "entry": "src/main/java/io/github/agentic/ai/examples/DynamicApproval.java",
+      "description": "InterruptableAction requests missing feedback and resumes the same node.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/DynamicApprovalTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/human-in-the-loop",
+      "artifact": "example-human-in-the-loop",
+      "mainClass": "io.github.agentic.ai.examples.HumanInTheLoop",
+      "entry": "src/main/java/io/github/agentic/ai/examples/HumanInTheLoop.java",
+      "description": "Pauses before a refund decision and resumes from the same checkpoint.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/HumanInTheLoopTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/observation",
+      "artifact": "example-observation",
+      "mainClass": "io.github.agentic.ai.examples.LocalObservation",
+      "entry": "src/main/java/io/github/agentic/ai/examples/LocalObservation.java",
+      "description": "Records graph observations with a local Micrometer handler and no telemetry backend.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/LocalObservationTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/parallel-nodes",
+      "artifact": "example-parallel-nodes",
+      "mainClass": "io.github.agentic.ai.examples.ParallelNodes",
+      "entry": "src/main/java/io/github/agentic/ai/examples/ParallelNodes.java",
+      "description": "Fork/join branches, an append reducer, explicit executors, and streamed node output.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/ParallelNodesTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/parallel-subgraph",
+      "artifact": "example-parallel-subgraph",
+      "mainClass": "io.github.agentic.ai.examples.ParallelSubgraph",
+      "entry": "src/main/java/io/github/agentic/ai/examples/ParallelSubgraph.java",
+      "description": "Joins order checks and creates a receipt in a nested graph.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/ParallelSubgraphTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/persistence",
+      "artifact": "example-persistence",
+      "mainClass": "io.github.agentic.ai.examples.Persistence",
+      "entry": "src/main/java/io/github/agentic/ai/examples/Persistence.java",
+      "description": "File checkpoints, thread identity, history inspection, and recovery with a fresh graph.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/PersistenceTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/plantuml",
+      "artifact": "example-plantuml",
+      "mainClass": "io.github.agentic.ai.examples.GraphDiagrams",
+      "entry": "src/main/java/io/github/agentic/ai/examples/GraphDiagrams.java",
+      "description": "Exports PlantUML and Mermaid representations without invoking the graph.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/GraphDiagramsTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/runtime-store",
+      "artifact": "example-runtime-store",
+      "mainClass": "io.github.agentic.ai.examples.RuntimeStore",
+      "entry": "src/main/java/io/github/agentic/ai/examples/RuntimeStore.java",
+      "description": "Separates transient invocation metadata, thread state, and long-lived namespaced memory.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-graph-example/scheduling",
+      "artifact": "example-scheduling",
+      "mainClass": "io.github.agentic.ai.examples.ScheduledWorkflow",
+      "entry": "src/main/java/io/github/agentic/ai/examples/ScheduledWorkflow.java",
+      "description": "Schedules a graph at a fixed delay and shuts down the task manager after completion.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": []
+    },
+    {
+      "path": "argi-graph-example/spring-ai-integration",
+      "artifact": "example-spring-ai-integration",
+      "mainClass": "io.github.agentic.ai.examples.GraphModelStreaming",
+      "entry": "src/main/java/io/github/agentic/ai/examples/GraphModelStreaming.java",
+      "description": "Adapts a Spring AI model into a neutral streaming LlmNode and consumes graph events.",
+      "runtime": "model",
+      "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/GraphModelStreamingTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/state-serialization",
+      "artifact": "example-state-serialization",
+      "mainClass": "io.github.agentic.ai.examples.StateSerialization",
+      "entry": "src/main/java/io/github/agentic/ai/examples/StateSerialization.java",
+      "description": "Append and replace reducers plus neutral message serialization round trips.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/StateSerializationTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/subgraph-as-compiled-graph",
+      "artifact": "example-subgraph-as-compiled-graph",
+      "mainClass": "io.github.agentic.ai.examples.SubgraphAsCompiledGraph",
+      "entry": "src/main/java/io/github/agentic/ai/examples/SubgraphAsCompiledGraph.java",
+      "description": "Embeds a compiled child directly and demonstrates reusable state transformation.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/SubgraphAsCompiledGraphTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/subgraph-as-node",
+      "artifact": "example-subgraph-as-node",
+      "mainClass": "io.github.agentic.ai.examples.SubgraphAsNode",
+      "entry": "src/main/java/io/github/agentic/ai/examples/SubgraphAsNode.java",
+      "description": "Explicitly maps parent input/output to a child graph with private state.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/SubgraphAsNodeTest.java"
+      ]
+    },
+    {
+      "path": "argi-graph-example/subgraphs",
+      "artifact": "example-subgraphs",
+      "mainClass": "io.github.agentic.ai.examples.Subgraphs",
+      "entry": "src/main/java/io/github/agentic/ai/examples/Subgraphs.java",
+      "description": "A StateGraph subgraph shares parent state and produces a normalized invoice.",
+      "runtime": "local",
+      "requirements": "No API key, container, or external service is required.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/SubgraphsTest.java"
+      ]
+    }
+  ],
+  "websiteCoverage": [
+    {
+      "source": "website/docs/frameworks/graph-core/quick-start.md",
+      "examples": [
+        "argi-graph-example/hello-graph"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/workflow-orchestration.md",
+      "examples": [
+        "argi-agent-example/support-workflow"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/context-management.md",
+      "examples": [
+        "argi-agent-example/context-engineering",
+        "argi-graph-example/runtime-store"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/observation.md",
+      "examples": [
+        "argi-graph-example/observation"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/persistence.md",
+      "examples": [
+        "argi-graph-example/persistence",
+        "argi-extensions-example/jdbc-checkpoint",
+        "argi-extensions-example/redis-checkpoint",
+        "argi-extensions-example/mongodb-checkpoint"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/runtime-config.md",
+      "examples": [
+        "argi-graph-example/runtime-store",
+        "argi-graph-example/human-in-the-loop"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/scheduling.md",
+      "examples": [
+        "argi-graph-example/scheduling"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/store.md",
+      "examples": [
+        "argi-graph-example/runtime-store"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/streaming.md",
+      "examples": [
+        "argi-graph-example/spring-ai-integration",
+        "argi-agent-example/routing-streaming"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/concepts/edges.md",
+      "examples": [
+        "argi-graph-example/conditional-routing",
+        "argi-graph-example/parallel-nodes"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/concepts/graph.md",
+      "examples": [
+        "argi-graph-example/hello-graph",
+        "argi-graph-example/plantuml"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/concepts/nodes.md",
+      "examples": [
+        "argi-graph-example/spring-ai-integration",
+        "argi-extensions-example/http-node",
+        "argi-graph-example/subgraph-as-node"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/concepts/serializer.md",
+      "examples": [
+        "argi-graph-example/state-serialization"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/concepts/state.md",
+      "examples": [
+        "argi-graph-example/state-serialization"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/concepts/threads.md",
+      "examples": [
+        "argi-agent-example/context-engineering",
+        "argi-graph-example/persistence"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/examples/spring-ai-integration.md",
+      "examples": [
+        "argi-graph-example/spring-ai-integration"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/examples/parallel-nodes.md",
+      "examples": [
+        "argi-graph-example/parallel-nodes"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/examples/subgraphs.md",
+      "examples": [
+        "argi-graph-example/subgraphs"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/examples/subgraph-as-node.md",
+      "examples": [
+        "argi-graph-example/subgraph-as-node"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/examples/subgraph-as-compiled-graph.md",
+      "examples": [
+        "argi-graph-example/subgraph-as-compiled-graph"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/examples/persistence.md",
+      "examples": [
+        "argi-graph-example/persistence"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/examples/hitl.md",
+      "examples": [
+        "argi-graph-example/hitl"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/examples/cancellation.md",
+      "examples": [
+        "argi-graph-example/cancellation"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/graph-core/examples/plantuml.md",
+      "examples": [
+        "argi-graph-example/plantuml"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/a2a.md",
+      "examples": [
+        "argi-agent-example/a2a",
+        "argi-extensions-example/a2a-nacos"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/agents-intro.md",
+      "examples": [
+        "argi-agent-example/react-tools",
+        "argi-agent-example/multi-agent"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/builtin-tools.md",
+      "examples": [
+        "argi-agent-example/builtin-tools",
+        "argi-extensions-example/docker-execution",
+        "argi-extensions-example/sandbox-tools"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/hitl.md",
+      "examples": [
+        "argi-agent-example/agent-hitl",
+        "argi-agent-example/support-workflow"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/hooks-interceptors.md",
+      "examples": [
+        "argi-agent-example/interceptors",
+        "argi-agent-example/hooks-and-retries",
+        "argi-agent-example/context-compaction"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/memory.md",
+      "examples": [
+        "argi-agent-example/context-engineering",
+        "argi-agent-example/context-compaction",
+        "argi-graph-example/runtime-store",
+        "argi-extensions-example/memory-backends"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/messages.md",
+      "examples": [
+        "argi-graph-example/state-serialization",
+        "argi-agent-example/routing-streaming"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/multi-agent.md",
+      "examples": [
+        "argi-agent-example/multi-agent",
+        "argi-agent-example/routing-streaming",
+        "argi-agent-example/agent-as-tool"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/quick-start.md",
+      "examples": [
+        "argi-agent-example/react-tools",
+        "argi-agent-example/studio-chatbot"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/rag.md",
+      "examples": [
+        "argi-agent-example/agentic-rag",
+        "argi-extensions-example/rag-retrieval"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/react-agent-theory.md",
+      "examples": [
+        "argi-agent-example/react-tools"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/runtime-config.md",
+      "examples": [
+        "argi-agent-example/context-engineering",
+        "argi-graph-example/runtime-store"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/skills.md",
+      "examples": [
+        "argi-agent-example/skills"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/structured-io.md",
+      "examples": [
+        "argi-agent-example/structured-output"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/tools-as-agent.md",
+      "examples": [
+        "argi-agent-example/agent-as-tool"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/tools.md",
+      "examples": [
+        "argi-agent-example/react-tools",
+        "argi-agent-example/builtin-tools",
+        "argi-extensions-example/mcp-discovery"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/agent-framework/workflow.md",
+      "examples": [
+        "argi-agent-example/support-workflow",
+        "argi-agent-example/multi-agent"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/extensions/chat-memory.md",
+      "examples": [
+        "argi-extensions-example/jdbc-chat-memory",
+        "argi-extensions-example/memory-backends",
+        "argi-extensions-example/mem0-memory"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/extensions/mcp-gateway.md",
+      "examples": [
+        "argi-extensions-example/mcp-gateway"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/extensions/mcp-router.md",
+      "examples": [
+        "argi-extensions-example/mcp-router"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/extensions/mcp.md",
+      "examples": [
+        "argi-extensions-example/mcp-client",
+        "argi-extensions-example/mcp-registry",
+        "argi-extensions-example/mcp-discovery"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/extensions/nacos-prompt.md",
+      "examples": [
+        "argi-extensions-example/nacos-prompt"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/extensions/observation.md",
+      "examples": [
+        "argi-graph-example/observation"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/extensions/overview.md",
+      "examples": [
+        "argi-extensions-example/memory-backends",
+        "argi-extensions-example/vector-backends",
+        "argi-extensions-example/mcp-registry",
+        "argi-extensions-example/rag-retrieval"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/extensions/rag.md",
+      "examples": [
+        "argi-extensions-example/rag-retrieval",
+        "argi-agent-example/agentic-rag"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/extensions/vector-stores.md",
+      "examples": [
+        "argi-extensions-example/tair-vector-store",
+        "argi-extensions-example/vector-backends"
+      ]
+    },
+    {
+      "source": "website/docs/frameworks/studio/quick-start.md",
+      "examples": [
+        "argi-agent-example/studio-chatbot"
+      ]
+    },
+    {
+      "source": "argi-website/docs/frameworks/agent-framework/planner.md",
+      "examples": [
+        "argi-agent-example/planner"
+      ]
+    },
+    {
+      "source": "website/docs/quick-start.md",
+      "examples": [
+        "argi-graph-example/hello-graph",
+        "argi-agent-example/react-tools"
+      ]
+    },
+    {
+      "source": "website/docs/overview.md",
+      "examples": [
+        "argi-graph-example/hello-graph",
+        "argi-agent-example/react-tools"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+argi.vectorstore.tair:
+  enabled: true
+  host: ${TAIR_HOST:127.0.0.1}
+  port: ${TAIR_PORT:6379}
+  password: ${TAIR_PASSWORD:}
+  options:
+    index-name: argi_example_vectors
+    dimensions: ${ARGI_EMBEDDING_DIMENSIONS:1536}

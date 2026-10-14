@@ -1,0 +1,8 @@
+argi.chat.memory.repository.elasticsearch:
+  enabled: true
+  host: ${ELASTICSEARCH_HOST:127.0.0.1}
+  port: ${ELASTICSEARCH_PORT:9200}
+  scheme: ${ELASTICSEARCH_SCHEME:http}
+  username: ${ELASTICSEARCH_USERNAME}
+  password: ${ELASTICSEARCH_PASSWORD}
+  index: argi-example-memory

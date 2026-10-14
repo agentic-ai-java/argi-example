@@ -1,0 +1,19 @@
+argi.chat.memory.mem0:
+  client:
+    base-url: ${MEM0_BASE_URL:http://127.0.0.1:8888}
+    timeout-seconds: 30
+    max-retry-attempts: 1
+    async:
+      enabled: false
+  server:
+    version: v1.1
+    llm:
+      provider: openai
+      config:
+        api_key: ${ARGI_API_KEY}
+        model: ${ARGI_MODEL}
+    embedder:
+      provider: openai
+      config:
+        api_key: ${ARGI_API_KEY}
+        model: ${ARGI_EMBEDDING_MODEL:text-embedding-3-small}

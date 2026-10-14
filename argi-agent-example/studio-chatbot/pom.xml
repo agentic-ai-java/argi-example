@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.github.agentic-ai-java.examples</groupId>
+    <artifactId>argi-agent-example</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>example-studio-chatbot</artifactId>
+  <properties>
+    <example.mainClass>io.github.agentic.ai.examples.StudioChatbot</example.mainClass>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>io.github.agentic-ai-java</groupId>
+      <artifactId>argi-studio</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.github.agentic-ai-java.examples</groupId>
+      <artifactId>example-spring-ai</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
+        <configuration>
+          <mainClass>io.github.agentic.ai.examples.StudioChatbot</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

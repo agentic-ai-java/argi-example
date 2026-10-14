@@ -1,0 +1,10 @@
+argi.chat.memory.repository.tablestore:
+  enabled: true
+  endpoint: ${TABLESTORE_ENDPOINT}
+  instance-name: ${TABLESTORE_INSTANCE}
+  access-key-id: ${ALIBABA_ACCESS_KEY_ID}
+  access-key-secret: ${ALIBABA_ACCESS_KEY_SECRET}
+  session-table-name: argi_example_sessions
+  session-secondary-index-name: argi_example_sessions_index
+  message-table-name: argi_example_messages
+  message-secondary-index-name: argi_example_messages_index

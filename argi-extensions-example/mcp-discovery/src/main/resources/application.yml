@@ -1,0 +1,14 @@
+argi.mcp.nacos:
+  server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+  namespace: ${NACOS_NAMESPACE:public}
+  username: ${NACOS_USERNAME:}
+  password: ${NACOS_PASSWORD:}
+spring.ai.mcp.client:
+  type: SYNC
+  request-timeout: 15s
+argi.mcp.nacos.client:
+  enabled: true
+  lazy-init: false
+  streamable.connections.catalog:
+    service-name: argi-catalog
+    version: 1.0.0

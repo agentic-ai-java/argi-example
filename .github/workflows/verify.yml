@@ -1,0 +1,48 @@
+name: Verify examples
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: examples
+      - uses: actions/checkout@v4
+        with:
+          repository: agentic-ai-java/argi
+          ref: ee72a721cfe6d50184068d053f70784556aee424
+          path: argi
+      - uses: actions/checkout@v4
+        with:
+          repository: agentic-ai-java/argi-extensions
+          ref: 84994ebb71374ebc3dea688ae7f81360934313f9
+          path: argi-extensions
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - name: Check the documentation catalog
+        working-directory: examples
+        run: python3 tools/check_catalog.py
+      - name: Install pinned source dependencies
+        working-directory: examples
+        run: bash tools/bootstrap.sh
+      - name: Verify examples without external services
+        working-directory: examples
+        run: bash tools/mvn.sh -B verify
+      - name: Compile every backend profile
+        working-directory: examples
+        shell: bash
+        run: |
+          for profile in memory-redis memory-mongodb memory-elasticsearch memory-tablestore memory-memcached memory-mysql memory-postgresql; do
+            bash tools/mvn.sh -B -pl :example-memory-backends -am -P"$profile" -Dmaven.test.skip=true package
+          done
+          for profile in vector-analyticdb vector-oceanbase vector-opensearch vector-tablestore vector-tair; do
+            bash tools/mvn.sh -B -pl :example-vector-backends -am -P"$profile" -Dmaven.test.skip=true package
+          done

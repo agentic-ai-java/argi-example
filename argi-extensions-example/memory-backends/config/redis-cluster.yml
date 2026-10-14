@@ -1,0 +1,8 @@
+argi.chat.memory.repository.redis:
+  client-type: lettuce
+  mode: cluster
+  cluster:
+    nodes: ${REDIS_CLUSTER_NODES}
+    max-redirects: 3
+  ssl:
+    enabled: ${REDIS_SSL_ENABLED:true}

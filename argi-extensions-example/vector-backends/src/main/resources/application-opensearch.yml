@@ -1,0 +1,11 @@
+argi.vectorstore.opensearch:
+  enabled: true
+  instance-id: ${OPENSEARCH_INSTANCE}
+  endpoint: ${OPENSEARCH_ENDPOINT}
+  access-user-name: ${OPENSEARCH_USERNAME}
+  access-pass-word: ${OPENSEARCH_PASSWORD}
+  table-name: ${OPENSEARCH_TABLE}
+  primary-key-field: id
+  index: ${OPENSEARCH_VECTOR_INDEX}
+  dimensions: ${ARGI_EMBEDDING_DIMENSIONS:1536}
+  output-fields: [id, content, metadata]

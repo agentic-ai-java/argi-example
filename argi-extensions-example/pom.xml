@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.github.agentic-ai-java.examples</groupId>
+    <artifactId>argi-examples</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>argi-extensions-example</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+    <module>a2a-nacos</module>
+    <module>docker-execution</module>
+    <module>document-parsing</module>
+    <module>http-node</module>
+    <module>jdbc-chat-memory</module>
+    <module>jdbc-checkpoint</module>
+    <module>mcp-client</module>
+    <module>mcp-discovery</module>
+    <module>mcp-gateway</module>
+    <module>mcp-registry</module>
+    <module>mcp-router</module>
+    <module>mem0-memory</module>
+    <module>memory-backends</module>
+    <module>mongodb-checkpoint</module>
+    <module>nacos-prompt</module>
+    <module>rag-retrieval</module>
+    <module>redis-checkpoint</module>
+    <module>sandbox-tools</module>
+    <module>tair-vector-store</module>
+    <module>vector-backends</module>
+  </modules>
+</project>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.github.agentic-ai-java.examples</groupId>
+    <artifactId>argi-graph-example</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>example-spring-ai-integration</artifactId>
+  <name>ARGI Example: spring-ai-integration</name>
+  <description>Adapts a Spring AI model into a neutral streaming LlmNode and consumes graph events.</description>
+  <properties>
+    <example.mainClass>io.github.agentic.ai.examples.GraphModelStreaming</example.mainClass>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>io.github.agentic-ai-java</groupId>
+      <artifactId>argi-graph-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.github.agentic-ai-java</groupId>
+      <artifactId>argi-starter-builtin-nodes</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.github.agentic-ai-java.examples</groupId>
+      <artifactId>example-spring-ai</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+  </dependencies>
+</project>

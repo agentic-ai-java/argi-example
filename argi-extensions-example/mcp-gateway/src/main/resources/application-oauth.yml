@@ -1,0 +1,12 @@
+argi.mcp.gateway.oauth:
+  enabled: true
+  provider:
+    client-id: ${MCP_CLIENT_ID}
+    client-secret: ${MCP_CLIENT_SECRET}
+    authorization-uri: ${MCP_AUTHORIZATION_URI}
+    token-uri: ${MCP_TOKEN_URI}
+    grant-type: client_credentials
+    scope: read
+  token-cache:
+    enabled: true
+    refresh-before-expiry: 5m

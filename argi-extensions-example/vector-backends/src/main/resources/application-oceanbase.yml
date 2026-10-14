@@ -1,0 +1,7 @@
+argi.vectorstore.oceanbase:
+  enabled: true
+  url: ${OCEANBASE_URL}
+  username: ${OCEANBASE_USERNAME}
+  password: ${OCEANBASE_PASSWORD}
+  table-name: argi_example_vectors
+  dimension: ${ARGI_EMBEDDING_DIMENSIONS:1536}

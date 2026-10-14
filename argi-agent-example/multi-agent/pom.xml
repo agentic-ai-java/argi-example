@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.github.agentic-ai-java.examples</groupId>
+    <artifactId>argi-agent-example</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>example-multi-agent</artifactId>
+  <name>ARGI Example: multi-agent</name>
+  <properties>
+    <example.mainClass>io.github.agentic.ai.examples.MultiAgent</example.mainClass>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>io.github.agentic-ai-java</groupId>
+      <artifactId>argi-agent-framework</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.github.agentic-ai-java.examples</groupId>
+      <artifactId>example-spring-ai</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+  </dependencies>
+</project>

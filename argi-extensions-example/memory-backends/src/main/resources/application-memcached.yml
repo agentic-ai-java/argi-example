@@ -1,0 +1,4 @@
+argi.chat.memory.repository.memcached:
+  enabled: true
+  host: ${MEMCACHED_HOST:127.0.0.1}
+  port: ${MEMCACHED_PORT:11211}

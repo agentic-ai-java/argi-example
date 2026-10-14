@@ -1,0 +1,9 @@
+argi.vectorstore.tablestore:
+  enabled: true
+  endpoint: ${TABLESTORE_ENDPOINT}
+  instance-name: ${TABLESTORE_INSTANCE}
+  access-key-id: ${ALIBABA_ACCESS_KEY_ID}
+  access-key-secret: ${ALIBABA_ACCESS_KEY_SECRET}
+  table-name: argi_example_vectors
+  embedding-dimension: ${ARGI_EMBEDDING_DIMENSIONS:1536}
+  enable-multitenant: false
