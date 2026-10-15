@@ -10,12 +10,14 @@
 package io.github.agentic.ai.examples;
 
 import io.github.agentic.ai.adapter.springai.SpringAiChatClientAdapter;
-import io.github.agentic.ai.api.chat.*;
-import org.springframework.ai.openai.OpenAiChatModel;
-import org.springframework.ai.openai.OpenAiChatOptions;
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.api.chat.ChatMessage;
+import io.github.agentic.ai.api.chat.ChatRequest;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
+import org.springframework.ai.openai.OpenAiChatModel;
+import org.springframework.ai.openai.OpenAiChatOptions;
 
 /** The Spring AI model is adapted once; downstream code uses only ARGI contracts. */
 public final class SpringAiExample {
@@ -24,9 +26,13 @@ public final class SpringAiExample {
     public static ChatClient client(Map<String, String> environment) {
         String key = required(environment, "ARGI_API_KEY");
         String model = required(environment, "ARGI_MODEL");
+        long timeoutSeconds = Long.parseLong(environment.getOrDefault("ARGI_TIMEOUT_SECONDS", "60"));
+        if (timeoutSeconds <= 0) {
+            throw new IllegalArgumentException("ARGI_TIMEOUT_SECONDS must be positive");
+        }
         var options = OpenAiChatOptions.builder().apiKey(key).model(model)
             .baseUrl(environment.getOrDefault("ARGI_BASE_URL", "https://api.openai.com/v1"))
-            .timeout(Duration.ofSeconds(60)).maxRetries(0).build();
+            .timeout(Duration.ofSeconds(timeoutSeconds)).maxRetries(0).build();
         return new SpringAiChatClientAdapter(OpenAiChatModel.builder().options(options).build());
     }
     private static String required(Map<String, String> environment, String name) {

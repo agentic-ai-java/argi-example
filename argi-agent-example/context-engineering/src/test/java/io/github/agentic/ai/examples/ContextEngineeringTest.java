@@ -9,16 +9,30 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.api.chat.ChatClientCapabilities;
+import io.github.agentic.ai.api.chat.ChatMessage;
+import io.github.agentic.ai.api.chat.ChatRequest;
+import io.github.agentic.ai.api.chat.ChatResponse;
+import io.github.agentic.ai.api.chat.FinishReason;
+import io.github.agentic.ai.api.chat.Usage;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.agent.hook.modelcalllimit.ModelCallLimitExceededException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
-import io.github.agentic.ai.graph.RunnableConfig;
-import io.github.agentic.ai.graph.agent.hook.modelcalllimit.ModelCallLimitExceededException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 class ContextEngineeringTest {
     @Test void historyIsScopedAndBudgetStopsTheThirdModelTurn() throws Exception {
         var client = mock(ChatClient.class);
@@ -39,6 +53,9 @@ class ContextEngineeringTest {
         try (var factory = mockStatic(SpringAiExample.class)) {
             factory.when(() -> SpringAiExample.client(System.getenv())).thenReturn(client);
             ContextEngineering.main(new String[0]);
+            ConversationSessions.main(new String[0]);
+            var sessions = new ConversationSessions(client);
+            assertThrows(IllegalArgumentException.class, () -> sessions.ask(" ", "Hello"));
         }
     }
 }

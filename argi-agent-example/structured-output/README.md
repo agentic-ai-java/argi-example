@@ -1,6 +1,6 @@
 # structured-output
 
-Requests a JSON schema and validates the parsed domain record.
+Selects schema enforcement according to adapter capabilities and validates the parsed domain record.
 
 ## Requirements
 
@@ -19,12 +19,53 @@ bash tools/run.sh argi-agent-example/structured-output
 
 ## Behavior
 
-Requests `category` and `priority` using JSON Schema, then parses and validates the `Ticket` record. Model output that violates the domain constraints is rejected.
+Requests `category` and `priority`, then strictly parses and validates the `Ticket` record.
+Adapters advertising neutral structured output receive `TicketSchema.format()`.
+The pinned Spring AI adapter does not advertise that capability: it receives the
+schema in the prompt and returns plain text, which is validated by the application.
+That fallback is not provider-enforced JSON Schema. Missing/extra fields, incorrect
+types and invalid domain values fail validation.
 
 ## Source and verification
 
-- [StructuredOutput.java](src/main/java/io/github/agentic/ai/examples/StructuredOutput.java) contains the complete example.
+- [StructuredOutput.java](src/main/java/io/github/agentic/ai/examples/StructuredOutput.java) is the primary entry point.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Selects schema enforcement according to adapter capabilities and validates the parsed domain record.
+- Explicit response format and ReactAgent outputType; domain validation rejects missing/extra fields, wrong types and out-of-range priorities.
+
+Limit: A ticket schema; provider schema adherence remains model-dependent, so application validation is mandatory.
+
+## Source layout
+
+| Source | Responsibility |
+| --- | --- |
+| [StructuredOutput.java](src/main/java/io/github/agentic/ai/examples/StructuredOutput.java) | Separates a provider's schema request from application-side result validation. |
+| [TicketSchema.java](src/main/java/io/github/agentic/ai/examples/TicketSchema.java) | One schema is shared by the model request and strict application validation. |
+| [TicketValidationScenarios.java](src/main/java/io/github/agentic/ai/examples/TicketValidationScenarios.java) | Shows that valid JSON alone does not make a valid domain result. |
+| [TypedTicketAgent.java](src/main/java/io/github/agentic/ai/examples/TypedTicketAgent.java) | Demonstrates ReactAgent's outputType in addition to the lower-level response format. |
+
+## Additional entry points
+
+Run from the repository root after installing the reactor dependencies. Select an entry point explicitly. The validation record distinguishes completed runs from unexecuted or failed scenarios.
+
+### TicketValidationScenarios
+
+Shows that valid JSON alone does not make a valid domain result. Runtime: **local**.
+
+```shell
+bash tools/run.sh argi-agent-example/structured-output -Dexample.mainClass=io.github.agentic.ai.examples.TicketValidationScenarios
+```
+
+### TypedTicketAgent
+
+Demonstrates ReactAgent's outputType in addition to the lower-level response format. Runtime: **model**.
+
+```shell
+bash tools/run.sh argi-agent-example/structured-output -Dexample.mainClass=io.github.agentic.ai.examples.TypedTicketAgent
+```

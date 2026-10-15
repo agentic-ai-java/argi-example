@@ -10,7 +10,9 @@
 package io.github.agentic.ai.examples;
 
 import io.github.agentic.ai.adapter.langchain4j.LangChain4jChatClientAdapter;
-import io.github.agentic.ai.api.chat.*;
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.api.chat.ChatMessage;
+import io.github.agentic.ai.api.chat.ChatRequest;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;

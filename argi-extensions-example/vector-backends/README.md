@@ -33,7 +33,7 @@ Select exactly one Maven profile and the matching Spring profile:
 | tablestore | `vector-tablestore` | `tablestore` | [application-tablestore.yml](src/main/resources/application-tablestore.yml) |
 | tair | `vector-tair` | `tair` | [application-tair.yml](src/main/resources/application-tair.yml) |
 
-The runner writes a stable example document with metadata, embeds a question, and retrieves matching documents. Provision the selected service and compatible schema/index first. The OpenSearch integration targets Alibaba Cloud OpenSearch, not the similarly named OpenSearch community cluster. Tair requires vector commands. Dimensions must match the embedding endpoint. Pass `--filter` only for a backend that implements metadata filters; it demonstrates `topic == 'checkpoint'`. The sample record is retained because deletion is not supported uniformly across backends.
+The runner writes three documents with stable IDs and metadata, embeds a question, and retrieves matching documents. Provision the selected service and compatible schema/index first. The OpenSearch integration targets Alibaba Cloud OpenSearch, not the similarly named OpenSearch community cluster. Tair requires vector commands. Dimensions must match the embedding endpoint. Pass `--filter` only for a backend that implements metadata filters; it demonstrates `source == 'argi-examples' && topic == 'checkpoint'`. The sample records are retained by default because deletion is not supported uniformly across backends.
 
 ## Configuration
 
@@ -45,8 +45,25 @@ The runner writes a stable example document with metadata, embeds a question, an
 
 ## Source and verification
 
-- [VectorBackends.java](src/main/java/io/github/agentic/ai/examples/VectorBackends.java) contains the complete example.
+- [VectorBackends.java](src/main/java/io/github/agentic/ai/examples/VectorBackends.java) is the primary entry point.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Profile-selected AnalyticDB, OceanBase, OpenSearch, TableStore, and Tair indexing and search.
+- Three labelled documents, neutral search result projection, optional metadata filtering and opt-in deletion of example IDs.
+
+Limit: Backend support for filters, deletion, upsert and index refresh differs. Optional operations require a compatible backend.
+
+## Source layout
+
+| Source | Responsibility |
+| --- | --- |
+| [KnowledgeCorpus.java](src/main/java/io/github/agentic/ai/examples/KnowledgeCorpus.java) | Stable document IDs and metadata make unfiltered and filtered searches comparable. |
+| [KnowledgeSearch.java](src/main/java/io/github/agentic/ai/examples/KnowledgeSearch.java) | Keeps retrieval policy and provider documents outside an application's graph state. |
+| [VectorBackends.java](src/main/java/io/github/agentic/ai/examples/VectorBackends.java) | Uses a real embedding provider and the selected Extensions VectorStore starter. |
+
+The runner now indexes three labelled documents. Add `--delete-indexed` to the Spring arguments only when your backend supports deletion by ID; otherwise the example IDs are retained. Search visibility may depend on backend refresh behavior.

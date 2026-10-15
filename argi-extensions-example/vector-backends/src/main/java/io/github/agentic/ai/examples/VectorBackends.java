@@ -9,38 +9,53 @@
  */
 package io.github.agentic.ai.examples;
 
-import org.springframework.boot.*;
+import java.time.Duration;
+import java.util.Map;
+import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.openai.OpenAiEmbeddingModel;
+import org.springframework.ai.openai.OpenAiEmbeddingOptions;
+import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
-import java.util.*;
 
-import org.springframework.ai.embedding.EmbeddingModel;
-import org.springframework.ai.openai.*;
-import org.springframework.ai.document.Document;
-import org.springframework.ai.vectorstore.*;
-import java.time.Duration;
 
 /** Uses a real embedding provider and the selected Extensions VectorStore starter. */
 @SpringBootApplication
 public class VectorBackends {
     @Bean EmbeddingModel embeddingModel() {
+        return embeddingModel(System.getenv());
+    }
+
+    static EmbeddingModel embeddingModel(Map<String, String> environment) {
+        String key = environment.get("ARGI_API_KEY");
+        if (key == null || key.isBlank()) {
+            throw new IllegalArgumentException("Set ARGI_API_KEY before running the embedding example");
+        }
         return OpenAiEmbeddingModel.builder().options(OpenAiEmbeddingOptions.builder()
-            .apiKey(System.getenv("ARGI_API_KEY")).model(System.getenv().getOrDefault("ARGI_EMBEDDING_MODEL", "text-embedding-3-small"))
-            .baseUrl(System.getenv().getOrDefault("ARGI_BASE_URL", "https://api.openai.com/v1"))
+            .apiKey(key).model(environment.getOrDefault("ARGI_EMBEDDING_MODEL", "text-embedding-3-small"))
+            .baseUrl(environment.getOrDefault("ARGI_BASE_URL", "https://api.openai.com/v1"))
             .timeout(Duration.ofSeconds(60)).maxRetries(0).build()).build();
     }
     @Bean ApplicationRunner indexAndSearch(VectorStore store) {
         return args -> {
-            // A stable ID makes repeat runs update the dedicated example document.
-            store.add(List.of(new Document("argi-checkpoint-guide", "Checkpoints preserve workflow state so a thread can resume.",
-                Map.of("source", "argi-examples", "topic", "checkpoint"))));
-            var request = SearchRequest.builder().query("How do I resume a workflow?").topK(3).similarityThreshold(0.0).build();
+            var search = new KnowledgeSearch(store);
+            search.index();
             var log = org.slf4j.LoggerFactory.getLogger(VectorBackends.class);
-            log.info("{}: {}", store.getClass().getSimpleName(), store.similaritySearch(request));
-            // Metadata filters are demonstrated only when explicitly requested; not every backend supports them.
-            if (args.containsOption("filter")) log.info("Filtered: {}", store.similaritySearch(SearchRequest.builder()
-                .query("How do I resume a workflow?").topK(3).filterExpression("topic == 'checkpoint'").build()));
+            try {
+                log.info("Unfiltered: {}", search.search("How do I resume a workflow?", 3, null));
+                if (args.containsOption("filter")) {
+                    log.info("Filtered: {}", search.search("How do I resume a workflow?", 3,
+                        "source == 'argi-examples' && topic == 'checkpoint'"));
+                }
+            } finally {
+                // Deletion and filters are opt-in because backend support differs.
+                if (args.containsOption("delete-indexed")) {
+                    search.deleteExampleDocuments();
+                }
+            }
         };
     }
     public static void main(String[] args) {

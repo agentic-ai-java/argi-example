@@ -9,15 +9,17 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.graph.*;
-import java.util.*;
-import static io.github.agentic.ai.graph.StateGraph.*;
-import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
-
-import java.time.Duration;
-import java.util.concurrent.*;
+import io.github.agentic.ai.graph.StateGraph;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import reactor.core.publisher.SignalType;
+
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /** Uses one subscription; a second blockLast call would start a second graph run. */
 public final class Cancellation {

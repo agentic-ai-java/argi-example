@@ -35,7 +35,7 @@ Select exactly one Maven profile and the matching Spring profile:
 | mysql | `memory-mysql` | `mysql` | [application-mysql.yml](src/main/resources/application-mysql.yml) |
 | postgresql | `memory-postgresql` | `postgresql` | [application-postgresql.yml](src/main/resources/application-postgresql.yml) |
 
-The runner saves two messages under a unique conversation ID, reads them through the selected repository, and clears only that conversation. No in-memory fallback is provided. Omitting the backend profile fails to supply the repository bean. The Redis cluster/TLS variant is in [redis-cluster.yml](config/redis-cluster.yml); load it with `--spring.config.additional-location=file:config/redis-cluster.yml` in addition to the redis profile.
+The runner writes three question/answer pairs with a four-message window, reads them through a recreated facade, checks a second conversation, and clears only its two unique conversation IDs. No in-memory fallback is provided. Omitting the backend profile fails to supply the repository bean. The Redis cluster/TLS variant is in [redis-cluster.yml](config/redis-cluster.yml); load it with `--spring.config.additional-location=file:config/redis-cluster.yml` in addition to the redis profile.
 
 ## Configuration
 
@@ -49,8 +49,24 @@ The runner saves two messages under a unique conversation ID, reads them through
 
 ## Source and verification
 
-- [MemoryBackends.java](src/main/java/io/github/agentic/ai/examples/MemoryBackends.java) contains the complete example.
+- [MemoryBackends.java](src/main/java/io/github/agentic/ai/examples/MemoryBackends.java) is the primary entry point.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Profile-selected Redis, MongoDB, Elasticsearch, TableStore, Memcached, and JDBC chat repositories.
+- Message-window eviction, a recreated facade, conversation isolation and targeted cleanup against the selected repository.
+
+Limit: Backend profiles share one contract scenario. No backend connectivity, consistency, TTL or failure behavior has been verified.
+
+## Source layout
+
+| Source | Responsibility |
+| --- | --- |
+| [ConversationLifecycle.java](src/main/java/io/github/agentic/ai/examples/ConversationLifecycle.java) | Runs the same conversation lifecycle against the profile-selected repository. |
+| [MemoryBackends.java](src/main/java/io/github/agentic/ai/examples/MemoryBackends.java) | Each Maven profile supplies exactly one real repository starter. |
+
+The lifecycle report should retain Question 2 / Answer 2 / Question 3 / Answer 3, keep the other conversation isolated, and report successful targeted cleanup. Eventual-consistency backends may need caller-managed refresh before matching that expectation.

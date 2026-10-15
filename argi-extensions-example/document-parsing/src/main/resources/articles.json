@@ -1,0 +1,14 @@
+{
+  "articles": [
+    {
+      "id": "checkpoint-guide",
+      "title": "Checkpoint recovery",
+      "body": "Resume a saved workflow using the same thread and checkpoint cursor."
+    },
+    {
+      "id": "approval-guide",
+      "title": "Human review",
+      "body": "Inspect the saved draft, record a decision, and resume the pending review node."
+    }
+  ]
+}

@@ -9,15 +9,22 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.graph.*;
-import java.util.*;
-import static io.github.agentic.ai.graph.StateGraph.*;
-import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
-
-import io.github.agentic.ai.graph.action.*;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.action.AsyncNodeActionWithConfig;
+import io.github.agentic.ai.graph.action.InterruptableAction;
+import io.github.agentic.ai.graph.action.InterruptionMetadata;
 import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
 import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
 
 /** A dynamic interrupt is raised only when the state lacks a review decision. */
 public final class DynamicApproval {

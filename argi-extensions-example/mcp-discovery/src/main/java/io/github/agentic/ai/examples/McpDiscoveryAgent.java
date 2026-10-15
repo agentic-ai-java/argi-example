@@ -9,16 +9,15 @@
  */
 package io.github.agentic.ai.examples;
 
-import org.springframework.boot.*;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.annotation.Bean;
-import java.util.*;
-
 import io.github.agentic.ai.adapter.springai.SpringAiToolAdapter;
 import io.github.agentic.ai.graph.agent.ReactAgent;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.Bean;
 
 
 /** Only ARGI executes the discovered callbacks; the model receives their schemas. */
@@ -27,7 +26,7 @@ public class McpDiscoveryAgent {
 
     @Bean ApplicationRunner ask(@Qualifier("distributedSyncToolCallback") ToolCallbackProvider provider) {
         return args -> {
-            var agent = ReactAgent.builder().name("mcp_discovery").chatClient(SpringAiExample.client(System.getenv()))
+            var agent = ReactAgent.builder().throwOnModelError(true).name("mcp_discovery").chatClient(SpringAiExample.client(System.getenv()))
                 .toolRegistry(SpringAiToolAdapter.fromCallbacks(provider.getToolCallbacks()))
                 .instruction("Use the available read-only catalog tools to answer the question.").build();
             org.slf4j.LoggerFactory.getLogger(McpDiscoveryAgent.class).info("{}", agent.call("Look up the definition of checkpoint.").text());

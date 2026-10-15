@@ -9,11 +9,13 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.graph.*;
+import io.github.agentic.ai.graph.StateGraph;
 import io.github.agentic.ai.graph.node.network.HttpNode;
 import java.time.Duration;
 import java.util.Map;
-import static io.github.agentic.ai.graph.StateGraph.*;
+
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
 import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /** Retrieves an HTTP resource as a graph step, with explicit network policy and timeout. */

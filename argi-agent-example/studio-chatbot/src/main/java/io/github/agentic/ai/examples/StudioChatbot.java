@@ -16,12 +16,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+
 /** Publishes a stateful agent bean for ARGI Studio's context-scanning loader. */
 @SpringBootApplication
 public class StudioChatbot {
     @Bean ChatClient chatClient() { return SpringAiExample.client(System.getenv()); }
     @Bean ReactAgent supportAgent(ChatClient client) {
-        return ReactAgent.builder().name("studio_support").chatClient(client).saver(new MemorySaver())
+        return ReactAgent.builder().throwOnModelError(true).name("studio_support").chatClient(client).saver(new MemorySaver())
             .instruction("Explain ARGI graph concepts briefly. Use prior turns when answering follow-up questions.").build();
     }
     public static void main(String[] args) { SpringApplication.run(StudioChatbot.class, args); }

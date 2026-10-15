@@ -23,9 +23,15 @@ The shared `count` is incremented twice. The same compiled child is used under t
 
 ## Source and verification
 
-- [SubgraphAsCompiledGraph.java](src/main/java/io/github/agentic/ai/examples/SubgraphAsCompiledGraph.java) contains the complete example.
+- [SubgraphAsCompiledGraph.java](src/main/java/io/github/agentic/ai/examples/SubgraphAsCompiledGraph.java) is the primary entry point.
 - [SubgraphAsCompiledGraphTest.java](src/test/java/io/github/agentic/ai/examples/SubgraphAsCompiledGraphTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Embeds a compiled child directly and demonstrates reusable state transformation.
+
+Limit: Compiled child composition; no nested runtime migration or distributed execution.

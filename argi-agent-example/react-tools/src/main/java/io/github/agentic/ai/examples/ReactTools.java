@@ -9,36 +9,21 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.api.tool.Tool;
+import io.github.agentic.ai.api.tool.ToolRegistry;
 import io.github.agentic.ai.graph.agent.ReactAgent;
 import java.util.List;
-import java.util.Map;
-
-import io.github.agentic.ai.api.tool.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import tools.jackson.databind.json.JsonMapper;
 
 /** A delivery assistant whose tracking results come from an application tool. */
 public final class ReactTools {
     private ReactTools() {}
 
     public static Tool trackingTool() {
-        return new Tool() {
-            @Override public ToolDefinition definition() {
-                return new ToolDefinition("track_order", "Look up the delivery status of an order",
-                    "{\"type\":\"object\",\"properties\":{\"orderId\":{\"type\":\"string\"}},\"required\":[\"orderId\"],\"additionalProperties\":false}");
-            }
-            @Override public CompletionStage<ToolResult> execute(ToolCall call, ToolContext context) {
-                String id = JsonMapper.shared().readTree(call.arguments()).path("orderId").asString();
-                // A small local catalog keeps the example runnable without a commerce service.
-                String status = Map.of("ORDER-42", "Dispatched; delivery on Friday", "ORDER-43", "Preparing shipment").get(id);
-                return CompletableFuture.completedFuture(status == null ? ToolResult.error("Unknown order: " + id) : ToolResult.text(status));
-            }
-        };
+        return new TrackingTool(OrderRepository.sample());
     }
     public static ReactAgent agent(ChatClient client) {
-        return ReactAgent.builder().name("delivery_assistant").chatClient(client)
+        return ReactAgent.builder().throwOnModelError(true).name("delivery_assistant").chatClient(client)
             .instruction("Use track_order for delivery questions. Do not invent delivery details.")
             .toolRegistry(new ToolRegistry(List.of(trackingTool()))).build();
     }

@@ -9,13 +9,21 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.ChatClient;
 import io.github.agentic.ai.agent.studio.loader.ContextScanningAgentLoader;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.boot.SpringApplication;
+import io.github.agentic.ai.api.chat.ChatClient;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 class StudioChatbotTest {
     @Test void exposesAgentUnderItsPublicStudioName() {
         var client = mock(ChatClient.class);

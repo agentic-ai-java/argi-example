@@ -9,14 +9,13 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
-import io.github.agentic.ai.api.tool.*;
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.api.tool.ToolRegistry;
 import io.github.agentic.ai.graph.agent.ReactAgent;
-import java.util.*;
-
+import io.github.agentic.ai.graph.agent.hook.skills.ReadSkillTool;
 import io.github.agentic.ai.graph.skills.ArgiSkillChatClient;
 import io.github.agentic.ai.graph.skills.registry.classpath.ClasspathSkillRegistry;
-import io.github.agentic.ai.graph.agent.hook.skills.ReadSkillTool;
+import java.util.List;
 
 /** Uses the same registry for skill summaries and full skill reads. */
 public final class SkillsExample {
@@ -24,7 +23,7 @@ public final class SkillsExample {
     public static String answer(ChatClient client) throws Exception {
         var registry = ClasspathSkillRegistry.builder().classpathPath("skills").basePath("target/skills-cache").build();
         try {
-            var agent = ReactAgent.builder().name("release_writer")
+            var agent = ReactAgent.builder().throwOnModelError(true).name("release_writer")
                 .chatClient(new ArgiSkillChatClient(client, registry))
                 .toolRegistry(new ToolRegistry(List.of(ReadSkillTool.createReadSkillTool(registry, null))))
                 .instruction("Read the release-notes skill and follow it when writing.").build();

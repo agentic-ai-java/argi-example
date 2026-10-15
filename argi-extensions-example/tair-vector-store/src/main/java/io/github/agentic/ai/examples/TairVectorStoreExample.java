@@ -9,15 +9,18 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.vectorstore.tair.*;
-import org.springframework.ai.document.Document;
-import org.springframework.ai.embedding.EmbeddingModel;
-import org.springframework.ai.vectorstore.SearchRequest;
-import org.springframework.ai.openai.*;
-import redis.clients.jedis.Jedis;
+import io.github.agentic.ai.vectorstore.tair.TairVectorApi;
+import io.github.agentic.ai.vectorstore.tair.TairVectorStore;
+import io.github.agentic.ai.vectorstore.tair.TairVectorStoreOptions;
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
-import java.time.Duration;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.openai.OpenAiEmbeddingModel;
+import org.springframework.ai.openai.OpenAiEmbeddingOptions;
+import org.springframework.ai.vectorstore.SearchRequest;
+import redis.clients.jedis.Jedis;
 
 /** Writes and searches a dedicated Tair Vector index using real embeddings. */
 public final class TairVectorStoreExample {

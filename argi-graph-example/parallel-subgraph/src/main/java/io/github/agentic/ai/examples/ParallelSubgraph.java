@@ -9,11 +9,15 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.graph.*;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
 import java.util.Map;
-import static io.github.agentic.ai.graph.StateGraph.*;
+import java.util.concurrent.Executors;
+
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
 import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
-import static io.github.agentic.ai.graph.action.AsyncEdgeAction.edge_async;
 
 /** Runs independent order checks in parallel, then delegates to a nested graph. */
 public final class ParallelSubgraph {
@@ -31,6 +35,13 @@ public final class ParallelSubgraph {
             .addEdge("stock", "receipt").addEdge("payment", "receipt").addEdge("receipt", END).compile();
     }
     public static void main(String[] args) throws Exception {
-        org.slf4j.LoggerFactory.getLogger(ParallelSubgraph.class).info("{}", workflow().invoke(Map.of()).orElseThrow().data());
+        var workers = Executors.newFixedThreadPool(2);
+        try {
+            var config = RunnableConfig.builder().defaultParallelExecutor(workers).build();
+            org.slf4j.LoggerFactory.getLogger(ParallelSubgraph.class)
+                .info("{}", workflow().invoke(Map.of(), config).orElseThrow().data());
+        } finally {
+            workers.shutdownNow();
+        }
     }
 }

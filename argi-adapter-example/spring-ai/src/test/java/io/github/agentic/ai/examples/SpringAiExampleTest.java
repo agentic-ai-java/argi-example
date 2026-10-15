@@ -9,13 +9,25 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.api.chat.ChatMessage;
+import io.github.agentic.ai.api.chat.ChatResponse;
+import io.github.agentic.ai.api.chat.FinishReason;
+import io.github.agentic.ai.api.chat.Usage;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.argThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class SpringAiExampleTest {
     @Test void validatesConfigurationAndAdaptsNativeModel() {
@@ -23,6 +35,8 @@ class SpringAiExampleTest {
         assertThrows(IllegalArgumentException.class, () -> SpringAiExample.client(Map.of("ARGI_API_KEY", " ")));
         assertThrows(IllegalArgumentException.class, () -> SpringAiExample.client(Map.of("ARGI_API_KEY", "test")));
         var client = SpringAiExample.client(Map.of("ARGI_API_KEY", "test", "ARGI_MODEL", "test-model", "ARGI_BASE_URL", "http://127.0.0.1:1/v1"));
+        assertThrows(IllegalArgumentException.class, () -> SpringAiExample.client(Map.of(
+            "ARGI_API_KEY", "test", "ARGI_MODEL", "test-model", "ARGI_TIMEOUT_SECONDS", "0")));
         assertTrue(client.capabilities().toolCalling());
         assertTrue(client.capabilities().async());
     }

@@ -9,14 +9,12 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
-import io.github.agentic.ai.api.tool.*;
-import io.github.agentic.ai.graph.agent.ReactAgent;
-import java.util.*;
-
+import io.github.agentic.ai.api.chat.ChatClient;
 import io.github.agentic.ai.graph.RunnableConfig;
-import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.agent.ReactAgent;
 import io.github.agentic.ai.graph.agent.hook.summarization.SummarizationHook;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import java.util.List;
 
 /** Summaries and recent messages remain in the same saved conversation thread. */
 public final class ContextCompaction {
@@ -24,7 +22,7 @@ public final class ContextCompaction {
     public static ReactAgent agent(ChatClient client) {
         var summarizer = SummarizationHook.builder().chatClient(client).maxTokensBeforeSummary(1500)
             .messagesToKeep(4).keepFirstUserMessage(true).build();
-        return ReactAgent.builder().name("project_assistant").chatClient(client).saver(new MemorySaver())
+        return ReactAgent.builder().throwOnModelError(true).name("project_assistant").chatClient(client).saver(new MemorySaver())
             .hooks(List.of(summarizer)).instruction("Track decisions and open questions about the project.").build();
     }
     public static void main(String[] args) throws Exception {

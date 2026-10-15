@@ -9,13 +9,16 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.graph.*;
-import java.util.*;
-import static io.github.agentic.ai.graph.StateGraph.*;
-import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.scheduling.ScheduledAgentManagerFactory;
+import io.github.agentic.ai.graph.scheduling.ScheduledAgentTask;
+import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
-import io.github.agentic.ai.graph.scheduling.*;
-import java.util.concurrent.*;
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /** A bounded heartbeat demonstration with explicit scheduler cleanup. */
 public final class ScheduledWorkflow {
@@ -26,7 +29,7 @@ public final class ScheduledWorkflow {
             completed.countDown();
             return Map.of("checked_at", java.time.Instant.now().toString());
         })).addEdge(START, "heartbeat").addEdge("heartbeat", END).compile();
-        var task = new ScheduledAgentTask(graph, ScheduleConfig.builder().fixedDelay(1000).initialDelay(0).inputs(Map.of()).build());
+        var task = new ScheduledAgentTask(graph, SchedulePolicies.select(args.length == 0 ? "delay" : args[0]));
         try {
             task.start();
             if (!completed.await(10, TimeUnit.SECONDS)) throw new IllegalStateException("Scheduled runs did not finish");

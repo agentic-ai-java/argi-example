@@ -9,11 +9,14 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.graph.*;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.StateGraph;
 import java.util.Map;
-import static io.github.agentic.ai.graph.StateGraph.*;
-import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
+
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
 import static io.github.agentic.ai.graph.action.AsyncEdgeAction.edge_async;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /** Routes support tickets without asking a model to make a deterministic decision. */
 public final class ConditionalRouting {

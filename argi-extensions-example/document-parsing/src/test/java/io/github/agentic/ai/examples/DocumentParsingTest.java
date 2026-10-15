@@ -10,7 +10,12 @@
 package io.github.agentic.ai.examples;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 class DocumentParsingTest {
     @Test void retainsSourceMetadataAndSelectsFields() {
         var docs = DocumentParsing.records("{\"articles\":[{\"id\":\"a\",\"title\":\"Recovery\",\"body\":\"Saved state\",\"secret\":\"excluded\"}]}");

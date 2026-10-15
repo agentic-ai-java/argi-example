@@ -9,14 +9,12 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
-import io.github.agentic.ai.graph.agent.ReactAgent;
-import java.util.List;
-import java.util.Map;
-
+import io.github.agentic.ai.api.chat.ChatClient;
 import io.github.agentic.ai.graph.RunnableConfig;
-import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import io.github.agentic.ai.graph.agent.ReactAgent;
 import io.github.agentic.ai.graph.agent.hook.modelcalllimit.ModelCallLimitHook;
+import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
+import java.util.List;
 
 /** Maintains per-thread history and limits the total number of model turns. */
 public final class ContextEngineering {
@@ -25,7 +23,7 @@ public final class ContextEngineering {
     public static ReactAgent agent(ChatClient client) {
         var budget = ModelCallLimitHook.builder().threadLimit(2).runLimit(1)
             .exitBehavior(ModelCallLimitHook.ExitBehavior.ERROR).build();
-        return ReactAgent.builder().name("support_session").chatClient(client).saver(new MemorySaver())
+        return ReactAgent.builder().throwOnModelError(true).name("support_session").chatClient(client).saver(new MemorySaver())
             .instruction("Use the conversation history to answer briefly.").hooks(List.of(budget)).build();
     }
     public static List<String> conversation(ChatClient client) throws Exception {

@@ -11,10 +11,10 @@ package io.github.agentic.ai.examples;
 
 import io.github.agentic.ai.document.JsonDocumentParser;
 import io.github.agentic.ai.document.TextDocumentParser;
-import org.springframework.ai.document.Document;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import org.springframework.ai.document.Document;
 
 /** Parses JSON records and UTF-8 text before indexing documents. */
 public final class DocumentParsing {

@@ -12,6 +12,7 @@ See the [root setup](../README.md) and select one capability below.
 - [parallel-subgraph](parallel-subgraph/README.md): Joins order checks and creates a receipt in a nested graph.
 - [persistence](persistence/README.md): File checkpoints, thread identity, history inspection, and recovery with a fresh graph.
 - [plantuml](plantuml/README.md): Exports PlantUML and Mermaid representations without invoking the graph.
+- [recoverable-runs](recoverable-runs/README.md): Run/task storage, submission deduplication, leases, revision conflicts and atomic commits.
 - [runtime-store](runtime-store/README.md): Separates transient invocation metadata, thread state, and long-lived namespaced memory.
 - [scheduling](scheduling/README.md): Schedules a graph at a fixed delay and shuts down the task manager after completion.
 - [spring-ai-integration](spring-ai-integration/README.md): Adapts a Spring AI model into a neutral streaming LlmNode and consumes graph events.

@@ -4,16 +4,25 @@ The examples target the local RC2 API, not the historical snippets verbatim.
 
 | Input | Revision used for API review |
 | --- | --- |
-| ARGI | `ee72a721cfe6d50184068d053f70784556aee424` |
+| ARGI | `f61a477220b9caec4d63b9469dbab5877eff1df9` |
 | ARGI Extensions | `84994ebb71374ebc3dea688ae7f81360934313f9` |
 | website | `21975f6313f0ef63542abf110e129bc81a110b64` |
 | argi-website (additional planner chapter) | `f8e815190e2dc6afc783fec6a6ec6309c1c000ca` |
 
 Both Maven BOMs are pinned to `2.1.0-RC2-SNAPSHOT`. Since a snapshot coordinate
 does not freeze source, CI checks out the revisions above. The local bootstrap
-script uses the caller's sibling checkouts and prints their revisions. It does not
-switch branches or modify their tracked files. Extensions must be installed with
+script reads the caller's sibling checkouts, prints their revisions, and builds temporary
+copies. It does not switch branches or modify their tracked files. Extensions must be installed with
 `-Dargi.version=2.1.0-RC2-SNAPSHOT`; its source parent still defaults to RC1.
+
+The Core pin was advanced from `ee72a721cfe6d50184068d053f70784556aee424` to include
+the `execution.run` contracts used by `recoverable-runs`. On 2026-10-15 the new
+commit was confirmed on the remote `feat/run-task-storage-contract-122` branch;
+the examples deliberately pin that commit rather than assuming it is on `main`.
+Existing API files used by the other examples are unchanged between these two
+revisions. Local artifacts built from the earlier commit must be rebuilt before
+compiling the new module. No existing example entry point or stored application
+data is migrated.
 
 ## Direct replacements from website snippets
 
@@ -45,26 +54,109 @@ When adapting historical snippets, replace the old APIs directly. Keep old
 checkpoint backups when upgrading an existing application; the example repository
 does not migrate production stores.
 
+## Staged compatibility corrections
+
+`tools/bootstrap.sh` now requires Python 3 and builds temporary copies under
+`target/bootstrap`, with automatic cleanup. The version coordinates remain
+`2.1.0-RC2-SNAPSHOT`; these are explicitly corrected local artifacts, not a claim
+that the unmodified upstream pins already contain the fixes.
+
+1. **Core nested-stream completion:** `tools/build_core.py` adds an empty visible-message
+   check to `NodeExecutor`'s terminal-response filter. The pinned runtime can emit a
+   completion event with a full origin response and no visible messages. Its parent
+   graph previously accessed `streaming.messages().get(0)`, causing an index error.
+   `RoutingStreamingTest` reproduced that failure before the correction and passes
+   afterward. Routing and embedded support-writer model runs verify the repaired path.
+2. **Extensions A2A streaming:** `tools/build_extensions.py` changes the obsolete
+   `StreamingOutput.chunk()` call to `StreamingOutput<?>.text()` in the staged copy.
+3. **Extensions Sandbox SDK:** the same script declares Sandbox's direct
+   `spring-ai-model` dependency, since neutral Core RC2 no longer supplies that SDK
+   transitively. The version comes from Extensions' Spring AI BOM.
+
+The scripts reject an unfamiliar streaming implementation instead of silently
+applying an uncertain replacement. The original Core and Extensions worktrees are
+unchanged. Rebuild through bootstrap on a fresh machine or CI; a previously installed
+uncorrected artifact with the same snapshot coordinate is insufficient.
+
 ## Verification boundary
 
-Final authoring review date: **2026-10-14**. After the user's instruction to write
-without execution, no examples, test suites, builds, model requests, or service
-startup commands were run. Static checks validate catalog completeness, Maven
-module wiring, local documentation links, source imports, and resource presence.
-Earlier test results cover only an earlier subset and do not certify this expanded
-repository. CI is provided for subsequent verification and has not been triggered.
+Last verification: **2026-10-15**, Java **17.0.19**, Maven **3.9.10**.
+Execution was explicitly authorized after the earlier static authoring pass.
+The selected Claude Code alias `sonnet` resolved to **`glm-5.3`**. Its gateway
+accepted OpenAI-compatible chat requests. Credentials remained in child-process
+environments; no key, gateway settings file, or account configuration was committed.
+Spring AI request timeouts were set to 120 seconds for the longer model runs.
 
-Static review completed for the final tree:
+| Check | Result |
+| --- | --- |
+| Fixed Core and Extensions dependency builds | Passed with the three staged corrections above |
+| Full example reactor, `bash tools/mvn.sh -B -fae install` | Passed, including verification |
+| Final `bash tools/mvn.sh -B -fae verify` | Passed; 109 tests, 0 failures, 0 errors, 0 skipped |
+| JaCoCo | 1,401 / 1,435 executable lines in 44 measured modules: **97.63%**; every measured module is at least 90% |
+| Unmeasured coverage | 15 modules have no tests/execution data; the measured percentage does **not** represent all 59 modules |
+| Local entry-point runs | **36 / 36 passed**, including separate persistence prepare/resume processes |
+| Model entry-point cases | **34 / 38 passed**; four incomplete gateway-backed cases are listed below |
+| Studio HTTP/SSE | Passed: HTTP 200 agent discovery and a real-model SSE answer; application stopped afterward |
+| Backend profiles | All 7 memory and 5 vector profiles compiled; backend connectivity was not tested |
+| Catalog/import checks | 59 modules, 54 website mappings, 116 main sources, 79 test sources, 31 additional entry points; no wildcard imports |
+| Remote CI and vulnerability checks | Not run for these working-tree changes; CI and its coverage gate remain enabled |
 
-- `python3 tools/check_catalog.py`: 58 example modules and 54 website mappings;
-  module entries, backend profile resources, and local documentation links resolve.
-- XML parsing: all 63 Maven POMs are well formed.
-- `bash -n tools/mvn.sh tools/bootstrap.sh tools/run.sh`: shell syntax passes.
-- Ruby Psych parsing: all 22 YAML files are well formed.
-- Source review: 90 Java files have balanced lexical delimiters; explicit ARGI imports
-  resolve to classes in the current Core, Extensions, or example source trees.
-- UTF-8 BOM check passes. These checks do not replace Java compilation or runtime tests.
+Counts are distinct entry-point/argument combinations, not model request counts.
+Reruns replace the earlier outcome. A normal process exit alone was insufficient:
+empty answers, swallowed model exceptions, pending reapprovals and failed requests
+were not counted as successful completed answers. Per-module test, coverage and
+runtime outcomes are recorded in [catalog.json](catalog.json).
 
-The dependency bootstrap explicitly disables both formatting and the Maven POM sorter
-so invoking it does not reformat the sibling checkouts. Earlier sorter-only edits
-created during dependency preparation were reverted; unrelated Core work was preserved.
+Successful real-model paths include all four adapters' basic, asynchronous and
+streaming requests; strict ticket validation and typed output; ordinary and direct
+return tools; actual fail-once tool retry; retrieval evidence; thread isolation and
+budgets; long-history summarization; selected and emulated tools; nested delegation;
+planner decomposition; bounded revision; routing streams; and support draft review.
+The compaction stress-input example retained seven messages, a summary marker and
+the first user message. The healthy-primary fallback run does not prove a live
+provider failover; injected primary failure is covered by a deterministic test.
+
+### Incomplete real-model cases
+
+| Entry point | Observed outcome |
+| --- | --- |
+| `ContextCompaction` | Gateway reset/cancelled the connection during the ordinary four-turn conversation; the separate long-transcript `CompactionScenarios` run passed |
+| `MultiAgent` | Parallel review/writing run failed with request timeout/connection cancellation; deterministic composition tests pass |
+| `ParallelReview` | Gateway reset a parallel review request; deterministic merge/runtime tests pass |
+| `AgentApproval EDITED` | Corrected arguments executed `ORDER-43` and returned `Preparing shipment`, but the gateway reset the subsequent model stream before completion; `APPROVED` and `REJECTED` live runs pass, and all three decision paths pass local tests |
+
+The first three were retried without obtaining a complete validated result. These
+are unresolved live-provider failures, not successful integration tests. The edited
+approval run additionally exposed a possible second approval request; the example
+now treats a new interruption as unfinished and never approves it automatically.
+
+### Execution-driven example fixes
+
+- Restored explicit Spring/JUnit/tool annotation imports removed during the earlier
+  source-only import cleanup; sorted imports without deleting annotation names.
+- Registered the local observation lifecycle listener and added the MongoDB sync
+  driver's direct dependency.
+- Selected neutral JSON Schema only when the adapter advertises support. The Spring
+  AI text fallback includes the schema in the prompt and strictly validates the result;
+  it is not provider-enforced structured output.
+- Raised adapter scenario output budgets from 160 to 2,048 tokens and reject blank
+  or length-truncated final answers.
+- Registered the RAG evidence hook at `BEFORE_MODEL`; added runtime request assertions.
+- Preserved typed approval feedback instead of overwriting it with `.resume()`,
+  passed non-null empty input on resume, and reject a second pending approval.
+- Matched the embedded support writer's agent name to its graph node ID.
+- Propagated model failures rather than returning successful error-text answers.
+- Owned and closed parallel executors; avoided interrupting provider daemon pools
+  when a standalone Maven launcher exits.
+
+No Docker/OrbStack, database, Nacos registry, external MCP server, vector backend or
+sandbox infrastructure was started. Live A2A/MCP/backend interoperability, performance,
+load, stress, capacity, chaos and dependency-CVE checks remain unverified. Local
+fixtures and profile compilation cannot establish those properties.
+
+No data migration: these example and launcher changes directly replace the prior
+source version. To roll back dependency corrections, restore the preceding bootstrap
+implementation and rebuild the original pins; this restores the documented upstream
+limitations too. Review and revert only this task's source diff to preserve unrelated
+working-tree changes. Temporary worktrees, model-run helpers, logs, backups and
+module runtime artifacts are removed after recording the results here.

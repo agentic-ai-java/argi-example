@@ -6,19 +6,27 @@ Only the sibling `demo` repository's directory and Maven aggregation layout was 
 The implementations come from ARGI/Extensions API contracts and the scenarios in
 `website/docs`; no demo application source was reused.
 
-The repository contains **58 executable example modules**, with **12 additional backend
+The repository contains **59 executable example modules**, with **12 additional backend
 profile configurations** across the memory and vector modules. All nine website Graph
 scenario pages have dedicated examples. [Website coverage](docs/website-coverage.md)
-maps every framework chapter to its implementation; [catalog.json](docs/catalog.json)
-is the machine-readable index.
+maps chapters to relevant modules; a chapter mapping is not proof that every feature
+in that chapter is implemented. [Behavioral coverage](docs/feature-coverage.md) records
+the demonstrated paths, additional entry points, and limits of every module.
+[catalog.json](docs/catalog.json) is the machine-readable source and scenario index.
+
+Expanded scenarios separate application data, repositories, tools, state inspection,
+and workflow orchestration where they have distinct responsibilities. Small introductory
+examples remain small. Both production and test Java sources use explicit imports;
+the static catalog check rejects ordinary and static wildcard imports.
 
 ## Requirements and setup
 
 - JDK 17 or newer; Maven 3.9.1 or newer.
 - ARGI and Extensions `2.1.0-RC2-SNAPSHOT` built from compatible source revisions.
-- Python 3 only for the optional static catalog check.
+- Python 3 for staged dependency builds and the static catalog check.
 - Model-backed examples need `ARGI_API_KEY` and `ARGI_MODEL`; `ARGI_BASE_URL` defaults
-  to `https://api.openai.com/v1`.
+  to `https://api.openai.com/v1`. The Spring AI factory accepts
+  `ARGI_TIMEOUT_SECONDS` (default `60`); this validation used `120` for longer model turns.
 - External integration examples need caller-managed services. Docker is required
   only by the optional Docker execution example or the chosen sandbox infrastructure.
 
@@ -33,8 +41,8 @@ open_source/
 └── demo/             # structural reference, not a build dependency
 ```
 
-The following are **commands for you to run when desired**, not actions performed
-as part of the final authoring pass:
+Build dependencies from the revisions in [compatibility.md](docs/compatibility.md),
+then install and run the selected module:
 
 ```shell
 # Inspect source/document wiring; this does not execute Java or contact services.
@@ -44,7 +52,7 @@ python3 tools/check_catalog.py
 bash tools/bootstrap.sh
 
 # Install the example reactor; required by modules that reuse another example's factory.
-bash tools/mvn.sh -B -Dmaven.test.skip=true install
+bash tools/mvn.sh -B install
 
 # Run a model-free example explicitly.
 bash tools/run.sh argi-graph-example/hello-graph
@@ -54,10 +62,14 @@ bash tools/run.sh argi-graph-example/hello-graph
 mise is available; otherwise it uses your `mvn`. It does not install SDKs. Set
 `ARGI_CORE_DIR` and `ARGI_EXTENSIONS_DIR` if the source checkouts live elsewhere.
 The source revision and RC2 migration notes are in [compatibility.md](docs/compatibility.md).
+The `recoverable-runs` module requires the pinned Core run/task-contract commit;
+an older RC2 snapshot with the same Maven version does not contain those classes.
 
 The root imports **both** `argi-bom` and `argi-extensions-bom`, with the Core BOM
 first. The bootstrap command overrides Extensions' RC1 default with the matching
-RC2 core version. All examples use `io.github.agentic.ai.*` and neutral model/tool
+RC2 core version. It builds temporary source copies with three compatibility
+corrections documented in [compatibility.md](docs/compatibility.md), then removes
+those copies. Sibling tracked source files are never modified. All examples use `io.github.agentic.ai.*` and neutral model/tool
 contracts at the ARGI runtime boundary.
 
 ## Example catalog
@@ -142,6 +154,7 @@ real APIs rather than mock responses.
 | [persistence](argi-graph-example/persistence/README.md) | local | File checkpoints, thread identity, history inspection, and recovery with a fresh graph. |
 | [plantuml](argi-graph-example/plantuml/README.md) | local | Exports PlantUML and Mermaid representations without invoking the graph. |
 | [runtime-store](argi-graph-example/runtime-store/README.md) | local | Separates transient invocation metadata, thread state, and long-lived namespaced memory. |
+| [recoverable-runs](argi-graph-example/recoverable-runs/README.md) | local | Run/task admission, deduplication, leases, revision conflicts and atomic checkpoint/journal/outbox writes. |
 | [scheduling](argi-graph-example/scheduling/README.md) | local | Schedules a graph at a fixed delay and shuts down the task manager after completion. |
 | [spring-ai-integration](argi-graph-example/spring-ai-integration/README.md) | model | Adapts a Spring AI model into a neutral streaming LlmNode and consumes graph events. |
 | [state-serialization](argi-graph-example/state-serialization/README.md) | local | Append and replace reducers plus neutral message serialization round trips. |
@@ -179,7 +192,7 @@ Their READMEs list every backend and required environment variable configuration
 Provision external services separately. No repository command starts OrbStack,
 Docker, Nacos, Redis, MongoDB, Elasticsearch, Tair, or a model server.
 
-For MCP, the examples form a complete composition:
+The MCP modules demonstrate this composition:
 
 1. `mcp-registry` publishes the read-only `lookup` tool and registers `argi-catalog` in Nacos.
 2. `mcp-client` connects directly; `mcp-discovery` resolves it through Nacos.
@@ -201,25 +214,37 @@ make compile
 make verify
 ```
 
-The existing verification configuration enforces a 90% line-coverage threshold for
-instrumented example bundles. The final expanded source tree has not been built or
-tested after the user requested writing without execution; **no achieved coverage
-percentage or successful full build is claimed**. Source checks do not establish
-native SDK compatibility, remote connectivity, performance, load, capacity, or chaos
-behavior. Real model, database, registry, Docker, and sandbox integration runs remain
-caller-driven checks. No vulnerability scan was run during this authoring-only pass.
+Local execution was authorized and performed on **2026-10-15**, using the selected
+Claude Code model (`sonnet` resolved to `glm-5.3`) through its OpenAI-compatible gateway.
+Credentials were passed only through child-process environments; neither the settings
+file nor credentials were copied into this repository. The normal examples continue
+to use `ARGI_API_KEY`, `ARGI_MODEL` and `ARGI_BASE_URL`.
+
+The full reactor and all 12 backend profiles build successfully. All 109 local tests
+and all 36 local entry-point runs pass. Of 38 real-model cases, 34 pass and four remain
+incomplete after gateway resets/timeouts. Studio HTTP/SSE also passed.
+The 90% JaCoCo line threshold remains enabled for bundles with execution data;
+modules without tests are explicitly outside the measured percentage.
+[Compatibility and validation results](docs/compatibility.md#verification-boundary)
+record exact counts, failed gateway requests and unexecuted external-service scenarios.
+No database, Nacos, MCP server, Docker daemon or sandbox infrastructure was started.
+Performance, load, capacity, chaos, dependency-vulnerability and remote-CI checks
+are not claimed by this local execution.
 
 [GitHub Actions](.github/workflows/verify.yml) keeps CI enabled for pushes and pull
 requests. It installs pinned upstream source revisions, verifies the examples, and
-compiles every backend profile. It has not been submitted or run remotely from this
-session.
+compiles every backend profile. CI is enabled; the current working-tree changes have not
+been validated by a remote run. No CI result is inferred from source inspection.
 
 ## Adding an example
 
 Add a capability-focused module, a Java main entry point, a README with prerequisites
 and observable results, and tests for nontrivial local behavior. Register the module
-in its group POM and update `docs/catalog.json` and `docs/website-coverage.md`.
-Use a real integration in the sample and keep test fixtures in `src/test`.
+in its group POM and update `docs/catalog.json`, `docs/website-coverage.md`, and
+`docs/feature-coverage.md`. Register all supporting sources, tests, and additional
+main methods in the catalog, with their demonstrated behavior and limitations.
+Use a real integration in integration scenarios. Label local corpora, fault injection,
+and emulation explicitly; keep mock providers in `src/test`. Do not use wildcard imports.
 
 ## Cleanup and rollback
 

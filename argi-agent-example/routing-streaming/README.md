@@ -23,8 +23,14 @@ A routing model selects the billing or technical specialist based on description
 
 ## Source and verification
 
-- [RoutingStreaming.java](src/main/java/io/github/agentic/ai/examples/RoutingStreaming.java) contains the complete example.
+- [RoutingStreaming.java](src/main/java/io/github/agentic/ai/examples/RoutingStreaming.java) is the primary entry point.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Uses LLM routing to choose a specialist and demonstrates neutral streamed messages.
+
+Limit: Model-selected specialists with a fallback; no routing accuracy evaluation or provider-event matrix.

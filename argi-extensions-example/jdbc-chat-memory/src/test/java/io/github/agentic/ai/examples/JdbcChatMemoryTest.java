@@ -11,7 +11,10 @@ package io.github.agentic.ai.examples;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.messages.UserMessage;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 class JdbcChatMemoryTest {
     @Test void persistsBoundsAndIsolatesConversations() {
         String url = "jdbc:h2:mem:memory-test;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE";

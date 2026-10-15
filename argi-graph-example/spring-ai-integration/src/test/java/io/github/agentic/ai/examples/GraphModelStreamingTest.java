@@ -9,13 +9,25 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.api.chat.ChatClientCapabilities;
+import io.github.agentic.ai.api.chat.ChatEvent;
+import io.github.agentic.ai.api.chat.ChatMessage;
+import io.github.agentic.ai.api.chat.ChatResponse;
+import io.github.agentic.ai.api.chat.FinishReason;
+import io.github.agentic.ai.api.chat.Usage;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Flux;
 import reactor.adapter.JdkFlowAdapter;
-import java.util.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import reactor.core.publisher.Flux;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.when;
+
 
 class GraphModelStreamingTest {
     @Test void commitsTheFinalNeutralResponseAfterStreaming() throws Exception {

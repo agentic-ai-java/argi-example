@@ -9,9 +9,11 @@
  */
 package io.github.agentic.ai.examples;
 
-import org.junit.jupiter.api.Test;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class ParallelSubgraphTest {
     @Test void exercisesWorkflow() throws Exception {
         assertEquals("reserved/authorized", ParallelSubgraph.workflow().invoke(Map.of()).orElseThrow().value("receipt").orElseThrow());

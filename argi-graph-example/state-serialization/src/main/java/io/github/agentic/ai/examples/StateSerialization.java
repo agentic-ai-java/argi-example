@@ -9,14 +9,19 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.graph.*;
-import java.util.*;
-import static io.github.agentic.ai.graph.StateGraph.*;
-import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
-
-import io.github.agentic.ai.graph.state.strategy.*;
-import io.github.agentic.ai.graph.serializer.plain_text.jackson.ArgiJacksonStateSerializer;
 import io.github.agentic.ai.api.chat.ChatMessage;
+import io.github.agentic.ai.graph.KeyStrategyFactory;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.serializer.plain_text.jackson.ArgiJacksonStateSerializer;
+import io.github.agentic.ai.graph.state.strategy.AppendStrategy;
+import io.github.agentic.ai.graph.state.strategy.ReplaceStrategy;
+import java.util.List;
+import java.util.Map;
+
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /** Keeps model messages and checkpoint state independent of provider SDK classes. */
 public final class StateSerialization {

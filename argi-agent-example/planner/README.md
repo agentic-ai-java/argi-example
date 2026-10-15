@@ -23,8 +23,35 @@ Default mode is `DECOMPOSE`; `DIRECT` selects a known capability without model p
 
 ## Source and verification
 
-- [PlannerExample.java](src/main/java/io/github/agentic/ai/examples/PlannerExample.java) contains the complete example.
+- [PlannerExample.java](src/main/java/io/github/agentic/ai/examples/PlannerExample.java) is the primary entry point.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Produces validated direct or decomposed plans from an explicit capability catalog.
+- Application-owned capability catalog; valid dependency chains; rejection of unregistered targets, missing dependencies, duplicate IDs and cycles.
+
+Limit: Plans are validated data. No trusted executor, scheduling or plan-result persistence is implemented here.
+
+## Source layout
+
+| Source | Responsibility |
+| --- | --- |
+| [PlanValidationScenarios.java](src/main/java/io/github/agentic/ai/examples/PlanValidationScenarios.java) | Validates plans locally; no capability is executed by validation. |
+| [PlannerExample.java](src/main/java/io/github/agentic/ai/examples/PlannerExample.java) | Planning produces data; it never executes the capabilities named by the plan. |
+| [PlanningCatalog.java](src/main/java/io/github/agentic/ai/examples/PlanningCatalog.java) | The application declares executable capability names before asking a model to plan. |
+
+## Additional entry points
+
+Run from the repository root after installing the reactor dependencies. Select an entry point explicitly. The validation record distinguishes completed runs from unexecuted or failed scenarios.
+
+### PlanValidationScenarios
+
+Validates plans locally; no capability is executed by validation. Runtime: **local**.
+
+```shell
+bash tools/run.sh argi-agent-example/planner -Dexample.mainClass=io.github.agentic.ai.examples.PlanValidationScenarios
+```

@@ -23,8 +23,14 @@ Requires an existing AgentScope Runtime manager. Running the sample requests a s
 
 ## Source and verification
 
-- [SandboxToolsExample.java](src/main/java/io/github/agentic/ai/examples/SandboxToolsExample.java) contains the complete example.
+- [SandboxToolsExample.java](src/main/java/io/github/agentic/ai/examples/SandboxToolsExample.java) is the primary entry point.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Adapts an Extensions sandbox Python tool into a neutral ReAct agent.
+
+Limit: Python sandbox tool integration; no sandbox provisioning or full browser/desktop tool catalog.

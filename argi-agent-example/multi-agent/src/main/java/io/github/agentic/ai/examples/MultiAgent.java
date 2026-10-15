@@ -9,35 +9,47 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.graph.RunnableConfig;
 import io.github.agentic.ai.graph.agent.ReactAgent;
-import java.util.List;
-import java.util.Map;
-
-import io.github.agentic.ai.graph.OverAllState;
-import io.github.agentic.ai.graph.agent.flow.agent.SequentialAgent;
-import io.github.agentic.ai.graph.agent.flow.agent.ParallelAgent;
 import io.github.agentic.ai.graph.agent.flow.agent.LoopAgent;
+import io.github.agentic.ai.graph.agent.flow.agent.ParallelAgent;
+import io.github.agentic.ai.graph.agent.flow.agent.SequentialAgent;
 import io.github.agentic.ai.graph.agent.flow.agent.loop.LoopMode;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ForkJoinPool;
 
 /** Independent reviewers feed a writer, followed by a bounded revision loop. */
 public final class MultiAgent {
     private MultiAgent() {}
 
     public static SequentialAgent workflow(ChatClient client) {
-        var technical = ReactAgent.builder().name("technical").chatClient(client)
+        return workflow(client, ForkJoinPool.commonPool());
+    }
+
+    public static SequentialAgent workflow(ChatClient client, Executor executor) {
+        var technical = ReactAgent.builder().throwOnModelError(true).name("technical").chatClient(client)
             .instruction("Review the technical risks of the proposal.").outputKey("technical_review").build();
-        var usability = ReactAgent.builder().name("usability").chatClient(client)
+        var usability = ReactAgent.builder().throwOnModelError(true).name("usability").chatClient(client)
             .instruction("Review the user experience risks of the proposal.").outputKey("usability_review").build();
-        var reviewers = ParallelAgent.builder().name("reviewers").subAgents(List.of(technical, usability)).build();
-        var writer = ReactAgent.builder().name("writer").chatClient(client)
+        var reviewers = ParallelAgent.builder().executor(executor).name("reviewers").subAgents(List.of(technical, usability)).build();
+        var writer = ReactAgent.builder().throwOnModelError(true).name("writer").chatClient(client)
             .instruction("Write a release checklist using these reviews: {technical_review}; {usability_review}.")
             .outputKey("checklist").build();
         var revisions = LoopAgent.builder().name("revisions").subAgent(writer).loopStrategy(LoopMode.count(2)).build();
-        return SequentialAgent.builder().name("release_review").subAgents(List.of(reviewers, revisions)).build();
+        return SequentialAgent.builder().executor(executor).name("release_review").subAgents(List.of(reviewers, revisions)).build();
     }
     public static void main(String[] args) throws Exception {
-        var result = workflow(SpringAiExample.client(System.getenv())).invoke("Add checkpoint recovery to a support agent.").orElseThrow();
-        org.slf4j.LoggerFactory.getLogger(MultiAgent.class).info("{}", result.value("checklist").orElseThrow());
+        var workers = Executors.newFixedThreadPool(2);
+        try {
+            var config = RunnableConfig.builder().defaultParallelExecutor(workers).build();
+            var result = workflow(SpringAiExample.client(System.getenv()), workers)
+                .invoke("Add checkpoint recovery to a support agent.", config).orElseThrow();
+            org.slf4j.LoggerFactory.getLogger(MultiAgent.class).info("{}", result.value("checklist").orElseThrow());
+        } finally {
+            workers.shutdownNow();
+        }
     }
 }

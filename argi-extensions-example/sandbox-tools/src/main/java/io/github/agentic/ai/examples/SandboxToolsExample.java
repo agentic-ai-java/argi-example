@@ -9,12 +9,12 @@
  */
 package io.github.agentic.ai.examples;
 
-
-import io.agentscope.runtime.sandbox.manager.*;
 import io.agentscope.runtime.sandbox.box.BaseSandbox;
-import io.github.agentic.ai.sandbox.ToolkitInit;
+import io.agentscope.runtime.sandbox.manager.ManagerConfig;
+import io.agentscope.runtime.sandbox.manager.SandboxService;
 import io.github.agentic.ai.adapter.springai.SpringAiToolAdapter;
 import io.github.agentic.ai.graph.agent.ReactAgent;
+import io.github.agentic.ai.sandbox.ToolkitInit;
 import java.util.Objects;
 
 /** Requires a separately provisioned AgentScope Runtime sandbox manager. */
@@ -27,7 +27,7 @@ public final class SandboxToolsExample {
             // Remote mode uses the manager URL; start() would initialize a local container client.
             try (var sandbox = new BaseSandbox(manager, "argi-example", "calculation")) {
                 var tools = SpringAiToolAdapter.fromCallbacks(ToolkitInit.RunPythonCodeTool(sandbox));
-                var agent = ReactAgent.builder().name("sandbox_calculator").chatClient(SpringAiExample.client(System.getenv()))
+                var agent = ReactAgent.builder().throwOnModelError(true).name("sandbox_calculator").chatClient(SpringAiExample.client(System.getenv()))
                     .toolRegistry(tools).instruction("Use Python only to calculate the requested expression.").build();
                 org.slf4j.LoggerFactory.getLogger(SandboxToolsExample.class).info("{}", agent.call("Calculate sum([19, 23]).").text());
             }

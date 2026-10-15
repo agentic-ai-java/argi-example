@@ -10,8 +10,9 @@
 package io.github.agentic.ai.examples;
 
 import io.github.agentic.ai.adapter.googleadk.GoogleAdkChatClientAdapter;
-import io.github.agentic.ai.api.chat.*;
-import java.time.Duration;
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.api.chat.ChatMessage;
+import io.github.agentic.ai.api.chat.ChatRequest;
 import java.util.List;
 import java.util.Map;
 

@@ -27,8 +27,14 @@ Discovers argi-catalog through the Nacos Streamable configuration and converts S
 
 ## Source and verification
 
-- [McpDiscoveryAgent.java](src/main/java/io/github/agentic/ai/examples/McpDiscoveryAgent.java) contains the complete example.
+- [McpDiscoveryAgent.java](src/main/java/io/github/agentic/ai/examples/McpDiscoveryAgent.java) is the primary entry point.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Discovers registered MCP tools through Nacos and adapts callbacks for ReAct.
+
+Limit: Tool discovery and callback adaptation; no registry failover, service churn or credential refresh test.

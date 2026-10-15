@@ -100,6 +100,8 @@
         <version>3.6.3</version>
         <configuration>
           <mainClass>${example.mainClass}</mainClass>
+          <!-- Each launcher owns its JVM; provider daemon pools exit with that JVM. -->
+          <cleanupDaemonThreads>false</cleanupDaemonThreads>
         </configuration>
       </plugin>
       <plugin>

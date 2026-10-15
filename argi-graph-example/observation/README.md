@@ -23,9 +23,15 @@ Logs local observation names and a completed-observation count. No prompt bodies
 
 ## Source and verification
 
-- [LocalObservation.java](src/main/java/io/github/agentic/ai/examples/LocalObservation.java) contains the complete example.
+- [LocalObservation.java](src/main/java/io/github/agentic/ai/examples/LocalObservation.java) is the primary entry point.
 - [LocalObservationTest.java](src/test/java/io/github/agentic/ai/examples/LocalObservationTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Records graph observations with a local Micrometer handler and no telemetry backend.
+
+Limit: Successful local observation lifecycle; no exporter deployment or error-path observability matrix.

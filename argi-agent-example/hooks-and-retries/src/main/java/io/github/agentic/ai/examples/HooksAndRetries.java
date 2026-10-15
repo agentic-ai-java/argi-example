@@ -9,12 +9,13 @@
  */
 package io.github.agentic.ai.examples;
 
-
 import io.github.agentic.ai.api.chat.ChatClient;
 import io.github.agentic.ai.api.tool.ToolRegistry;
 import io.github.agentic.ai.graph.agent.ReactAgent;
-import io.github.agentic.ai.graph.agent.hook.pii.*;
 import io.github.agentic.ai.graph.agent.hook.modelcalllimit.ModelCallLimitHook;
+import io.github.agentic.ai.graph.agent.hook.pii.PIIDetectionHook;
+import io.github.agentic.ai.graph.agent.hook.pii.PIIType;
+import io.github.agentic.ai.graph.agent.hook.pii.RedactionStrategy;
 import io.github.agentic.ai.graph.agent.hook.toolcalllimit.ToolCallLimitHook;
 import io.github.agentic.ai.graph.agent.interceptor.modelretry.ModelRetryInterceptor;
 import io.github.agentic.ai.graph.agent.interceptor.toolretry.ToolRetryInterceptor;
@@ -24,7 +25,7 @@ import java.util.List;
 public final class HooksAndRetries {
     private HooksAndRetries() {}
     public static ReactAgent agent(ChatClient client) {
-        return ReactAgent.builder().name("bounded_support").chatClient(client)
+        return ReactAgent.builder().throwOnModelError(true).name("bounded_support").chatClient(client)
             .toolRegistry(new ToolRegistry(List.of(ReactTools.trackingTool())))
             .hooks(List.of(PIIDetectionHook.builder().piiType(PIIType.EMAIL).strategy(RedactionStrategy.REDACT).applyToInput(true).build(),
                 ModelCallLimitHook.builder().runLimit(4).build(),

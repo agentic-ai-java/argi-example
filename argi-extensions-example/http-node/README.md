@@ -23,9 +23,15 @@ Requests `/orders/ORDER-42` from TRACKING_BASE_URL. The response is stored as `t
 
 ## Source and verification
 
-- [HttpNodeExample.java](src/main/java/io/github/agentic/ai/examples/HttpNodeExample.java) contains the complete example.
+- [HttpNodeExample.java](src/main/java/io/github/agentic/ai/examples/HttpNodeExample.java) is the primary entry point.
 - [HttpNodeExampleTest.java](src/test/java/io/github/agentic/ai/examples/HttpNodeExampleTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Retrieves an HTTP order resource as a graph step with explicit timeout and network policy.
+
+Limit: One HTTP GET with timeout and network policy; POST, authentication refresh and status-dependent routing are not covered.

@@ -9,9 +9,12 @@
  */
 package io.github.agentic.ai.examples;
 
+import java.util.Map;
 import org.junit.jupiter.api.Test;
-import java.util.*;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 
 class SubgraphAsNodeTest {
     @Test void demonstratesTheDocumentedContract() throws Exception {

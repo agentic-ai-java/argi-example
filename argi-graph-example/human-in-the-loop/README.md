@@ -23,9 +23,35 @@ The saved state first contains `awaiting-approval`. Explicit feedback changes th
 
 ## Source and verification
 
-- [HumanInTheLoop.java](src/main/java/io/github/agentic/ai/examples/HumanInTheLoop.java) contains the complete example.
+- [HumanInTheLoop.java](src/main/java/io/github/agentic/ai/examples/HumanInTheLoop.java) is the primary entry point.
 - [HumanInTheLoopTest.java](src/test/java/io/github/agentic/ai/examples/HumanInTheLoopTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Pauses before a refund decision and resumes from the same checkpoint.
+- Two independently paused requests receive different approval decisions before resuming.
+
+Limit: Approval changes example state; it does not issue a real refund.
+
+## Source layout
+
+| Source | Responsibility |
+| --- | --- |
+| [ApprovalScenarios.java](src/main/java/io/github/agentic/ai/examples/ApprovalScenarios.java) | Resolves two independent pending requests with different human decisions. |
+| [HumanInTheLoop.java](src/main/java/io/github/agentic/ai/examples/HumanInTheLoop.java) | Pauses before a refund decision and resumes from the same saved thread. |
+
+## Additional entry points
+
+Run from the repository root after installing the reactor dependencies. Select an entry point explicitly. The validation record distinguishes completed runs from unexecuted or failed scenarios.
+
+### ApprovalScenarios
+
+Resolves two independent pending requests with different human decisions. Runtime: **local**.
+
+```shell
+bash tools/run.sh argi-graph-example/human-in-the-loop -Dexample.mainClass=io.github.agentic.ai.examples.ApprovalScenarios
+```

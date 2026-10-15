@@ -20,6 +20,7 @@
     <module>parallel-subgraph</module>
     <module>persistence</module>
     <module>plantuml</module>
+    <module>recoverable-runs</module>
     <module>runtime-store</module>
     <module>scheduling</module>
     <module>spring-ai-integration</module>

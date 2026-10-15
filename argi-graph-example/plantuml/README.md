@@ -23,9 +23,15 @@ Writes `target/diagrams/release.puml` and `release.mmd`. Open these with a Plant
 
 ## Source and verification
 
-- [GraphDiagrams.java](src/main/java/io/github/agentic/ai/examples/GraphDiagrams.java) contains the complete example.
+- [GraphDiagrams.java](src/main/java/io/github/agentic/ai/examples/GraphDiagrams.java) is the primary entry point.
 - [GraphDiagramsTest.java](src/test/java/io/github/agentic/ai/examples/GraphDiagramsTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Exports PlantUML and Mermaid representations without invoking the graph.
+
+Limit: Diagram source export only; external image renderers are not invoked.

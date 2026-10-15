@@ -9,13 +9,25 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.api.chat.ChatClientCapabilities;
+import io.github.agentic.ai.api.chat.ChatMessage;
+import io.github.agentic.ai.api.chat.ChatResponse;
+import io.github.agentic.ai.api.chat.FinishReason;
+import io.github.agentic.ai.api.chat.Usage;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 
 class MultiAgentTest {
     @Test void parallelReviewAndBoundedRevisionProduceChecklist() throws Exception {
@@ -29,6 +41,8 @@ class MultiAgentTest {
         try (var factory = mockStatic(SpringAiExample.class)) {
             factory.when(() -> SpringAiExample.client(System.getenv())).thenReturn(client);
             MultiAgent.main(new String[0]);
+            ParallelReview.main(new String[0]);
+            RevisionUntilReady.main(new String[0]);
         }
     }
 }

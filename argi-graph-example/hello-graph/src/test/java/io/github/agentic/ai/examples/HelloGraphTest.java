@@ -9,9 +9,11 @@
  */
 package io.github.agentic.ai.examples;
 
-import org.junit.jupiter.api.Test;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class HelloGraphTest {
     @Test void exercisesWorkflow() throws Exception {
         assertEquals("Welcome, Ada!", HelloGraph.workflow().invoke(Map.of("name", " Ada ")).orElseThrow().value("greeting").orElseThrow());

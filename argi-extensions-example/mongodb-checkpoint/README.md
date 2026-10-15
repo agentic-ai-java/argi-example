@@ -23,8 +23,22 @@ Uses a unique thread and reads the persisted checkpoint back through MongoSaver.
 
 ## Source and verification
 
-- [MongoCheckpoint.java](src/main/java/io/github/agentic/ai/examples/MongoCheckpoint.java) contains the complete example.
+- [MongoCheckpoint.java](src/main/java/io/github/agentic/ai/examples/MongoCheckpoint.java) is the primary entry point.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Persists neutral graph state in the Extensions MongoDB checkpoint saver.
+- Fresh saver and graph read pending checkpoints, apply one approval, inspect history and leave another thread pending.
+
+Limit: Restoration uses fresh saver objects on one client; database restart, replica failover and concurrent writers remain unverified.
+
+## Source layout
+
+| Source | Responsibility |
+| --- | --- |
+| [MongoCheckpoint.java](src/main/java/io/github/agentic/ai/examples/MongoCheckpoint.java) | Uses an existing MongoDB service and a unique example thread. |
+| [MongoRecovery.java](src/main/java/io/github/agentic/ai/examples/MongoRecovery.java) | Demonstrates checkpoint recovery through a fresh graph using the selected external saver. |

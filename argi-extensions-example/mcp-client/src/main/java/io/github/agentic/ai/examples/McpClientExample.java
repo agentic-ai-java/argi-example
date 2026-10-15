@@ -10,14 +10,16 @@
 package io.github.agentic.ai.examples;
 
 import io.github.agentic.ai.mcp.common.transport.builder.WebFluxStreamableClientTransportBuilder;
-import io.modelcontextprotocol.client.*;
+import io.modelcontextprotocol.client.McpClient;
+import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.json.jackson3.JacksonMcpJsonMapper;
 import io.modelcontextprotocol.spec.McpSchema;
-import org.springframework.web.reactive.function.client.WebClient;
-import tools.jackson.databind.json.JsonMapper;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import org.springframework.web.reactive.function.client.WebClient;
+import tools.jackson.databind.json.JsonMapper;
 
 /** Uses the Extensions HTTP transport to initialize MCP and enumerate all tool pages. */
 public final class McpClientExample {
@@ -31,11 +33,15 @@ public final class McpClientExample {
     public static List<McpSchema.Tool> tools(McpSyncClient client) {
         client.initialize();
         var tools = new ArrayList<McpSchema.Tool>();
+        var cursors = new HashSet<String>();
         String cursor = null;
         do {
             var page = client.listTools(cursor);
             tools.addAll(page.tools());
             cursor = page.nextCursor();
+            if (cursor != null && !cursor.isBlank() && !cursors.add(cursor)) {
+                throw new IllegalStateException("MCP server repeated a tool-list cursor: " + cursor);
+            }
         } while (cursor != null && !cursor.isBlank());
         return List.copyOf(tools);
     }

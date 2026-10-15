@@ -15,6 +15,10 @@
   </properties>
   <dependencies>
     <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongodb-driver-sync</artifactId>
+    </dependency>
+    <dependency>
       <groupId>io.github.agentic-ai-java</groupId>
       <artifactId>argi-graph-persistence-mongodb</artifactId>
     </dependency>

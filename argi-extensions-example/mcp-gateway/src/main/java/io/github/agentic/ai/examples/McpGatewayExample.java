@@ -9,11 +9,9 @@
  */
 package io.github.agentic.ai.examples;
 
-import org.springframework.boot.*;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.annotation.Bean;
-import java.util.*;
+
 
 /** Server aggregation and tool lifecycle are supplied by the Extensions gateway starter. */
 @SpringBootApplication

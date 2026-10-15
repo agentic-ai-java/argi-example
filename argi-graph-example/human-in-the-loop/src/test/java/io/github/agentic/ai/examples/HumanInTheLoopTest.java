@@ -9,9 +9,11 @@
  */
 package io.github.agentic.ai.examples;
 
-import org.junit.jupiter.api.Test;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class HumanInTheLoopTest {
     @Test void exercisesWorkflow() throws Exception {
         var graph = HumanInTheLoop.workflow();

@@ -9,15 +9,28 @@
  */
 package io.github.agentic.ai.examples;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.ai.chat.model.*;
-import org.springframework.ai.chat.messages.AssistantMessage;
-import org.springframework.ai.document.Document;
-import org.springframework.ai.vectorstore.*;
 import java.util.List;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.Test;
+import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.chat.model.Generation;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.vectorstore.SearchRequest;
+import org.springframework.ai.vectorstore.VectorStore;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.argThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 class RagRetrievalTest {
     @Test void expandsTheQueryAndRetainsRetrievedEvidence() throws Exception {
         var model = mock(ChatModel.class);

@@ -9,16 +9,18 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.prompt.*;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.Listener;
-import tools.jackson.databind.json.JsonMapper;
-import tools.jackson.core.type.TypeReference;
+import io.github.agentic.ai.prompt.ConfigurablePromptTemplateFactory.ConfigurablePromptTemplateModel;
+import io.github.agentic.ai.prompt.ConfigurablePromptTemplateFactory;
+import io.github.agentic.ai.prompt.PromptTemplateBuilderConfigure;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.json.JsonMapper;
 
 /** Subscribes to the Extensions prompt JSON format and always renders the latest template. */
 public final class NacosPrompt implements AutoCloseable {
@@ -37,8 +39,8 @@ public final class NacosPrompt implements AutoCloseable {
         if (initial != null && !initial.isBlank()) update(initial);
     }
     public void update(String content) {
-        List<ConfigurablePromptTemplateFactory.ConfigurablePromptTemplateModel> models =
-            JsonMapper.shared().readValue(content, new TypeReference<List<ConfigurablePromptTemplateFactory.ConfigurablePromptTemplateModel>>() {});
+        List<ConfigurablePromptTemplateModel> models =
+            JsonMapper.shared().readValue(content, new TypeReference<List<ConfigurablePromptTemplateModel>>() {});
         factory.replace(models);
     }
     public String render(String question) {

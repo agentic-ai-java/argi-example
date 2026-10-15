@@ -9,23 +9,26 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
-import io.github.agentic.ai.api.tool.*;
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
 import io.github.agentic.ai.graph.agent.ReactAgent;
-import java.util.*;
-
-import io.github.agentic.ai.graph.*;
 import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
 import io.github.agentic.ai.graph.checkpoint.savers.MemorySaver;
-import static io.github.agentic.ai.graph.StateGraph.*;
+import java.util.Locale;
+import java.util.Map;
+
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
 import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
-import static io.github.agentic.ai.graph.action.AsyncEdgeAction.edge_async;
 
 /** Classifies an issue, drafts a response, then requires review before publication. */
 public final class SupportWorkflow {
     private SupportWorkflow() {}
     public static CompiledGraph workflow(ChatClient client) throws Exception {
-        var writer = ReactAgent.builder().name("writer").chatClient(client).outputKey("draft")
+        var writer = ReactAgent.builder().throwOnModelError(true).name("draft").chatClient(client).outputKey("draft")
             .instruction("Draft a concise support reply for this ticket: {ticket}. Category: {category}.").build();
         return new StateGraph()
             .addNode("classify", node_async(s -> Map.of("category", s.<String>value("ticket").orElseThrow().toLowerCase(Locale.ROOT).contains("refund") ? "billing" : "technical")))

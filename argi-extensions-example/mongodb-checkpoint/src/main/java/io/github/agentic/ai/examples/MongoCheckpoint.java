@@ -9,14 +9,20 @@
  */
 package io.github.agentic.ai.examples;
 
-
-import io.github.agentic.ai.graph.*;
+import com.mongodb.client.MongoClients;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
 import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
 import io.github.agentic.ai.graph.persistence.mongodb.MongoSaver;
 import io.github.agentic.ai.graph.serializer.plain_text.jackson.ArgiJacksonStateSerializer;
-import com.mongodb.client.MongoClients;
-import java.util.*;
-import static io.github.agentic.ai.graph.StateGraph.*;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
 import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /** Uses an existing MongoDB service and a unique example thread. */
@@ -31,6 +37,10 @@ public final class MongoCheckpoint {
             var config = RunnableConfig.builder().threadId("argi-example-" + UUID.randomUUID()).build();
             graph.invoke(Map.of(), config);
             org.slf4j.LoggerFactory.getLogger(MongoCheckpoint.class).info("{}", saver.get(config).orElseThrow().getState());
+            var reader = MongoSaver.builder().client(client)
+                .stateSerializer(new ArgiJacksonStateSerializer(OverAllState::new)).build();
+            org.slf4j.LoggerFactory.getLogger(MongoCheckpoint.class).info("Recovery: {}",
+                MongoRecovery.exercise(saver, reader));
         }
     }
 }

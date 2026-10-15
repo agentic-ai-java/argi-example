@@ -9,13 +9,9 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
-import io.github.agentic.ai.api.tool.*;
-import io.github.agentic.ai.graph.agent.ReactAgent;
-import java.util.*;
-
 import io.github.agentic.ai.graph.agent.a2a.A2aRemoteAgent;
 import io.github.agentic.ai.graph.agent.a2a.RemoteAgentCardProvider;
+import java.util.Objects;
 
 /** Requires an existing A2A service exposing a public, unauthenticated agent card. */
 public final class A2aExample {

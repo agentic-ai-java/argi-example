@@ -9,12 +9,19 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
-import io.github.agentic.ai.api.tool.*;
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.api.tool.ToolRegistry;
 import io.github.agentic.ai.graph.agent.ReactAgent;
-import java.util.*;
-
-import io.github.agentic.ai.graph.agent.interceptor.*;
+import io.github.agentic.ai.graph.agent.interceptor.ModelCallHandler;
+import io.github.agentic.ai.graph.agent.interceptor.ModelInterceptor;
+import io.github.agentic.ai.graph.agent.interceptor.ModelRequest;
+import io.github.agentic.ai.graph.agent.interceptor.ModelResponse;
+import io.github.agentic.ai.graph.agent.interceptor.ToolCallHandler;
+import io.github.agentic.ai.graph.agent.interceptor.ToolCallRequest;
+import io.github.agentic.ai.graph.agent.interceptor.ToolCallResponse;
+import io.github.agentic.ai.graph.agent.interceptor.ToolInterceptor;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /** Caches only the public tracking fixture; invocation IDs are rebuilt for each caller. */
@@ -41,7 +48,7 @@ public final class InterceptorsExample {
         }
     }
     public static ReactAgent agent(ChatClient client) {
-        return ReactAgent.builder().name("instrumented_delivery").chatClient(client)
+        return ReactAgent.builder().throwOnModelError(true).name("instrumented_delivery").chatClient(client)
             .toolRegistry(new ToolRegistry(List.of(ReactTools.trackingTool())))
             .interceptors(List.of(new Timing(), new TrackingCache())).build();
     }

@@ -27,9 +27,35 @@ This is the ADK Apigee OpenAI-compatible path, not native Gemini/Vertex AI authe
 
 ## Source and verification
 
-- [GoogleAdkExample.java](src/main/java/io/github/agentic/ai/examples/GoogleAdkExample.java) contains the complete example.
+- [GoogleAdkExample.java](src/main/java/io/github/agentic/ai/examples/GoogleAdkExample.java) is the primary entry point.
 - [GoogleAdkExampleTest.java](src/test/java/io/github/agentic/ai/examples/GoogleAdkExampleTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Uses the Google ADK Apigee OpenAI-compatible transport through an ARGI adapter.
+- Asynchronous completion, capability-gated streaming, one-event demand, final-response handling, terminal failures and cancellation on timeout.
+
+Limit: Adapter-level capability flags, async completion and demand-controlled streams are demonstrated. Model-specific features and native SDK interoperability have not been exercised.
+
+## Source layout
+
+| Source | Responsibility |
+| --- | --- |
+| [GoogleAdkExample.java](src/main/java/io/github/agentic/ai/examples/GoogleAdkExample.java) | Demonstrates native model construction and the neutral ARGI invocation boundary. |
+| [GoogleAdkScenarios.java](src/main/java/io/github/agentic/ai/examples/GoogleAdkScenarios.java) | Exercises neutral async calls and demand-controlled streaming through this adapter. |
+
+## Additional entry points
+
+Run from the repository root after installing the reactor dependencies. Select an entry point explicitly. The validation record distinguishes completed runs from unexecuted or failed scenarios.
+
+### GoogleAdkScenarios
+
+Exercises neutral async calls and demand-controlled streaming through this adapter. Runtime: **model**.
+
+```shell
+bash tools/run.sh argi-adapter-example/google-adk -Dexample.mainClass=io.github.agentic.ai.examples.GoogleAdkScenarios
+```

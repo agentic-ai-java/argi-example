@@ -9,21 +9,15 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
-import io.github.agentic.ai.api.tool.*;
-import io.github.agentic.ai.graph.agent.ReactAgent;
-import java.util.*;
-
-import io.github.agentic.ai.graph.agent.planner.*;
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.graph.agent.planner.ArgiPlanner;
+import io.github.agentic.ai.graph.agent.planner.PlanSpec;
 
 /** Planning produces data; it never executes the capabilities named by the plan. */
 public final class PlannerExample {
     private PlannerExample() {}
     public static PlanSpec plan(ChatClient client, ArgiPlanner.Mode mode) {
-        String schema = "{\"type\":\"object\",\"properties\":{},\"additionalProperties\":false}";
-        var catalog = List.of(new PlanCapability("agent:research", "Research documentation", schema, schema),
-            new PlanCapability("agent:review", "Review findings for completeness", schema, schema));
-        var planner = new ArgiPlanner(client, new PlanValidator(catalog, 8, 4));
+        var planner = new ArgiPlanner(client, PlanningCatalog.validator());
         return planner.plan(new ArgiPlanner.Request("Research checkpoint recovery and review the findings.", 1, mode,
             mode == ArgiPlanner.Mode.DIRECT ? "agent:research" : null));
     }

@@ -38,6 +38,29 @@ def check():
         source = (directory / module["entry"]).read_text()
         if "public static void main(String[] args)" not in source:
             errors.append(f"Missing main method: {module['path']}")
+        sources = {str(path.relative_to(directory)) for path in directory.glob("src/main/java/**/*.java")}
+        if sources != set(module["sources"]):
+            errors.append(f"Source inventory mismatch: {module['path']}")
+        tests = {str(path.relative_to(directory)) for path in directory.glob("src/test/java/**/*.java")}
+        if tests != set(module["tests"]):
+            errors.append(f"Test inventory mismatch: {module['path']}")
+        if not module["demonstratedBehaviors"] or not module["limitations"]:
+            errors.append(f"Missing behavioral scope: {module['path']}")
+        expected_entries = {entry for entry in sources
+                            if "public static void main(String[] args)" in (directory / entry).read_text()}
+        declared_entries = {module["entry"]} | {scenario["entry"] for scenario in module["scenarios"]}
+        if expected_entries != declared_entries:
+            errors.append(f"Scenario entry point mismatch: {module['path']}")
+        for scenario in module["scenarios"]:
+            entry = scenario["entry"]
+            if entry not in sources:
+                errors.append(f"Missing scenario source: {module['path']}: {entry}")
+                continue
+            expected_class = entry.removeprefix("src/main/java/").removesuffix(".java").replace("/", ".")
+            if scenario["mainClass"] != expected_class:
+                errors.append(f"Scenario class mismatch: {module['path']}: {entry}")
+            if scenario["runtime"] not in {"local", "model", "service"}:
+                errors.append(f"Unknown scenario runtime: {module['path']}: {entry}")
         for profile in module["profiles"]:
             backend = profile.split("-", 1)[1]
             if not (directory / f"src/main/resources/application-{backend}.yml").is_file():
@@ -46,6 +69,13 @@ def check():
         for example in mapping["examples"]:
             if example not in listed:
                 errors.append(f"Unknown coverage target: {example}")
+    for mapping in catalog.get("projectSourceCoverage", []):
+        for example in mapping["examples"]:
+            if example not in listed:
+                errors.append(f"Unknown source-led coverage target: {example}")
+        source_root = ROOT.parent / mapping["source"].split("/", 1)[0]
+        if source_root.exists() and not (ROOT.parent / mapping["source"]).exists():
+            errors.append(f"Missing project source reference: {mapping['source']}")
     # When sibling sources exist, also verify every website framework chapter is mapped.
     website = ROOT.parent / "website/docs/frameworks"
     if website.is_dir():
@@ -66,6 +96,8 @@ def check():
         if "target" in path.parts:
             continue
         content = path.read_text()
+        if re.search(r"^\s*import\s+(?:static\s+)?[\w.]+\.\s*\*\s*;", content, re.MULTILINE):
+            errors.append(f"Wildcard import in {path.relative_to(ROOT)}")
         if "io.github.agentic.spring.ai" in content:
             errors.append(f"Legacy website package in {path.relative_to(ROOT)}")
         if re.search(r"NotImplemented|TODO|FIXME", content):
@@ -74,6 +106,9 @@ def check():
         print("\n".join(errors), file=sys.stderr)
         return 1
     print(f"Catalog OK: {len(listed)} modules; {len(catalog['websiteCoverage'])} website mappings; Maven and local links resolved.")
+    print(f"Sources: {sum(len(module['sources']) for module in catalog['modules'])} main files; "
+          f"{sum(len(module['tests']) for module in catalog['modules'])} test files; "
+          f"{sum(len(module['scenarios']) for module in catalog['modules'])} additional entry points; no wildcard imports.")
     print("This is a static source check, not a build or runtime test.")
     return 0
 

@@ -9,10 +9,12 @@
  */
 package io.github.agentic.ai.examples;
 
+import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import java.nio.file.Path;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class JdbcCheckpointTest {
     @TempDir Path directory;
     @Test void restoresFileBackedCheckpointWithANewRuntime() throws Exception {

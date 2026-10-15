@@ -23,9 +23,15 @@ Consumes token/node events once and commits the final model response into `answe
 
 ## Source and verification
 
-- [GraphModelStreaming.java](src/main/java/io/github/agentic/ai/examples/GraphModelStreaming.java) contains the complete example.
+- [GraphModelStreaming.java](src/main/java/io/github/agentic/ai/examples/GraphModelStreaming.java) is the primary entry point.
 - [GraphModelStreamingTest.java](src/test/java/io/github/agentic/ai/examples/GraphModelStreamingTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Adapts a Spring AI model into a neutral streaming LlmNode and consumes graph events.
+
+Limit: One streaming LlmNode; provider-specific event extensions and live cancellation are not validated.

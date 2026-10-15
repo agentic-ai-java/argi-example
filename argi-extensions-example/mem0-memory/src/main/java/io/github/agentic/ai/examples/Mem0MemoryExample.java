@@ -9,15 +9,16 @@
  */
 package io.github.agentic.ai.examples;
 
-import org.springframework.boot.*;
+import io.github.agentic.ai.memory.mem0.model.Mem0ServerRequest;
+import java.util.List;
+import java.util.Map;
+import org.springframework.ai.document.Document;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
-import java.util.*;
 
-import io.github.agentic.ai.memory.mem0.core.Mem0MemoryStore;
-import io.github.agentic.ai.memory.mem0.model.Mem0ServerRequest;
-import org.springframework.ai.document.Document;
 
 /** Mem0 semantic memory is separate from an ordered chat-message repository. */
 @SpringBootApplication

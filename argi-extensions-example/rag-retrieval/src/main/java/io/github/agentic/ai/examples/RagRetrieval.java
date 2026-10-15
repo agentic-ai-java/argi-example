@@ -9,20 +9,25 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.graph.*;
+import io.github.agentic.ai.graph.StateGraph;
 import io.github.agentic.ai.graph.node.rag.KnowledgeRetrievalNode;
 import io.github.agentic.ai.rag.preretrieval.transformation.HyDeTransformer;
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.ai.rag.Query;
-import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.ai.vectorstore.SimpleVectorStore;
-import org.springframework.ai.document.Document;
-import org.springframework.ai.openai.*;
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
-import java.time.Duration;
-import static io.github.agentic.ai.graph.StateGraph.*;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.openai.OpenAiChatModel;
+import org.springframework.ai.openai.OpenAiChatOptions;
+import org.springframework.ai.openai.OpenAiEmbeddingModel;
+import org.springframework.ai.openai.OpenAiEmbeddingOptions;
+import org.springframework.ai.rag.Query;
+import org.springframework.ai.vectorstore.SimpleVectorStore;
+import org.springframework.ai.vectorstore.VectorStore;
+
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
 import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /** Expands a query with HyDE, then retrieves source documents through an Extensions graph node. */

@@ -9,14 +9,15 @@
  */
 package io.github.agentic.ai.examples;
 
-
 import io.github.agentic.ai.a2a.registry.nacos.discovery.NacosAgentCardProvider;
 import io.github.agentic.ai.graph.agent.a2a.A2aRemoteAgent;
-import org.springframework.boot.*;
+import java.util.Objects;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
-import java.util.Objects;
+
 
 /** Discovery and protocol execution remain separate steps. */
 @SpringBootApplication

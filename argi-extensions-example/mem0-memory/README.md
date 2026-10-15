@@ -27,8 +27,14 @@ Stores a preference for argi-example-user and uses Mem0ServerRequest.SearchReque
 
 ## Source and verification
 
-- [Mem0MemoryExample.java](src/main/java/io/github/agentic/ai/examples/Mem0MemoryExample.java) contains the complete example.
+- [Mem0MemoryExample.java](src/main/java/io/github/agentic/ai/examples/Mem0MemoryExample.java) is the primary entry point.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Writes semantic memories to Mem0 and retrieves them with an explicit user scope.
+
+Limit: Semantic write/search for one example user; no deletion, reconciliation or extraction-quality evaluation.

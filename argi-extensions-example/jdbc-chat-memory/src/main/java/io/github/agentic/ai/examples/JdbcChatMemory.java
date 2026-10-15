@@ -10,11 +10,13 @@
 package io.github.agentic.ai.examples;
 
 import io.github.agentic.ai.memory.jdbc.H2ChatMemoryRepository;
-import org.h2.jdbcx.JdbcDataSource;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.ai.chat.memory.MessageWindowChatMemory;
-import org.springframework.ai.chat.messages.*;
 import java.util.List;
+import org.h2.jdbcx.JdbcDataSource;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.ai.chat.messages.Message;
+import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /** Stores a bounded Spring AI conversation using the Extensions JDBC repository. */
 public final class JdbcChatMemory {

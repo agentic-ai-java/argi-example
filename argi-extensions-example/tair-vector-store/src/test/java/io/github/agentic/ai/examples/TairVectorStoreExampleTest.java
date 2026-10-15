@@ -9,15 +9,28 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.vectorstore.tair.*;
 import com.aliyun.tair.tairvector.factory.VectorBuilderFactory;
-import org.springframework.ai.document.Document;
-import org.springframework.ai.embedding.EmbeddingModel;
-import org.junit.jupiter.api.Test;
+import io.github.agentic.ai.vectorstore.tair.TairVectorApi;
 import java.util.List;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.Test;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.embedding.EmbeddingModel;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockConstruction;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.same;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 class TairVectorStoreExampleTest {
     @SuppressWarnings("unchecked")
     @Test void indexesEmbeddingsAndMapsSearchResults() {

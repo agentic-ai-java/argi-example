@@ -23,9 +23,15 @@ Uses the dedicated `argi_example_knowledge` index and stable document ID `checkp
 
 ## Source and verification
 
-- [TairVectorStoreExample.java](src/main/java/io/github/agentic/ai/examples/TairVectorStoreExample.java) contains the complete example.
+- [TairVectorStoreExample.java](src/main/java/io/github/agentic/ai/examples/TairVectorStoreExample.java) is the primary entry point.
 - [TairVectorStoreExampleTest.java](src/test/java/io/github/agentic/ai/examples/TairVectorStoreExampleTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Writes real embeddings to a Tair Vector index and searches for relevant documents.
+
+Limit: Tair indexing and search; no index administration, replication or failure-mode matrix.

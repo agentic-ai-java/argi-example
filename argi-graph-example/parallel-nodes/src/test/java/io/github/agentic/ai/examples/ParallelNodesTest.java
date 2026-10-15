@@ -10,8 +10,9 @@
 package io.github.agentic.ai.examples;
 
 import org.junit.jupiter.api.Test;
-import java.util.*;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 class ParallelNodesTest {
     @Test void demonstratesTheDocumentedContract() throws Exception {

@@ -9,18 +9,19 @@
  */
 package io.github.agentic.ai.examples;
 
-import org.springframework.boot.*;
+import io.github.agentic.ai.adapter.springai.SpringAiToolAdapter;
+import io.github.agentic.ai.graph.agent.ReactAgent;
+import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.openai.OpenAiEmbeddingModel;
+import org.springframework.ai.openai.OpenAiEmbeddingOptions;
+import org.springframework.ai.tool.ToolCallbackProvider;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
-import java.util.*;
 
-import io.github.agentic.ai.adapter.springai.SpringAiToolAdapter;
-import io.github.agentic.ai.graph.agent.ReactAgent;
-import org.springframework.ai.tool.ToolCallbackProvider;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.ai.embedding.EmbeddingModel;
-import org.springframework.ai.openai.*;
 
 /** Only ARGI executes the discovered callbacks; the model receives their schemas. */
 @SpringBootApplication
@@ -33,7 +34,7 @@ public class McpRouterAgent {
 
     @Bean ApplicationRunner ask(@Qualifier("routerTools") ToolCallbackProvider provider) {
         return args -> {
-            var agent = ReactAgent.builder().name("mcp_router").chatClient(SpringAiExample.client(System.getenv()))
+            var agent = ReactAgent.builder().throwOnModelError(true).name("mcp_router").chatClient(SpringAiExample.client(System.getenv()))
                 .toolRegistry(SpringAiToolAdapter.fromCallbacks(provider.getToolCallbacks()))
                 .instruction("Use the available read-only catalog tools to answer the question.").build();
             org.slf4j.LoggerFactory.getLogger(McpRouterAgent.class).info("{}", agent.call("Look up the definition of checkpoint.").text());

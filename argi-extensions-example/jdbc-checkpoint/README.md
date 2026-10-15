@@ -23,9 +23,15 @@ Uses H2 in memory for the console run. The test uses a file-backed database and 
 
 ## Source and verification
 
-- [JdbcCheckpoint.java](src/main/java/io/github/agentic/ai/examples/JdbcCheckpoint.java) contains the complete example.
+- [JdbcCheckpoint.java](src/main/java/io/github/agentic/ai/examples/JdbcCheckpoint.java) is the primary entry point.
 - [JdbcCheckpointTest.java](src/test/java/io/github/agentic/ai/examples/JdbcCheckpointTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Restores a pending approval through an H2 JDBC checkpoint saver and a new graph.
+
+Limit: Local H2 recovery; no production JDBC migration, contention or failover experiment.

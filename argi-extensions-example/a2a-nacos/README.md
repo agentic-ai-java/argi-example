@@ -27,8 +27,14 @@ Discovery resolves A2A_AGENT_NAME through Nacos before constructing the remote a
 
 ## Source and verification
 
-- [NacosA2aExample.java](src/main/java/io/github/agentic/ai/examples/NacosA2aExample.java) contains the complete example.
+- [NacosA2aExample.java](src/main/java/io/github/agentic/ai/examples/NacosA2aExample.java) is the primary entry point.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Resolves an A2A agent by registered name in Nacos before delegation.
+
+Limit: Nacos-backed agent discovery and delegation; no service failover or registration lifecycle validation.

@@ -9,16 +9,21 @@
  */
 package io.github.agentic.ai.examples;
 
-
-import io.github.agentic.ai.graph.*;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.OverAllState;
+import io.github.agentic.ai.graph.RunnableConfig;
+import io.github.agentic.ai.graph.StateGraph;
 import io.github.agentic.ai.graph.checkpoint.config.SaverConfig;
 import io.github.agentic.ai.graph.persistence.redis.RedisSaver;
 import io.github.agentic.ai.graph.serializer.plain_text.jackson.ArgiJacksonStateSerializer;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import org.redisson.Redisson;
 import org.redisson.config.Config;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import static io.github.agentic.ai.graph.StateGraph.*;
+
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
 import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /** Uses a namespaced example thread and an expiring Redis checkpoint. */
@@ -39,6 +44,10 @@ public final class RedisCheckpoint {
             var config = RunnableConfig.builder().threadId("argi-example-" + UUID.randomUUID()).build();
             graph.invoke(Map.of(), config);
             org.slf4j.LoggerFactory.getLogger(RedisCheckpoint.class).info("{}", saver.get(config).orElseThrow().getState());
+            var reader = RedisSaver.builder().redisson(client).ttl(1, TimeUnit.HOURS)
+                .stateSerializer(new ArgiJacksonStateSerializer(OverAllState::new)).build();
+            org.slf4j.LoggerFactory.getLogger(RedisCheckpoint.class).info("Recovery: {}",
+                RedisRecovery.exercise(saver, reader));
         } finally { client.shutdown(); }
     }
 }

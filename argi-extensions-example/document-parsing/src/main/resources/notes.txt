@@ -1,0 +1,2 @@
+Keep checkpoint state independent of provider SDK objects.
+Use stable thread identities when resuming human approvals.

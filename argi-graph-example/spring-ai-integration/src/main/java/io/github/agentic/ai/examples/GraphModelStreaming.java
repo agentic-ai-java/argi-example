@@ -9,14 +9,15 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.graph.*;
-import java.util.*;
-import static io.github.agentic.ai.graph.StateGraph.*;
-import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
-
 import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.StateGraph;
 import io.github.agentic.ai.graph.node.LlmNode;
 import java.time.Duration;
+import java.util.Map;
+
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
 
 /** The adapter handles the model protocol; LlmNode handles graph streaming and final state. */
 public final class GraphModelStreaming {

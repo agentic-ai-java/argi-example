@@ -23,9 +23,15 @@ Calls a real chat model to generate a hypothetical passage, then searches a vect
 
 ## Source and verification
 
-- [RagRetrieval.java](src/main/java/io/github/agentic/ai/examples/RagRetrieval.java) contains the complete example.
+- [RagRetrieval.java](src/main/java/io/github/agentic/ai/examples/RagRetrieval.java) is the primary entry point.
 - [RagRetrievalTest.java](src/test/java/io/github/agentic/ai/examples/RagRetrievalTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
-This expanded repository was reviewed statically only after the user requested no execution. No build, runtime, service-integration, or coverage result is claimed for the final version.
+Local builds and selected runtime checks were performed on 2026-10-15. See [validation results](../../docs/compatibility.md#verification-boundary) for the exact tested scope and remaining failures; compilation alone does not certify an external integration.
+
+## Behavioral scope
+
+- Expands a query with HyDE and retrieves evidence through the RAG graph node.
+
+Limit: HyDE and graph retrieval; no reranker, hybrid retrieval, answer evaluation or ingestion lifecycle.

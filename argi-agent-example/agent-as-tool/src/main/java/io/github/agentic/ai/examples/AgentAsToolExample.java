@@ -9,20 +9,19 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.api.chat.*;
-import io.github.agentic.ai.api.tool.*;
-import io.github.agentic.ai.graph.agent.ReactAgent;
-import java.util.*;
-
+import io.github.agentic.ai.api.chat.ChatClient;
+import io.github.agentic.ai.api.tool.ToolRegistry;
 import io.github.agentic.ai.graph.agent.AgentTool;
+import io.github.agentic.ai.graph.agent.ReactAgent;
+import java.util.List;
 
 /** The parent ReAct runtime owns delegation; the provider sees only tool definitions. */
 public final class AgentAsToolExample {
     private AgentAsToolExample() {}
     public static ReactAgent coordinator(ChatClient client) {
-        var specialist = ReactAgent.builder().name("java_reviewer").description("Review Java code for resource lifecycle issues")
+        var specialist = ReactAgent.builder().throwOnModelError(true).name("java_reviewer").description("Review Java code for resource lifecycle issues")
             .chatClient(client).instruction("Identify leaked executors, streams, or connections.").build();
-        return ReactAgent.builder().name("coordinator").chatClient(client)
+        return ReactAgent.builder().throwOnModelError(true).name("coordinator").chatClient(client)
             .instruction("Delegate Java lifecycle reviews to java_reviewer, then summarize the findings.")
             .toolRegistry(new ToolRegistry(List.of(AgentTool.create(specialist)))).build();
     }

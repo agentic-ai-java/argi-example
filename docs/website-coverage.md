@@ -1,8 +1,11 @@
 # Website coverage
 
 The nine website Graph scenario pages have individual modules. The remaining rows
-cover the website framework chapters and the additional ARGI planner chapter.
-Examples preserve the documented intent while using the current RC2 APIs.
+associate website framework chapters and the additional ARGI planner chapter with
+relevant examples. These are navigation mappings, not exhaustive feature coverage.
+Examples use the current RC2 APIs; historical provider-specific snippets may not have
+direct equivalents. [Behavioral coverage](feature-coverage.md) lists the actual
+demonstrated paths, source files, scenario entry points, and limits of every module.
 
 | Website source | Example modules |
 | --- | --- |
@@ -72,3 +75,10 @@ Examples preserve the documented intent while using the current RC2 APIs.
 Coverage here means source examples exist for each documented topic. It is not a claim
 that every backend has been connected to or that every historical code block is retained verbatim.
 See [compatibility and verification](compatibility.md).
+
+## Source-led additions
+
+[recoverable-runs](../argi-graph-example/recoverable-runs/README.md) follows the Core
+`execution.run` contract added in commit `f61a477220b9caec4d63b9469dbab5877eff1df9`.
+It has no corresponding chapter in the original website inventory; it is tracked
+under `projectSourceCoverage` in the catalog rather than counted as another website chapter.

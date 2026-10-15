@@ -9,13 +9,18 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.graph.*;
-import java.util.*;
-import static io.github.agentic.ai.graph.StateGraph.*;
-import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
-
-import io.micrometer.observation.*;
+import io.github.agentic.ai.graph.CompileConfig;
+import io.github.agentic.ai.graph.StateGraph;
+import io.github.agentic.ai.graph.observation.GraphObservationLifecycleListener;
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationHandler;
+import io.micrometer.observation.ObservationRegistry;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
+import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /** A lightweight local handler counts completed observations without exporting prompt data. */
 public final class LocalObservation {
@@ -32,7 +37,8 @@ public final class LocalObservation {
         });
         var graph = new StateGraph().addNode("calculate", node_async(s -> Map.of("answer", 42)))
             .addEdge(START, "calculate").addEdge("calculate", END)
-            .compile(CompileConfig.builder().observationRegistry(registry).build());
+            .compile(CompileConfig.builder().observationRegistry(registry)
+                .withLifecycleListener(new GraphObservationLifecycleListener(registry)).build());
         graph.invoke(Map.of());
         return stopped.get();
     }

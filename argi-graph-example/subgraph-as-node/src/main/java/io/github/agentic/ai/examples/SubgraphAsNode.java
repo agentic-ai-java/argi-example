@@ -9,9 +9,12 @@
  */
 package io.github.agentic.ai.examples;
 
-import io.github.agentic.ai.graph.*;
-import java.util.*;
-import static io.github.agentic.ai.graph.StateGraph.*;
+import io.github.agentic.ai.graph.CompiledGraph;
+import io.github.agentic.ai.graph.StateGraph;
+import java.util.Map;
+
+import static io.github.agentic.ai.graph.StateGraph.END;
+import static io.github.agentic.ai.graph.StateGraph.START;
 import static io.github.agentic.ai.graph.action.AsyncNodeAction.node_async;
 
 /** A node wrapper exposes only the child result and keeps its intermediate keys private. */

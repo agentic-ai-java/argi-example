@@ -9,15 +9,15 @@
  */
 package io.github.agentic.ai.examples;
 
-import org.springframework.boot.*;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.annotation.Bean;
-import java.util.*;
-
+import java.util.Locale;
+import java.util.Map;
 import org.springframework.ai.tool.ToolCallbackProvider;
-import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.ai.tool.annotation.Tool;
+import org.springframework.ai.tool.method.MethodToolCallbackProvider;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
 
 /** A complete server companion for the discovery, router, and gateway examples. */
 @SpringBootApplication

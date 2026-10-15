@@ -9,14 +9,17 @@
  */
 package io.github.agentic.ai.examples;
 
-
 import io.github.agentic.ai.api.chat.ChatClient;
-import io.github.agentic.ai.api.tool.*;
+import io.github.agentic.ai.api.tool.Tool;
+import io.github.agentic.ai.api.tool.ToolRegistry;
 import io.github.agentic.ai.graph.agent.ReactAgent;
-import io.github.agentic.ai.graph.agent.tools.*;
 import io.github.agentic.ai.graph.agent.extension.tools.filesystem.FileSystemTools;
-import java.nio.file.*;
-import java.util.*;
+import io.github.agentic.ai.graph.agent.tools.GlobSearchTool;
+import io.github.agentic.ai.graph.agent.tools.GrepSearchTool;
+import io.github.agentic.ai.graph.agent.tools.WriteTodosTool;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 
 /** Limits all file tools to a dedicated example workspace supplied by the caller. */
 public final class BuiltinToolsExample {
@@ -26,7 +29,7 @@ public final class BuiltinToolsExample {
         tools.add(GlobSearchTool.builder(directory.toAbsolutePath().toString()).maxResults(20).build());
         tools.add(GrepSearchTool.builder(directory.toAbsolutePath().toString()).withUseRipgrep(false).build());
         tools.add(WriteTodosTool.builder().build());
-        return ReactAgent.builder().name("workspace_assistant").chatClient(client).toolRegistry(new ToolRegistry(tools))
+        return ReactAgent.builder().throwOnModelError(true).name("workspace_assistant").chatClient(client).toolRegistry(new ToolRegistry(tools))
             .instruction("Inspect notes.txt, make a todo list, and write a concise summary to summary.txt.").build();
     }
     public static void main(String[] args) throws Exception {
