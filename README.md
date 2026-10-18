@@ -4,9 +4,10 @@ Examples for the ARGI core runtime and ARGI Extensions, organized as a Maven rea
 **root project → capability group → independent example module**.
 Only the sibling `demo` repository's directory and Maven aggregation layout was used.
 The implementations come from ARGI/Extensions API contracts and the scenarios in
-`website/docs`; no demo application source was reused.
+`argi-website/docs`; no demo application source was reused.
 
-The repository contains **59 executable example modules**, with **12 additional backend
+The repository contains **64 example modules** (63 in the default reactor and one
+historical AgentScope module behind `legacy-agentscope`), with **12 additional backend
 profile configurations** across the memory and vector modules. All nine website Graph
 scenario pages have dedicated examples. [Website coverage](docs/website-coverage.md)
 maps chapters to relevant modules; a chapter mapping is not proof that every feature
@@ -37,7 +38,7 @@ open_source/
 ├── argi/
 ├── argi-extensions/
 ├── argi-example/
-├── website/          # documentation input, not a build dependency
+├── argi-website/     # documentation input, not a build dependency
 └── demo/             # structural reference, not a build dependency
 ```
 
@@ -258,3 +259,13 @@ repository source files are not part of this change.
 ## License
 
 [Apache License 2.0](LICENSE).
+
+## Current main runtime examples
+
+| Module | Demonstrated behavior |
+| --- | --- |
+| [tool-execution-policies](argi-agent-example/tool-execution-policies/README.md) | Runs a real AgentToolNode with application-owned trusted identity, opt-in argument validation and explicit business-result mapping. |
+| [context-provenance](argi-agent-example/context-provenance/README.md) | Tags retrieved documents and child output, constructs two summaries and clamps a forged high-trust claim. |
+| [background-tasks](argi-agent-example/background-tasks/README.md) | Uses one execution slot and one waiting slot to demonstrate capacity and duplicate-ID rejection, completion and explicit result removal. |
+| [batched-array-loop](argi-agent-example/batched-array-loop/README.md) | Drives the actual LoopMode.array initialization and dispatch strategy with ordered JSON input. |
+| [versioned-recovery](argi-graph-example/versioned-recovery/README.md) | Serializes exact graph, tool catalog, codec and application references and resolves them against an upgraded registry. |

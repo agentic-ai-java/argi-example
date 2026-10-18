@@ -126,3 +126,13 @@ unverified. CI and the 90% coverage threshold remain enabled; the inventory chec
 validates wiring and import policy rather than behavior.
 
 Primary evidence is the sibling `website/docs/frameworks`, `argi/argi-api`, `argi/argi-graph-core`, `argi/argi-agent-framework`, and `argi-extensions` source tree. Pinned dependency revisions are recorded in [compatibility.md](compatibility.md).
+
+## Current main additions
+
+| Example | Demonstrated behavior | Limit |
+| --- | --- | --- |
+| [tool-execution-policies](../argi-agent-example/tool-execution-policies/README.md) | Missing identity and revoked permission yield auth-denied with zero callbacks; invalid arguments yield error with zero callbacks; a registered invoice decline yields business-failed; an unregistered decline stays SUCCESS. | The ledger is an in-process example. SelectionFailurePolicies deliberately injects selector unavailability; EffectAwareRetries injects an uncertain timeout. No model-quality, real authorization provider or external exactly-once guarantee is demonstrated. |
+| [context-provenance](../argi-agent-example/context-provenance/README.md) | Application instructions remain trusted; retrieved and child content are untrusted; summaries are derived and retain attribution. | Summary text is supplied by the application. This does not run a summarization model, prove prompt-injection immunity or authenticate serialized metadata. |
+| [background-tasks](../argi-agent-example/background-tasks/README.md) | The third submission and a duplicate ID are rejected; both accepted tasks complete after the gate opens; owned resources close. | This is a local JVM repository, without tenant isolation or crash recovery. Results may expire. Cancelling or hiding active work does not immediately free its slot. |
+| [batched-array-loop](../argi-agent-example/batched-array-loop/README.md) | [1,2,3,4,5] with batch size 2 yields [1,2], [3,4], [5]. Explicit size 1 keeps array framing; the legacy constructor yields scalar text. | This inspects dispatch without a model-backed child. Batching does not enable parallel execution or establish throughput improvements. |
+| [versioned-recovery](../argi-graph-example/versioned-recovery/README.md) | A version-one run resolves version one even when version two exists; missing old versions and incompatible codecs are rejected. MemoryRunStore cannot enter durable mode. | Registry values are local data definitions. This is an admission contract, not a task runner, persistent backend or cross-JVM recovery demonstration. |

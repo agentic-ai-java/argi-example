@@ -16,6 +16,7 @@
     <dependency>
       <groupId>io.github.agentic-ai-java</groupId>
       <artifactId>argi-adapter-agentscope</artifactId>
+      <version>${argi.version}</version>
     </dependency>
     <dependency>
       <groupId>io.agentscope</groupId>

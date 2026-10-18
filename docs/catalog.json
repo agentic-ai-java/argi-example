@@ -1,5 +1,5 @@
 {
-  "reviewDate": "2026-10-15",
+  "reviewDate": "2026-10-18",
   "verification": {
     "date": "2026-10-15",
     "mode": "local-build-tests-and-partial-live-validation",
@@ -3060,36 +3060,171 @@
           "ratio": 1.0
         }
       }
+    },
+    {
+      "path": "argi-agent-example/tool-execution-policies",
+      "artifact": "example-tool-execution-policies",
+      "mainClass": "io.github.agentic.ai.examples.ToolExecutionPolicies",
+      "entry": "src/main/java/io/github/agentic/ai/examples/ToolExecutionPolicies.java",
+      "description": "Runs a real AgentToolNode with application-owned trusted identity, opt-in argument validation and explicit business-result mapping.",
+      "runtime": "local",
+      "requirements": "Java 17 and pinned Core RC2 artifacts; no external services.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/ToolExecutionPoliciesTest.java"
+      ],
+      "sources": [
+        "src/main/java/io/github/agentic/ai/examples/EffectAwareRetries.java",
+        "src/main/java/io/github/agentic/ai/examples/SelectionFailurePolicies.java",
+        "src/main/java/io/github/agentic/ai/examples/ToolExecutionPolicies.java"
+      ],
+      "demonstratedBehaviors": [
+        "Runs a real AgentToolNode with application-owned trusted identity, opt-in argument validation and explicit business-result mapping.",
+        "Missing identity and revoked permission yield auth-denied with zero callbacks; invalid arguments yield error with zero callbacks; a registered invoice decline yields business-failed; an unregistered decline stays SUCCESS."
+      ],
+      "limitations": [
+        "The ledger is an in-process example. SelectionFailurePolicies deliberately injects selector unavailability; EffectAwareRetries injects an uncertain timeout. No model-quality, real authorization provider or external exactly-once guarantee is demonstrated."
+      ],
+      "scenarios": [
+        {
+          "entry": "src/main/java/io/github/agentic/ai/examples/EffectAwareRetries.java",
+          "mainClass": "io.github.agentic.ai.examples.EffectAwareRetries",
+          "description": "Local controlled failure drill.",
+          "runtime": "local"
+        },
+        {
+          "entry": "src/main/java/io/github/agentic/ai/examples/SelectionFailurePolicies.java",
+          "mainClass": "io.github.agentic.ai.examples.SelectionFailurePolicies",
+          "description": "Local controlled failure drill.",
+          "runtime": "local"
+        }
+      ]
+    },
+    {
+      "path": "argi-agent-example/context-provenance",
+      "artifact": "example-context-provenance",
+      "mainClass": "io.github.agentic.ai.examples.ContextProvenance",
+      "entry": "src/main/java/io/github/agentic/ai/examples/ContextProvenance.java",
+      "description": "Tags retrieved documents and child output, constructs two summaries and clamps a forged high-trust claim.",
+      "runtime": "local",
+      "requirements": "Java 17 and pinned Core RC2 artifacts; no external services.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/ContextProvenanceTest.java"
+      ],
+      "sources": [
+        "src/main/java/io/github/agentic/ai/examples/ContextProvenance.java"
+      ],
+      "demonstratedBehaviors": [
+        "Tags retrieved documents and child output, constructs two summaries and clamps a forged high-trust claim.",
+        "Application instructions remain trusted; retrieved and child content are untrusted; summaries are derived and retain attribution."
+      ],
+      "limitations": [
+        "Summary text is supplied by the application. This does not run a summarization model, prove prompt-injection immunity or authenticate serialized metadata."
+      ],
+      "scenarios": []
+    },
+    {
+      "path": "argi-agent-example/background-tasks",
+      "artifact": "example-background-tasks",
+      "mainClass": "io.github.agentic.ai.examples.BackgroundTasks",
+      "entry": "src/main/java/io/github/agentic/ai/examples/BackgroundTasks.java",
+      "description": "Uses one execution slot and one waiting slot to demonstrate capacity and duplicate-ID rejection, completion and explicit result removal.",
+      "runtime": "local",
+      "requirements": "Java 17 and pinned Core RC2 artifacts; no external services.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/BackgroundTasksTest.java"
+      ],
+      "sources": [
+        "src/main/java/io/github/agentic/ai/examples/BackgroundTasks.java"
+      ],
+      "demonstratedBehaviors": [
+        "Uses one execution slot and one waiting slot to demonstrate capacity and duplicate-ID rejection, completion and explicit result removal.",
+        "The third submission and a duplicate ID are rejected; both accepted tasks complete after the gate opens; owned resources close."
+      ],
+      "limitations": [
+        "This is a local JVM repository, without tenant isolation or crash recovery. Results may expire. Cancelling or hiding active work does not immediately free its slot."
+      ],
+      "scenarios": []
+    },
+    {
+      "path": "argi-agent-example/batched-array-loop",
+      "artifact": "example-batched-array-loop",
+      "mainClass": "io.github.agentic.ai.examples.BatchedArrayLoop",
+      "entry": "src/main/java/io/github/agentic/ai/examples/BatchedArrayLoop.java",
+      "description": "Drives the actual LoopMode.array initialization and dispatch strategy with ordered JSON input.",
+      "runtime": "local",
+      "requirements": "Java 17 and pinned Core RC2 artifacts; no external services.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/BatchedArrayLoopTest.java"
+      ],
+      "sources": [
+        "src/main/java/io/github/agentic/ai/examples/BatchedArrayLoop.java"
+      ],
+      "demonstratedBehaviors": [
+        "Drives the actual LoopMode.array initialization and dispatch strategy with ordered JSON input.",
+        "[1,2,3,4,5] with batch size 2 yields [1,2], [3,4], [5]. Explicit size 1 keeps array framing; the legacy constructor yields scalar text."
+      ],
+      "limitations": [
+        "This inspects dispatch without a model-backed child. Batching does not enable parallel execution or establish throughput improvements."
+      ],
+      "scenarios": []
+    },
+    {
+      "path": "argi-graph-example/versioned-recovery",
+      "artifact": "example-versioned-recovery",
+      "mainClass": "io.github.agentic.ai.examples.VersionedRecovery",
+      "entry": "src/main/java/io/github/agentic/ai/examples/VersionedRecovery.java",
+      "description": "Serializes exact graph, tool catalog, codec and application references and resolves them against an upgraded registry.",
+      "runtime": "local",
+      "requirements": "Java 17 and pinned Core RC2 artifacts; no external services.",
+      "profiles": [],
+      "tests": [
+        "src/test/java/io/github/agentic/ai/examples/VersionedRecoveryTest.java"
+      ],
+      "sources": [
+        "src/main/java/io/github/agentic/ai/examples/VersionedRecovery.java"
+      ],
+      "demonstratedBehaviors": [
+        "Serializes exact graph, tool catalog, codec and application references and resolves them against an upgraded registry.",
+        "A version-one run resolves version one even when version two exists; missing old versions and incompatible codecs are rejected. MemoryRunStore cannot enter durable mode."
+      ],
+      "limitations": [
+        "Registry values are local data definitions. This is an admission contract, not a task runner, persistent backend or cross-JVM recovery demonstration."
+      ],
+      "scenarios": []
     }
   ],
   "websiteCoverage": [
     {
-      "source": "website/docs/frameworks/graph-core/quick-start.md",
+      "source": "argi-website/docs/frameworks/graph-core/quick-start.md",
       "examples": [
         "argi-graph-example/hello-graph"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/workflow-orchestration.md",
+      "source": "argi-website/docs/frameworks/graph-core/workflow-orchestration.md",
       "examples": [
         "argi-agent-example/support-workflow"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/context-management.md",
+      "source": "argi-website/docs/frameworks/graph-core/context-management.md",
       "examples": [
         "argi-agent-example/context-engineering",
         "argi-graph-example/runtime-store"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/observation.md",
+      "source": "argi-website/docs/frameworks/graph-core/observation.md",
       "examples": [
         "argi-graph-example/observation"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/persistence.md",
+      "source": "argi-website/docs/frameworks/graph-core/persistence.md",
       "examples": [
         "argi-graph-example/persistence",
         "argi-extensions-example/jdbc-checkpoint",
@@ -3098,47 +3233,47 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/runtime-config.md",
+      "source": "argi-website/docs/frameworks/graph-core/runtime-config.md",
       "examples": [
         "argi-graph-example/runtime-store",
         "argi-graph-example/human-in-the-loop"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/scheduling.md",
+      "source": "argi-website/docs/frameworks/graph-core/scheduling.md",
       "examples": [
         "argi-graph-example/scheduling"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/store.md",
+      "source": "argi-website/docs/frameworks/graph-core/store.md",
       "examples": [
         "argi-graph-example/runtime-store"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/streaming.md",
+      "source": "argi-website/docs/frameworks/graph-core/streaming.md",
       "examples": [
         "argi-graph-example/spring-ai-integration",
         "argi-agent-example/routing-streaming"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/concepts/edges.md",
+      "source": "argi-website/docs/frameworks/graph-core/concepts/edges.md",
       "examples": [
         "argi-graph-example/conditional-routing",
         "argi-graph-example/parallel-nodes"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/concepts/graph.md",
+      "source": "argi-website/docs/frameworks/graph-core/concepts/graph.md",
       "examples": [
         "argi-graph-example/hello-graph",
         "argi-graph-example/plantuml"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/concepts/nodes.md",
+      "source": "argi-website/docs/frameworks/graph-core/concepts/nodes.md",
       "examples": [
         "argi-graph-example/spring-ai-integration",
         "argi-extensions-example/http-node",
@@ -3146,94 +3281,94 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/concepts/serializer.md",
+      "source": "argi-website/docs/frameworks/graph-core/concepts/serializer.md",
       "examples": [
         "argi-graph-example/state-serialization"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/concepts/state.md",
+      "source": "argi-website/docs/frameworks/graph-core/concepts/state.md",
       "examples": [
         "argi-graph-example/state-serialization"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/concepts/threads.md",
+      "source": "argi-website/docs/frameworks/graph-core/concepts/threads.md",
       "examples": [
         "argi-agent-example/context-engineering",
         "argi-graph-example/persistence"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/spring-ai-integration.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/spring-ai-integration.md",
       "examples": [
         "argi-graph-example/spring-ai-integration"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/parallel-nodes.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/parallel-nodes.md",
       "examples": [
         "argi-graph-example/parallel-nodes"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/subgraphs.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/subgraphs.md",
       "examples": [
         "argi-graph-example/subgraphs"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/subgraph-as-node.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/subgraph-as-node.md",
       "examples": [
         "argi-graph-example/subgraph-as-node"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/subgraph-as-compiled-graph.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/subgraph-as-compiled-graph.md",
       "examples": [
         "argi-graph-example/subgraph-as-compiled-graph"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/persistence.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/persistence.md",
       "examples": [
         "argi-graph-example/persistence"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/hitl.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/hitl.md",
       "examples": [
         "argi-graph-example/hitl"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/cancellation.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/cancellation.md",
       "examples": [
         "argi-graph-example/cancellation"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/plantuml.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/plantuml.md",
       "examples": [
         "argi-graph-example/plantuml"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/a2a.md",
+      "source": "argi-website/docs/frameworks/agent-framework/a2a.md",
       "examples": [
         "argi-agent-example/a2a",
         "argi-extensions-example/a2a-nacos"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/agents-intro.md",
+      "source": "argi-website/docs/frameworks/agent-framework/agents-intro.md",
       "examples": [
         "argi-agent-example/react-tools",
         "argi-agent-example/multi-agent"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/builtin-tools.md",
+      "source": "argi-website/docs/frameworks/agent-framework/builtin-tools.md",
       "examples": [
         "argi-agent-example/builtin-tools",
         "argi-extensions-example/docker-execution",
@@ -3241,14 +3376,14 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/hitl.md",
+      "source": "argi-website/docs/frameworks/agent-framework/hitl.md",
       "examples": [
         "argi-agent-example/agent-hitl",
         "argi-agent-example/support-workflow"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/hooks-interceptors.md",
+      "source": "argi-website/docs/frameworks/agent-framework/hooks-interceptors.md",
       "examples": [
         "argi-agent-example/interceptors",
         "argi-agent-example/hooks-and-retries",
@@ -3256,7 +3391,7 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/memory.md",
+      "source": "argi-website/docs/frameworks/agent-framework/memory.md",
       "examples": [
         "argi-agent-example/context-engineering",
         "argi-agent-example/context-compaction",
@@ -3265,14 +3400,14 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/messages.md",
+      "source": "argi-website/docs/frameworks/agent-framework/messages.md",
       "examples": [
         "argi-graph-example/state-serialization",
         "argi-agent-example/routing-streaming"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/multi-agent.md",
+      "source": "argi-website/docs/frameworks/agent-framework/multi-agent.md",
       "examples": [
         "argi-agent-example/multi-agent",
         "argi-agent-example/routing-streaming",
@@ -3280,52 +3415,52 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/quick-start.md",
+      "source": "argi-website/docs/frameworks/agent-framework/quick-start.md",
       "examples": [
         "argi-agent-example/react-tools",
         "argi-agent-example/studio-chatbot"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/rag.md",
+      "source": "argi-website/docs/frameworks/agent-framework/rag.md",
       "examples": [
         "argi-agent-example/agentic-rag",
         "argi-extensions-example/rag-retrieval"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/react-agent-theory.md",
+      "source": "argi-website/docs/frameworks/agent-framework/react-agent-theory.md",
       "examples": [
         "argi-agent-example/react-tools"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/runtime-config.md",
+      "source": "argi-website/docs/frameworks/agent-framework/runtime-config.md",
       "examples": [
         "argi-agent-example/context-engineering",
         "argi-graph-example/runtime-store"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/skills.md",
+      "source": "argi-website/docs/frameworks/agent-framework/skills.md",
       "examples": [
         "argi-agent-example/skills"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/structured-io.md",
+      "source": "argi-website/docs/frameworks/agent-framework/structured-io.md",
       "examples": [
         "argi-agent-example/structured-output"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/tools-as-agent.md",
+      "source": "argi-website/docs/frameworks/agent-framework/tools-as-agent.md",
       "examples": [
         "argi-agent-example/agent-as-tool"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/tools.md",
+      "source": "argi-website/docs/frameworks/agent-framework/tools.md",
       "examples": [
         "argi-agent-example/react-tools",
         "argi-agent-example/builtin-tools",
@@ -3333,14 +3468,14 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/workflow.md",
+      "source": "argi-website/docs/frameworks/agent-framework/workflow.md",
       "examples": [
         "argi-agent-example/support-workflow",
         "argi-agent-example/multi-agent"
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/chat-memory.md",
+      "source": "argi-website/docs/frameworks/extensions/chat-memory.md",
       "examples": [
         "argi-extensions-example/jdbc-chat-memory",
         "argi-extensions-example/memory-backends",
@@ -3348,19 +3483,19 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/mcp-gateway.md",
+      "source": "argi-website/docs/frameworks/extensions/mcp-gateway.md",
       "examples": [
         "argi-extensions-example/mcp-gateway"
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/mcp-router.md",
+      "source": "argi-website/docs/frameworks/extensions/mcp-router.md",
       "examples": [
         "argi-extensions-example/mcp-router"
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/mcp.md",
+      "source": "argi-website/docs/frameworks/extensions/mcp.md",
       "examples": [
         "argi-extensions-example/mcp-client",
         "argi-extensions-example/mcp-registry",
@@ -3368,19 +3503,19 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/nacos-prompt.md",
+      "source": "argi-website/docs/frameworks/extensions/nacos-prompt.md",
       "examples": [
         "argi-extensions-example/nacos-prompt"
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/observation.md",
+      "source": "argi-website/docs/frameworks/extensions/observation.md",
       "examples": [
         "argi-graph-example/observation"
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/overview.md",
+      "source": "argi-website/docs/frameworks/extensions/overview.md",
       "examples": [
         "argi-extensions-example/memory-backends",
         "argi-extensions-example/vector-backends",
@@ -3389,21 +3524,21 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/rag.md",
+      "source": "argi-website/docs/frameworks/extensions/rag.md",
       "examples": [
         "argi-extensions-example/rag-retrieval",
         "argi-agent-example/agentic-rag"
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/vector-stores.md",
+      "source": "argi-website/docs/frameworks/extensions/vector-stores.md",
       "examples": [
         "argi-extensions-example/tair-vector-store",
         "argi-extensions-example/vector-backends"
       ]
     },
     {
-      "source": "website/docs/frameworks/studio/quick-start.md",
+      "source": "argi-website/docs/frameworks/studio/quick-start.md",
       "examples": [
         "argi-agent-example/studio-chatbot"
       ]
@@ -3415,17 +3550,58 @@
       ]
     },
     {
-      "source": "website/docs/quick-start.md",
+      "source": "argi-website/docs/quick-start.md",
       "examples": [
         "argi-graph-example/hello-graph",
         "argi-agent-example/react-tools"
       ]
     },
     {
-      "source": "website/docs/overview.md",
+      "source": "argi-website/docs/overview.md",
       "examples": [
         "argi-graph-example/hello-graph",
         "argi-agent-example/react-tools"
+      ]
+    },
+    {
+      "source": "argi-website/docs/frameworks/agent-framework/tool-execution-policies.md",
+      "examples": [
+        "argi-agent-example/tool-execution-policies"
+      ]
+    },
+    {
+      "source": "argi-website/docs/frameworks/agent-framework/context-provenance.md",
+      "examples": [
+        "argi-agent-example/context-provenance"
+      ]
+    },
+    {
+      "source": "argi-website/docs/frameworks/agent-framework/background-tasks.md",
+      "examples": [
+        "argi-agent-example/background-tasks"
+      ]
+    },
+    {
+      "source": "argi-website/docs/frameworks/agent-framework/batched-array-loops.md",
+      "examples": [
+        "argi-agent-example/batched-array-loop"
+      ]
+    },
+    {
+      "source": "argi-website/docs/frameworks/graph-core/versioned-recovery.md",
+      "examples": [
+        "argi-graph-example/versioned-recovery",
+        "argi-graph-example/recoverable-runs"
+      ]
+    },
+    {
+      "source": "argi-website/docs/frameworks/agent-framework/runtime-contracts.md",
+      "examples": [
+        "argi-agent-example/tool-execution-policies",
+        "argi-agent-example/context-provenance",
+        "argi-agent-example/background-tasks",
+        "argi-agent-example/batched-array-loop",
+        "argi-graph-example/versioned-recovery"
       ]
     }
   ],
@@ -3438,5 +3614,10 @@
         "argi-graph-example/recoverable-runs"
       ]
     }
-  ]
+  ],
+  "currentBaseline": {
+    "core": "5ec935b384d5379324ee60277ddcd3a6683a861f",
+    "date": "2026-10-18",
+    "newModulesValidation": "full default reactor and test sources compiled; runtime validation pending"
+  }
 }

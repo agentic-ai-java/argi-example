@@ -4,10 +4,9 @@ The examples target the local RC2 API, not the historical snippets verbatim.
 
 | Input | Revision used for API review |
 | --- | --- |
-| ARGI | `f61a477220b9caec4d63b9469dbab5877eff1df9` |
+| ARGI | `5ec935b384d5379324ee60277ddcd3a6683a861f` |
 | ARGI Extensions | `84994ebb71374ebc3dea688ae7f81360934313f9` |
-| website | `21975f6313f0ef63542abf110e129bc81a110b64` |
-| argi-website (additional planner chapter) | `f8e815190e2dc6afc783fec6a6ec6309c1c000ca` |
+| argi-website baseline | `33d6449f577536645b5ef03e18556d2b1688afa6`, plus the runtime guides in this change |
 
 Both Maven BOMs are pinned to `2.1.0-RC2-SNAPSHOT`. Since a snapshot coordinate
 does not freeze source, CI checks out the revisions above. The local bootstrap
@@ -15,14 +14,30 @@ script reads the caller's sibling checkouts, prints their revisions, and builds 
 copies. It does not switch branches or modify their tracked files. Extensions must be installed with
 `-Dargi.version=2.1.0-RC2-SNAPSHOT`; its source parent still defaults to RC1.
 
-The Core pin was advanced from `ee72a721cfe6d50184068d053f70784556aee424` to include
-the `execution.run` contracts used by `recoverable-runs`. On 2026-10-15 the new
-commit was confirmed on the remote `feat/run-task-storage-contract-122` branch;
-the examples deliberately pin that commit rather than assuming it is on `main`.
-Existing API files used by the other examples are unchanged between these two
-revisions. Local artifacts built from the earlier commit must be rebuilt before
-compiling the new module. No existing example entry point or stored application
-data is migrated.
+On 2026-10-18 the Core pin was advanced from `f61a477220b9caec4d63b9469dbab5877eff1df9`
+to the current main revision above. It includes run definitions, recovery capability
+checks, authorization, business outcomes, selection failure policies, provenance,
+batched loops and bounded background tasks. Rebuild local snapshot artifacts before
+compiling the new modules. No application data is migrated.
+
+That main revision no longer contains the AgentScope adapter in its reactor or BOM.
+The historical example remains under the explicit `legacy-agentscope` Maven profile;
+it requires the earlier adapter artifact to be installed separately. Default builds
+and bootstrap use the three adapters actually available on current main. This is an
+explicit source-baseline migration, not a claim that the legacy adapter was tested
+against the new baseline.
+
+## Current update verification
+
+The complete default reactor (63 example modules, excluding historical AgentScope)
+and its test sources compile with Java 17 using `bash tools/mvn.sh -B -DskipTests package`.
+The catalog check passes with 64 entries, 60 website mappings, 123 main source files
+and 84 test files. Runtime execution and coverage are pending explicit execution
+authorization. The existing results below remain dated historical evidence and must
+not be treated as validation of this update.
+
+The catalog now follows the active `argi-website/docs` inventory, while retaining
+existing source-led coverage and historical model/backend validation details.
 
 ## Direct replacements from website snippets
 

@@ -77,9 +77,9 @@ def check():
         if source_root.exists() and not (ROOT.parent / mapping["source"]).exists():
             errors.append(f"Missing project source reference: {mapping['source']}")
     # When sibling sources exist, also verify every website framework chapter is mapped.
-    website = ROOT.parent / "website/docs/frameworks"
+    website = ROOT.parent / "argi-website/docs/frameworks"
     if website.is_dir():
-        chapters = {"website/docs/frameworks/" + str(p.relative_to(website)) for p in website.rglob("*.md")}
+        chapters = {"argi-website/docs/frameworks/" + str(p.relative_to(website)) for p in website.rglob("*.md")}
         mapped = {mapping["source"] for mapping in catalog["websiteCoverage"]}
         if chapters - mapped:
             errors.append(f"Unmapped website chapters: {sorted(chapters - mapped)}")

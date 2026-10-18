@@ -1,8 +1,9 @@
 # Recoverable run and task storage
 
-This module demonstrates the opt-in `RunStore` contract introduced by Core commit
-`f61a477220b9caec4d63b9469dbab5877eff1df9`. The original examples baseline did not
-contain this API. Use the pinned source revision in [compatibility.md](../../docs/compatibility.md).
+This module demonstrates the opt-in `RunStore` contract available in the pinned
+Core main revision in [compatibility.md](../../docs/compatibility.md).
+For exact definition versions and recovery admission, also see
+[versioned-recovery](../versioned-recovery/README.md).
 
 ## Requirements
 

@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: agentic-ai-java/argi
-          ref: f61a477220b9caec4d63b9469dbab5877eff1df9
+          ref: 5ec935b384d5379324ee60277ddcd3a6683a861f
           path: argi
       - uses: actions/checkout@v4
         with:

@@ -9,7 +9,7 @@ for source_dir in "$core_dir" "$extensions_dir"; do
   test -f "$source_dir/pom.xml" || { printf 'Missing source checkout: %s\n' "$source_dir" >&2; exit 1; }
   git -C "$source_dir" rev-parse HEAD
 done
-core_modules=":argi-bom,:argi-agent-framework,:argi-studio,:argi-starter-builtin-nodes,:argi-adapter-spring-ai,:argi-adapter-langchain4j,:argi-adapter-google-adk,:argi-adapter-agentscope"
+core_modules=":argi-bom,:argi-agent-framework,:argi-studio,:argi-starter-builtin-nodes,:argi-adapter-spring-ai,:argi-adapter-langchain4j,:argi-adapter-google-adk"
 python3 "$repo_root/tools/build_core.py" "$core_dir" -B -pl "$core_modules" -am \
   -Drevision="$version" -Dmaven.test.skip=true -Dspotless.skip=true -Dspring-javaformat.skip=true -Dmaven.sorter.skip=true install
 # All optional integrations used in the catalog, including profile-selected backends.
