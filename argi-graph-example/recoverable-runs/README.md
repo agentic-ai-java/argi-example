@@ -49,7 +49,6 @@ dispatcher; this example does not send them anywhere.
 | [RunExampleContext.java](src/main/java/io/github/agentic/ai/examples/RunExampleContext.java) | Application identity fixture and versioned run input. |
 | [StoredRunWorkflow.java](src/main/java/io/github/agentic/ai/examples/StoredRunWorkflow.java) | Stored run/task lifecycle, lease handoff and atomic completion. |
 | [RunConflictScenarios.java](src/main/java/io/github/agentic/ai/examples/RunConflictScenarios.java) | Conflict and failed-write atomicity scenarios. |
-| [RecoverableRunsTest.java](src/test/java/io/github/agentic/ai/examples/RecoverableRunsTest.java) | Assertions for the lifecycle, conflicts, codec and durability declaration. |
 
 ## Boundaries and verification
 
@@ -58,6 +57,5 @@ serialized or dispatched, no outbox delivery or exactly-once side effect is prom
 and the supplied memory implementation is not a durable backend. Authentication,
 code registration and production recovery belong to the application.
 
-Compilation, local tests and both entry points passed on 2026-10-15. See the
-[validation record](../../docs/compatibility.md#verification-boundary) for coverage
-and the distinction between in-memory storage contracts and durable infrastructure.
+Compilation and both entry points passed on 2026-10-15. See the
+[validation record](../../docs/compatibility.md#verification-boundary) for the distinction between in-memory storage contracts and durable infrastructure.

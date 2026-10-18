@@ -21,15 +21,15 @@ bash tools/run.sh argi-agent-example/context-provenance
 
 Application instructions remain trusted; retrieved and child content are untrusted; summaries are derived and retain attribution.
 
-## Verification
+## Build and inspect
 
 ```shell
-bash tools/mvn.sh -B -pl :example-context-provenance -am verify
+bash tools/mvn.sh -B -pl :example-context-provenance -am -Dmaven.test.skip=true package
 ```
 
-The tests assert the demonstrated behavior and boundary cases. See
-[compatibility.md](../../docs/compatibility.md) for the actual validation record;
-commands listed here are instructions, not a claim that execution occurred.
+Run the entry point above and compare its output with the expected behavior.
+These teaching examples do not add a separate test suite or coverage requirement.
+See [compatibility.md](../../docs/compatibility.md) for the actual validation record.
 
 ## Limits
 

@@ -24,7 +24,6 @@ The stream includes independent stock, credit, and shipping checks followed by `
 ## Source and verification
 
 - [ParallelNodes.java](src/main/java/io/github/agentic/ai/examples/ParallelNodes.java) is the primary entry point.
-- [ParallelNodesTest.java](src/test/java/io/github/agentic/ai/examples/ParallelNodesTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

@@ -21,15 +21,15 @@ bash tools/run.sh argi-agent-example/background-tasks
 
 The third submission and a duplicate ID are rejected; both accepted tasks complete after the gate opens; owned resources close.
 
-## Verification
+## Build and inspect
 
 ```shell
-bash tools/mvn.sh -B -pl :example-background-tasks -am verify
+bash tools/mvn.sh -B -pl :example-background-tasks -am -Dmaven.test.skip=true package
 ```
 
-The tests assert the demonstrated behavior and boundary cases. See
-[compatibility.md](../../docs/compatibility.md) for the actual validation record;
-commands listed here are instructions, not a claim that execution occurred.
+Run the entry point above and compare its output with the expected behavior.
+These teaching examples do not add a separate test suite or coverage requirement.
+See [compatibility.md](../../docs/compatibility.md) for the actual validation record.
 
 ## Limits
 

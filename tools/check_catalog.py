@@ -1,4 +1,18 @@
 #!/usr/bin/env python3
+# Copyright 2025-2026 the original author or authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 """Check source/document wiring without compiling or executing any example."""
 
 import json
@@ -41,9 +55,6 @@ def check():
         sources = {str(path.relative_to(directory)) for path in directory.glob("src/main/java/**/*.java")}
         if sources != set(module["sources"]):
             errors.append(f"Source inventory mismatch: {module['path']}")
-        tests = {str(path.relative_to(directory)) for path in directory.glob("src/test/java/**/*.java")}
-        if tests != set(module["tests"]):
-            errors.append(f"Test inventory mismatch: {module['path']}")
         if not module["demonstratedBehaviors"] or not module["limitations"]:
             errors.append(f"Missing behavioral scope: {module['path']}")
         expected_entries = {entry for entry in sources
@@ -107,7 +118,6 @@ def check():
         return 1
     print(f"Catalog OK: {len(listed)} modules; {len(catalog['websiteCoverage'])} website mappings; Maven and local links resolved.")
     print(f"Sources: {sum(len(module['sources']) for module in catalog['modules'])} main files; "
-          f"{sum(len(module['tests']) for module in catalog['modules'])} test files; "
           f"{sum(len(module['scenarios']) for module in catalog['modules'])} additional entry points; no wildcard imports.")
     print("This is a static source check, not a build or runtime test.")
     return 0

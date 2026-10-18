@@ -33,7 +33,6 @@ The model is constructed from ARGI_API_KEY, ARGI_MODEL, and ARGI_BASE_URL. Only 
 ## Source and verification
 
 - [AgentScopeExample.java](src/main/java/io/github/agentic/ai/examples/AgentScopeExample.java) is the primary entry point.
-- [AgentScopeExampleTest.java](src/test/java/io/github/agentic/ai/examples/AgentScopeExampleTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

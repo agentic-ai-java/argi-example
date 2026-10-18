@@ -37,72 +37,78 @@ import org.slf4j.LoggerFactory;
 
 /** A deliberate offline failure drill, not a model-quality demonstration. */
 public final class SelectionFailurePolicies {
-    private static final Logger LOG = LoggerFactory.getLogger(SelectionFailurePolicies.class);
 
-    private SelectionFailurePolicies() {
-    }
+	private static final Logger LOG = LoggerFactory.getLogger(SelectionFailurePolicies.class);
 
-    public record Selection(List<String> tools, ActionDecision decision) {
-    }
+	private SelectionFailurePolicies() {
+	}
 
-    public static Selection select(ChatClient selectionClient, ToolSelectionFailurePolicy policy) {
-        final var selection = ToolSelectionInterceptor.builder()
-                .chatClient(selectionClient).maxTools(1).alwaysInclude("help")
-                .failurePolicy(policy).build();
-        final AtomicReference<ModelRequest> downstream = new AtomicReference<>();
-        selection.interceptModel(ModelRequest.builder()
-                .messages(List.of(ChatMessage.user("Help me review an invoice")))
-                .tools(List.of("help", "reviewInvoice", "chargeCard")).build(), request -> {
-                    downstream.set(request);
-                    return ModelResponse.of(ChatMessage.assistant("Selection inspected locally."));
-                });
-        return new Selection(downstream.get().getTools(),
-                (ActionDecision) downstream.get().getContext().get(ActionDecision.CONTEXT_KEY));
-    }
+	public record Selection(List<String> tools, ActionDecision decision) {
+	}
 
-    /** Injects unavailability without opening a network connection. */
-    public static ChatClient unavailableClient() {
-        return new ChatClient() {
-            @Override
-            public CompletionStage<ChatResponse> call(ChatRequest request) {
-                return CompletableFuture.failedFuture(new IllegalStateException("Injected selector outage"));
-            }
+	public static Selection select(ChatClient selectionClient, ToolSelectionFailurePolicy policy) {
+		final var selection = ToolSelectionInterceptor.builder()
+			.chatClient(selectionClient)
+			.maxTools(1)
+			.alwaysInclude("help")
+			.failurePolicy(policy)
+			.build();
+		final AtomicReference<ModelRequest> downstream = new AtomicReference<>();
+		selection.interceptModel(ModelRequest.builder()
+			.messages(List.of(ChatMessage.user("Help me review an invoice")))
+			.tools(List.of("help", "reviewInvoice", "chargeCard"))
+			.build(), request -> {
+				downstream.set(request);
+				return ModelResponse.of(ChatMessage.assistant("Selection inspected locally."));
+			});
+		return new Selection(downstream.get().getTools(),
+				(ActionDecision) downstream.get().getContext().get(ActionDecision.CONTEXT_KEY));
+	}
 
-            @Override
-            public Flow.Publisher<ChatEvent> stream(ChatRequest request) {
-                return subscriber -> subscriber.onSubscribe(new Flow.Subscription() {
-                    private boolean terminated;
+	/** Injects unavailability without opening a network connection. */
+	public static ChatClient unavailableClient() {
+		return new ChatClient() {
+			@Override
+			public CompletionStage<ChatResponse> call(ChatRequest request) {
+				return CompletableFuture.failedFuture(new IllegalStateException("Injected selector outage"));
+			}
 
-                    @Override
-                    public void request(long count) {
-                        if (!terminated) {
-                            terminated = true;
-                            subscriber.onError(new IllegalStateException("Injected selector outage"));
-                        }
-                    }
+			@Override
+			public Flow.Publisher<ChatEvent> stream(ChatRequest request) {
+				return subscriber -> subscriber.onSubscribe(new Flow.Subscription() {
+					private boolean terminated;
 
-                    @Override
-                    public void cancel() {
-                        terminated = true;
-                    }
-                });
-            }
+					@Override
+					public void request(long count) {
+						if (!terminated) {
+							terminated = true;
+							subscriber.onError(new IllegalStateException("Injected selector outage"));
+						}
+					}
 
-            @Override
-            public ChatClientCapabilities capabilities() {
-                return ChatClientCapabilities.basic();
-            }
-        };
-    }
+					@Override
+					public void cancel() {
+						terminated = true;
+					}
+				});
+			}
 
-    public static void main(String[] args) {
-        for (ToolSelectionFailurePolicy policy : ToolSelectionFailurePolicy.values()) {
-            try {
-                LOG.info("{}: {}", policy, select(unavailableClient(), policy));
-            }
-            catch (ToolSelectionFailedException expected) {
-                LOG.info("{}: stopped with {}", policy, expected.getDecision());
-            }
-        }
-    }
+			@Override
+			public ChatClientCapabilities capabilities() {
+				return ChatClientCapabilities.basic();
+			}
+		};
+	}
+
+	public static void main(String[] args) {
+		for (ToolSelectionFailurePolicy policy : ToolSelectionFailurePolicy.values()) {
+			try {
+				LOG.info("{}: {}", policy, select(unavailableClient(), policy));
+			}
+			catch (ToolSelectionFailedException expected) {
+				LOG.info("{}: stopped with {}", policy, expected.getDecision());
+			}
+		}
+	}
+
 }

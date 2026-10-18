@@ -24,7 +24,6 @@ Uses H2 with DATABASE_TO_LOWER=TRUE and an explicit schema. A new memory facade 
 ## Source and verification
 
 - [JdbcChatMemory.java](src/main/java/io/github/agentic/ai/examples/JdbcChatMemory.java) is the primary entry point.
-- [JdbcChatMemoryTest.java](src/test/java/io/github/agentic/ai/examples/JdbcChatMemoryTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

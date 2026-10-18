@@ -1,0 +1,14 @@
+.git
+**/node_modules/**
+**/target/**
+**/build/**
+**/dist/**
+**/*.tsbuildinfo
+**/agent-chat-ui/out/**
+**/ui-vue3/ui/assets/**
+**/ui/assets/**
+**/src/test/resources/*.pdf
+**/src/main/resources/static/**
+**/src/main/resources/META-INF/resources/chatui/**
+**/pnpm-lock.yaml
+**/package-lock.json

@@ -26,7 +26,6 @@ The model is constructed from ARGI_API_KEY, ARGI_MODEL, and ARGI_BASE_URL. Only 
 ## Source and verification
 
 - [LangChain4jExample.java](src/main/java/io/github/agentic/ai/examples/LangChain4jExample.java) is the primary entry point.
-- [LangChain4jExampleTest.java](src/test/java/io/github/agentic/ai/examples/LangChain4jExampleTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

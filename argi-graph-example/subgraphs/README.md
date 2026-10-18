@@ -24,7 +24,6 @@ Expected invoice: `Ada: 120`. The child is a `StateGraph` compiled by the parent
 ## Source and verification
 
 - [Subgraphs.java](src/main/java/io/github/agentic/ai/examples/Subgraphs.java) is the primary entry point.
-- [SubgraphsTest.java](src/test/java/io/github/agentic/ai/examples/SubgraphsTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

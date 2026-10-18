@@ -46,105 +46,109 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** Exercises real tool dispatch with trusted identity, argument validation and domain outcomes. */
+/**
+ * Exercises real tool dispatch with trusted identity, argument validation and domain
+ * outcomes.
+ */
 public final class ToolExecutionPolicies {
-    private static final Logger LOG = LoggerFactory.getLogger(ToolExecutionPolicies.class);
-    private static final String SCHEMA = """
-            {"type":"object","required":["invoiceId"],"additionalProperties":false,
-             "properties":{"invoiceId":{"$ref":"#/$defs/id"}},
-             "$defs":{"id":{"type":"integer","minimum":1}}}
-            """;
 
-    private ToolExecutionPolicies() {
-    }
+	private static final Logger LOG = LoggerFactory.getLogger(ToolExecutionPolicies.class);
 
-    public record Result(ToolCallResponse response, int callbackCount) {
-        @Override
-        public String toString() {
-            return "status=" + response.getStatus() + ", callbacks=" + callbackCount
-                    + ", metadata=" + response.getMetadata();
-        }
-    }
+	private static final String SCHEMA = """
+			{"type":"object","required":["invoiceId"],"additionalProperties":false,
+			 "properties":{"invoiceId":{"$ref":"#/$defs/id"}},
+			 "$defs":{"id":{"type":"integer","minimum":1}}}
+			""";
 
-    public static Result dispatch(String arguments, boolean authenticated, boolean permitted,
-            boolean mapBusinessOutcome) throws Exception {
-        final AtomicInteger calls = new AtomicInteger();
-        final Tool invoice = new Tool() {
-            @Override
-            public ToolDefinition definition() {
-                return new ToolDefinition("reviewInvoice", "Review an invoice in the local ledger.", SCHEMA);
-            }
+	private ToolExecutionPolicies() {
+	}
 
-            @Override
-            public CompletionStage<ToolResult> execute(ToolCall call, ToolContext context) {
-                calls.incrementAndGet();
-                // A completed transport can still carry a business rejection.
-                return CompletableFuture.completedFuture(ToolResult.text("DECLINED"));
-            }
-        };
-        final BusinessOutcomeMapperRegistry outcomes = mapBusinessOutcome
-                ? BusinessOutcomeMapperRegistry.builder()
-                    .declare("reviewInvoice", (call, result) -> new ToolResult(result.content(), true,
-                            Map.of("errorCode", "INVOICE_DECLINED")))
-                    .build()
-                : BusinessOutcomeMapperRegistry.empty();
-        final AtomicReference<ToolCallResponse> captured = new AtomicReference<>();
-        final ToolInterceptor observe = new ToolInterceptor() {
-            @Override
-            public ToolCallResponse interceptToolCall(ToolCallRequest request, ToolCallHandler handler) {
-                final ToolCallResponse response = handler.call(request);
-                captured.set(response);
-                return response;
-            }
+	public record Result(ToolCallResponse response, int callbackCount) {
+		@Override
+		public String toString() {
+			return "status=" + response.getStatus() + ", callbacks=" + callbackCount + ", metadata="
+					+ response.getMetadata();
+		}
+	}
 
-            @Override
-            public String getName() {
-                return "observe-local-result";
-            }
-        };
-        final ToolAuthorizationInterceptor authorization = new ToolAuthorizationInterceptor((name, identity) ->
-                permitted && "tenant-a".equals(identity.tenant().id())
-                        ? AuthorizationDecision.allow()
-                        : AuthorizationDecision.deny("Invoice access is not granted"));
-        final AgentToolNode node = AgentToolNode.builder()
-                .agentName("invoice-review")
-                .toolRegistry(new ToolRegistry(List.of(invoice)))
-                .validateToolArguments(true)
-                .businessOutcomeMappers(outcomes)
-                .parallelToolExecution(false)
-                .toolExecutionTimeout(Duration.ofSeconds(5))
-                .throwOnToolError(false)
-                .build();
-        node.setToolInterceptors(List.of(observe, authorization));
-        final OverAllState state = new OverAllState(Map.of("messages",
-                List.of(ChatMessage.assistant("", List.of(new ToolCall("review-1", "reviewInvoice", arguments))))));
-        final var executor = Executors.newFixedThreadPool(2);
-        try {
-            final RunnableConfig.Builder config = RunnableConfig.builder()
-                    .threadId("invoice-session")
-                    .addParallelNodeExecutor("_AGENT_TOOL_", executor);
-            if (authenticated) {
-                // Local application fixture. Production identity must come from authenticated ingress.
-                config.trustedExecutionContext(TrustedExecutionContext.builder()
-                        .tenant(new TenantReference("example", "tenant-a"))
-                        .principal(new PrincipalReference("example", "reviewer"))
-                        .runId("invoice-run")
-                        .correlationId("invoice-trace")
-                        .build());
-            }
-            node.apply(state, config.build());
-            return new Result(captured.get(), calls.get());
-        }
-        finally {
-            executor.shutdownNow();
-        }
-    }
+	public static Result dispatch(String arguments, boolean authenticated, boolean permitted,
+			boolean mapBusinessOutcome) throws Exception {
+		final AtomicInteger calls = new AtomicInteger();
+		final Tool invoice = new Tool() {
+			@Override
+			public ToolDefinition definition() {
+				return new ToolDefinition("reviewInvoice", "Review an invoice in the local ledger.", SCHEMA);
+			}
 
-    public static void main(String[] args) throws Exception {
-        LOG.info("Missing identity: {}", dispatch("{\"invoiceId\":1}", false, true, true));
-        LOG.info("Revoked permission: {}", dispatch("{\"invoiceId\":1}", true, false, true));
-        LOG.info("Invalid arguments: {}", dispatch("{\"invoiceId\":0}", true, true, true));
-        LOG.info("Registered business rejection: {}", dispatch("{\"invoiceId\":1}", true, true, true));
-        LOG.info("Unmapped payload: {}", dispatch("{\"invoiceId\":1}", true, true, false));
-    }
+			@Override
+			public CompletionStage<ToolResult> execute(ToolCall call, ToolContext context) {
+				calls.incrementAndGet();
+				// A completed transport can still carry a business rejection.
+				return CompletableFuture.completedFuture(ToolResult.text("DECLINED"));
+			}
+		};
+		final BusinessOutcomeMapperRegistry outcomes = mapBusinessOutcome ? BusinessOutcomeMapperRegistry.builder()
+			.declare("reviewInvoice",
+					(call, result) -> new ToolResult(result.content(), true, Map.of("errorCode", "INVOICE_DECLINED")))
+			.build() : BusinessOutcomeMapperRegistry.empty();
+		final AtomicReference<ToolCallResponse> captured = new AtomicReference<>();
+		final ToolInterceptor observe = new ToolInterceptor() {
+			@Override
+			public ToolCallResponse interceptToolCall(ToolCallRequest request, ToolCallHandler handler) {
+				final ToolCallResponse response = handler.call(request);
+				captured.set(response);
+				return response;
+			}
+
+			@Override
+			public String getName() {
+				return "observe-local-result";
+			}
+		};
+		final ToolAuthorizationInterceptor authorization = new ToolAuthorizationInterceptor(
+				(name, identity) -> permitted && "tenant-a".equals(identity.tenant().id())
+						? AuthorizationDecision.allow() : AuthorizationDecision.deny("Invoice access is not granted"));
+		final AgentToolNode node = AgentToolNode.builder()
+			.agentName("invoice-review")
+			.toolRegistry(new ToolRegistry(List.of(invoice)))
+			.validateToolArguments(true)
+			.businessOutcomeMappers(outcomes)
+			.parallelToolExecution(false)
+			.toolExecutionTimeout(Duration.ofSeconds(5))
+			.throwOnToolError(false)
+			.build();
+		node.setToolInterceptors(List.of(observe, authorization));
+		final OverAllState state = new OverAllState(Map.of("messages",
+				List.of(ChatMessage.assistant("", List.of(new ToolCall("review-1", "reviewInvoice", arguments))))));
+		final var executor = Executors.newFixedThreadPool(2);
+		try {
+			final RunnableConfig.Builder config = RunnableConfig.builder()
+				.threadId("invoice-session")
+				.addParallelNodeExecutor("_AGENT_TOOL_", executor);
+			if (authenticated) {
+				// Local application fixture. Production identity must come from
+				// authenticated ingress.
+				config.trustedExecutionContext(TrustedExecutionContext.builder()
+					.tenant(new TenantReference("example", "tenant-a"))
+					.principal(new PrincipalReference("example", "reviewer"))
+					.runId("invoice-run")
+					.correlationId("invoice-trace")
+					.build());
+			}
+			node.apply(state, config.build());
+			return new Result(captured.get(), calls.get());
+		}
+		finally {
+			executor.shutdownNow();
+		}
+	}
+
+	public static void main(String[] args) throws Exception {
+		LOG.info("Missing identity: {}", dispatch("{\"invoiceId\":1}", false, true, true));
+		LOG.info("Revoked permission: {}", dispatch("{\"invoiceId\":1}", true, false, true));
+		LOG.info("Invalid arguments: {}", dispatch("{\"invoiceId\":0}", true, true, true));
+		LOG.info("Registered business rejection: {}", dispatch("{\"invoiceId\":1}", true, true, true));
+		LOG.info("Unmapped payload: {}", dispatch("{\"invoiceId\":1}", true, true, false));
+	}
+
 }

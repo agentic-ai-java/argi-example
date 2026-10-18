@@ -25,40 +25,50 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** Injects an uncertain timeout to contrast read-only retry with unsafe payment execution. */
+/**
+ * Injects an uncertain timeout to contrast read-only retry with unsafe payment execution.
+ */
 public final class EffectAwareRetries {
-    private static final Logger LOG = LoggerFactory.getLogger(EffectAwareRetries.class);
 
-    private EffectAwareRetries() {
-    }
+	private static final Logger LOG = LoggerFactory.getLogger(EffectAwareRetries.class);
 
-    public record Result(int attempts, ToolCallResponse response) {
-        @Override
-        public String toString() {
-            return "attempts=" + attempts + ", status=" + response.getStatus()
-                    + ", metadata=" + response.getMetadata();
-        }
-    }
+	private EffectAwareRetries() {
+	}
 
-    public static Result timeoutThenSuccess(ToolEffect effect) {
-        final AtomicInteger attempts = new AtomicInteger();
-        final var retry = EffectAwareToolRetryInterceptor.builder()
-                .effects(ToolEffectRegistry.builder().declare("operation", effect).build())
-                .maxAttempts(2).initialDelay(0).jitter(false)
-                .onFailure(EffectAwareToolRetryInterceptor.OnFailureBehavior.RETURN_MESSAGE)
-                .build();
-        final ToolCallResponse response = retry.interceptToolCall(
-                ToolCallRequest.builder().toolCallId("attempt-1").toolName("operation")
-                        .arguments("{}").context(Map.of()).build(),
-                request -> attempts.incrementAndGet() == 1
-                        ? ToolCallResponse.error(request.getToolCallId(), request.getToolName(), "Injected timeout",
-                            Map.of(ToolCallResponse.FAILURE_KIND_METADATA_KEY, ToolCallResponse.FAILURE_KIND_TIMEOUT))
-                        : ToolCallResponse.success(request.getToolCallId(), request.getToolName(), "completed"));
-        return new Result(attempts.get(), response);
-    }
+	public record Result(int attempts, ToolCallResponse response) {
+		@Override
+		public String toString() {
+			return "attempts=" + attempts + ", status=" + response.getStatus() + ", metadata=" + response.getMetadata();
+		}
+	}
 
-    public static void main(String[] args) {
-        LOG.info("Read-only operation: {}", timeoutThenSuccess(ToolEffect.READ_ONLY));
-        LOG.info("Unsafe operation: {}", timeoutThenSuccess(ToolEffect.UNSAFE));
-    }
+	public static Result timeoutThenSuccess(ToolEffect effect) {
+		final AtomicInteger attempts = new AtomicInteger();
+		final var retry = EffectAwareToolRetryInterceptor.builder()
+			.effects(ToolEffectRegistry.builder().declare("operation", effect).build())
+			.maxAttempts(2)
+			.initialDelay(0)
+			.jitter(false)
+			.onFailure(EffectAwareToolRetryInterceptor.OnFailureBehavior.RETURN_MESSAGE)
+			.build();
+		final ToolCallResponse response = retry.interceptToolCall(
+				ToolCallRequest.builder()
+					.toolCallId("attempt-1")
+					.toolName("operation")
+					.arguments("{}")
+					.context(Map.of())
+					.build(),
+				request -> attempts.incrementAndGet() == 1
+						? ToolCallResponse.error(request.getToolCallId(), request.getToolName(), "Injected timeout",
+								Map.of(ToolCallResponse.FAILURE_KIND_METADATA_KEY,
+										ToolCallResponse.FAILURE_KIND_TIMEOUT))
+						: ToolCallResponse.success(request.getToolCallId(), request.getToolName(), "completed"));
+		return new Result(attempts.get(), response);
+	}
+
+	public static void main(String[] args) {
+		LOG.info("Read-only operation: {}", timeoutThenSuccess(ToolEffect.READ_ONLY));
+		LOG.info("Unsafe operation: {}", timeoutThenSuccess(ToolEffect.UNSAFE));
+	}
+
 }

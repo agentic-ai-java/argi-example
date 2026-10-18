@@ -24,7 +24,6 @@ The shared `count` is incremented twice. The same compiled child is used under t
 ## Source and verification
 
 - [SubgraphAsCompiledGraph.java](src/main/java/io/github/agentic/ai/examples/SubgraphAsCompiledGraph.java) is the primary entry point.
-- [SubgraphAsCompiledGraphTest.java](src/test/java/io/github/agentic/ai/examples/SubgraphAsCompiledGraphTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

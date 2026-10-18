@@ -23,50 +23,55 @@ import java.util.concurrent.RejectedExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** Uses a completion gate to demonstrate capacity rejection without timing-dependent sleeps. */
+/**
+ * Uses a completion gate to demonstrate capacity rejection without timing-dependent
+ * sleeps.
+ */
 public final class BackgroundTasks {
-    private static final Logger LOG = LoggerFactory.getLogger(BackgroundTasks.class);
 
-    private BackgroundTasks() {
-    }
+	private static final Logger LOG = LoggerFactory.getLogger(BackgroundTasks.class);
 
-    public record Report(boolean capacityRejected, boolean duplicateRejected, String first, String queued) {
-    }
+	private BackgroundTasks() {
+	}
 
-    public static Report run() throws InterruptedException {
-        final CompletableFuture<String> release = new CompletableFuture<>();
-        try (BoundedTaskRepository tasks = new BoundedTaskRepository(1, 1, 2, Duration.ofMinutes(1))) {
-            final BackgroundTask first = tasks.putTask("invoice-1", release::join);
-            try {
-                final BackgroundTask queued = tasks.putTask("invoice-2", () -> "second invoice checked");
-                final boolean full = rejected(tasks, "invoice-3");
-                final boolean duplicate = rejected(tasks, "invoice-1");
-                release.complete("first invoice checked");
-                if (!first.waitForCompletion(5000) || !queued.waitForCompletion(5000)) {
-                    throw new IllegalStateException("Background tasks did not complete within five seconds");
-                }
-                final Report result = new Report(full, duplicate, first.getResult(), queued.getResult());
-                tasks.removeTask("invoice-1");
-                return result;
-            }
-            finally {
-                // Never leave the owned executor blocked if observation fails.
-                release.complete("released during cleanup");
-            }
-        }
-    }
+	public record Report(boolean capacityRejected, boolean duplicateRejected, String first, String queued) {
+	}
 
-    private static boolean rejected(BoundedTaskRepository tasks, String id) {
-        try {
-            tasks.putTask(id, () -> "unexpected admission");
-            return false;
-        }
-        catch (RejectedExecutionException expected) {
-            return true;
-        }
-    }
+	public static Report run() throws InterruptedException {
+		final CompletableFuture<String> release = new CompletableFuture<>();
+		try (BoundedTaskRepository tasks = new BoundedTaskRepository(1, 1, 2, Duration.ofMinutes(1))) {
+			final BackgroundTask first = tasks.putTask("invoice-1", release::join);
+			try {
+				final BackgroundTask queued = tasks.putTask("invoice-2", () -> "second invoice checked");
+				final boolean full = rejected(tasks, "invoice-3");
+				final boolean duplicate = rejected(tasks, "invoice-1");
+				release.complete("first invoice checked");
+				if (!first.waitForCompletion(5000) || !queued.waitForCompletion(5000)) {
+					throw new IllegalStateException("Background tasks did not complete within five seconds");
+				}
+				final Report result = new Report(full, duplicate, first.getResult(), queued.getResult());
+				tasks.removeTask("invoice-1");
+				return result;
+			}
+			finally {
+				// Never leave the owned executor blocked if observation fails.
+				release.complete("released during cleanup");
+			}
+		}
+	}
 
-    public static void main(String[] args) throws InterruptedException {
-        LOG.info("Bounded background execution: {}", run());
-    }
+	private static boolean rejected(BoundedTaskRepository tasks, String id) {
+		try {
+			tasks.putTask(id, () -> "unexpected admission");
+			return false;
+		}
+		catch (RejectedExecutionException expected) {
+			return true;
+		}
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+		LOG.info("Bounded background execution: {}", run());
+	}
+
 }

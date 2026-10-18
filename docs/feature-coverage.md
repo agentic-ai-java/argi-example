@@ -118,14 +118,14 @@ The repository does not claim complete coverage of the upstream public API. In p
 ## Verification boundary
 
 The source inventory and runtime validation serve different purposes. Local builds,
-tests, model calls and the Studio HTTP/SSE workflow were executed on 2026-10-15;
+model calls and the Studio HTTP/SSE workflow were executed on 2026-10-15;
 [validation results](compatibility.md#verification-boundary) record their outcomes.
 Some gateway-backed runs remain unsuccessful, and external backend services were
 not started. Performance, load, capacity, chaos and backend interoperability are
-unverified. CI and the 90% coverage threshold remain enabled; the inventory checker
-validates wiring and import policy rather than behavior.
+unverified. CI checks the catalog, Java formatting and compilation. Runtime behavior is
+inspected through documented entry points; no test suites or coverage gates remain.
 
-Primary evidence is the sibling `website/docs/frameworks`, `argi/argi-api`, `argi/argi-graph-core`, `argi/argi-agent-framework`, and `argi-extensions` source tree. Pinned dependency revisions are recorded in [compatibility.md](compatibility.md).
+Primary evidence is the sibling `argi-website/docs/frameworks`, `argi/argi-api`, `argi/argi-graph-core`, `argi/argi-agent-framework`, and `argi-extensions` source tree. Pinned dependency revisions are recorded in [compatibility.md](compatibility.md).
 
 ## Current main additions
 

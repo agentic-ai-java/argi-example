@@ -24,7 +24,6 @@ Uses H2 in memory for the console run. The test uses a file-backed database and 
 ## Source and verification
 
 - [JdbcCheckpoint.java](src/main/java/io/github/agentic/ai/examples/JdbcCheckpoint.java) is the primary entry point.
-- [JdbcCheckpointTest.java](src/test/java/io/github/agentic/ai/examples/JdbcCheckpointTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

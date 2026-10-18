@@ -24,7 +24,6 @@ Logs local observation names and a completed-observation count. No prompt bodies
 ## Source and verification
 
 - [LocalObservation.java](src/main/java/io/github/agentic/ai/examples/LocalObservation.java) is the primary entry point.
-- [LocalObservationTest.java](src/test/java/io/github/agentic/ai/examples/LocalObservationTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

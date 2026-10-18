@@ -21,15 +21,15 @@ bash tools/run.sh argi-graph-example/versioned-recovery
 
 A version-one run resolves version one even when version two exists; missing old versions and incompatible codecs are rejected. MemoryRunStore cannot enter durable mode.
 
-## Verification
+## Build and inspect
 
 ```shell
-bash tools/mvn.sh -B -pl :example-versioned-recovery -am verify
+bash tools/mvn.sh -B -pl :example-versioned-recovery -am -Dmaven.test.skip=true package
 ```
 
-The tests assert the demonstrated behavior and boundary cases. See
-[compatibility.md](../../docs/compatibility.md) for the actual validation record;
-commands listed here are instructions, not a claim that execution occurred.
+Run the entry point above and compare its output with the expected behavior.
+These teaching examples do not add a separate test suite or coverage requirement.
+See [compatibility.md](../../docs/compatibility.md) for the actual validation record.
 
 ## Limits
 

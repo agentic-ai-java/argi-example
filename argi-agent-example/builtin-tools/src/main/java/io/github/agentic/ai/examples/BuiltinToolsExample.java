@@ -1,11 +1,17 @@
 /*
  * Copyright 2026 the original author or authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy at https://www.apache.org/licenses/LICENSE-2.0
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package io.github.agentic.ai.examples;
 
@@ -23,19 +29,36 @@ import java.util.ArrayList;
 
 /** Limits all file tools to a dedicated example workspace supplied by the caller. */
 public final class BuiltinToolsExample {
-    private BuiltinToolsExample() {}
-    public static ReactAgent agent(ChatClient client, Path directory) {
-        var tools = new ArrayList<Tool>(FileSystemTools.builder().rootDir(directory.toAbsolutePath().toString()).maxFileSizeMb(1).build().tools());
-        tools.add(GlobSearchTool.builder(directory.toAbsolutePath().toString()).maxResults(20).build());
-        tools.add(GrepSearchTool.builder(directory.toAbsolutePath().toString()).withUseRipgrep(false).build());
-        tools.add(WriteTodosTool.builder().build());
-        return ReactAgent.builder().throwOnModelError(true).name("workspace_assistant").chatClient(client).toolRegistry(new ToolRegistry(tools))
-            .instruction("Inspect notes.txt, make a todo list, and write a concise summary to summary.txt.").build();
-    }
-    public static void main(String[] args) throws Exception {
-        Path workspace = Path.of("target", "tool-workspace");
-        Files.createDirectories(workspace);
-        Files.writeString(workspace.resolve("notes.txt"), "Add JDBC checkpoints. Document how to resume pending approvals.");
-        org.slf4j.LoggerFactory.getLogger(BuiltinToolsExample.class).info("{}", agent(SpringAiExample.client(System.getenv()), workspace).call("Organize the project notes.").text());
-    }
+
+	private BuiltinToolsExample() {
+	}
+
+	public static ReactAgent agent(ChatClient client, Path directory) {
+		var tools = new ArrayList<Tool>(FileSystemTools.builder()
+			.rootDir(directory.toAbsolutePath().toString())
+			.maxFileSizeMb(1)
+			.build()
+			.tools());
+		tools.add(GlobSearchTool.builder(directory.toAbsolutePath().toString()).maxResults(20).build());
+		tools.add(GrepSearchTool.builder(directory.toAbsolutePath().toString()).withUseRipgrep(false).build());
+		tools.add(WriteTodosTool.builder().build());
+		return ReactAgent.builder()
+			.throwOnModelError(true)
+			.name("workspace_assistant")
+			.chatClient(client)
+			.toolRegistry(new ToolRegistry(tools))
+			.instruction("Inspect notes.txt, make a todo list, and write a concise summary to summary.txt.")
+			.build();
+	}
+
+	public static void main(String[] args) throws Exception {
+		Path workspace = Path.of("target", "tool-workspace");
+		Files.createDirectories(workspace);
+		Files.writeString(workspace.resolve("notes.txt"),
+				"Add JDBC checkpoints. Document how to resume pending approvals.");
+		org.slf4j.LoggerFactory.getLogger(BuiltinToolsExample.class)
+			.info("{}", agent(SpringAiExample.client(System.getenv()), workspace).call("Organize the project notes.")
+				.text());
+	}
+
 }

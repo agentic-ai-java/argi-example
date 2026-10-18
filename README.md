@@ -17,7 +17,7 @@ the demonstrated paths, additional entry points, and limits of every module.
 
 Expanded scenarios separate application data, repositories, tools, state inspection,
 and workflow orchestration where they have distinct responsibilities. Small introductory
-examples remain small. Both production and test Java sources use explicit imports;
+examples remain small. Java sources use explicit imports;
 the static catalog check rejects ordinary and static wildcard imports.
 
 ## Requirements and setup
@@ -77,8 +77,7 @@ contracts at the ARGI runtime boundary.
 
 Runtime labels: **local** needs no model or service; **model** uses real provider
 credentials; **service** needs the external service described in its README and may
-also need a model. Tests use local fixtures where provided; sample main methods use
-real APIs rather than mock responses.
+also need a model. Sample main methods use real APIs; controlled failure drills are labeled explicitly.
 
 
 ### argi-adapter-example
@@ -204,48 +203,48 @@ Each component has its own port/configuration and is started explicitly by its c
 
 ## Checks and CI
 
+These are teaching examples. The repository contains no unit-test suites,
+JUnit/Mockito dependencies or coverage gates. Verify formatting and compilation,
+then run the desired entry point and inspect its documented output.
+
 ```shell
-# Static inventory and document links only.
+# Source inventory and document links.
 make catalog
 
-# Optional compilation without tests or sample execution.
+# Apply the same Java formatter version used by Core.
+make format
+
+# Validate formatting without changing files.
+make format-check
+
+# Compile the default reactor without executing examples.
 make compile
 
-# Optional tests and JaCoCo verification; never starts external infrastructure.
+# Run catalog, formatting and compilation checks together.
 make verify
 ```
 
-Local execution was authorized and performed on **2026-10-15**, using the selected
-Claude Code model (`sonnet` resolved to `glm-5.3`) through its OpenAI-compatible gateway.
-Credentials were passed only through child-process environments; neither the settings
-file nor credentials were copied into this repository. The normal examples continue
-to use `ARGI_API_KEY`, `ARGI_MODEL` and `ARGI_BASE_URL`.
+The seven new local runtime entry points completed successfully on **2026-10-18**.
+No model, database, Nacos, MCP server, Docker daemon or sandbox service was started.
+Earlier real-model and service-validation boundaries remain documented in
+[compatibility.md](docs/compatibility.md#verification-boundary); they are not a claim
+that every external integration was exercised against the current source revision.
 
-The full reactor and all 12 backend profiles build successfully. All 109 local tests
-and all 36 local entry-point runs pass. Of 38 real-model cases, 34 pass and four remain
-incomplete after gateway resets/timeouts. Studio HTTP/SSE also passed.
-The 90% JaCoCo line threshold remains enabled for bundles with execution data;
-modules without tests are explicitly outside the measured percentage.
-[Compatibility and validation results](docs/compatibility.md#verification-boundary)
-record exact counts, failed gateway requests and unexecuted external-service scenarios.
-No database, Nacos, MCP server, Docker daemon or sandbox infrastructure was started.
-Performance, load, capacity, chaos, dependency-vulnerability and remote-CI checks
-are not claimed by this local execution.
-
-[GitHub Actions](.github/workflows/verify.yml) keeps CI enabled for pushes and pull
-requests. It installs pinned upstream source revisions, verifies the examples, and
-compiles every backend profile. CI is enabled; the current working-tree changes have not
-been validated by a remote run. No CI result is inferred from source inspection.
+[GitHub Actions](.github/workflows/verify.yml) runs on pushes and pull requests.
+It checks the catalog and Java formatting, installs pinned source dependencies,
+compiles the default reactor, and compiles all 12 optional backend profiles.
+ARGI lint, license and secret-check workflows use the same rule files as Core.
+It does not execute test suites or enforce coverage thresholds.
 
 ## Adding an example
 
-Add a capability-focused module, a Java main entry point, a README with prerequisites
-and observable results, and tests for nontrivial local behavior. Register the module
-in its group POM and update `docs/catalog.json`, `docs/website-coverage.md`, and
-`docs/feature-coverage.md`. Register all supporting sources, tests, and additional
-main methods in the catalog, with their demonstrated behavior and limitations.
-Use a real integration in integration scenarios. Label local corpora, fault injection,
-and emulation explicitly; keep mock providers in `src/test`. Do not use wildcard imports.
+Add a named Maven module, a real Java main entry point, and a README with
+prerequisites, a runnable command and observable results. Register the module in
+its group POM and update `docs/catalog.json`, `docs/website-coverage.md`, and
+`docs/feature-coverage.md`. Register supporting sources and additional main methods
+with their demonstrated behavior and limitations. Do not add test suites.
+Use real integrations where required; label local corpora, fault injection and
+emulation explicitly. Use explicit imports and run `make format` before submitting.
 
 ## Cleanup and rollback
 

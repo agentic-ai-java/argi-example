@@ -24,7 +24,6 @@ Uses JSON Pointer `/articles`, selects title/body, and retains each record ID as
 ## Source and verification
 
 - [DocumentParsing.java](src/main/java/io/github/agentic/ai/examples/DocumentParsing.java) is the primary entry point.
-- [DocumentParsingTest.java](src/test/java/io/github/agentic/ai/examples/DocumentParsingTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

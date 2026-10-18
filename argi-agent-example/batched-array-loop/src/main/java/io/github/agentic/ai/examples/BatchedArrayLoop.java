@@ -27,39 +27,43 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** Inspects the actual array-loop dispatcher without requiring a model-backed child agent. */
+/**
+ * Inspects the actual array-loop dispatcher without requiring a model-backed child agent.
+ */
 public final class BatchedArrayLoop {
-    private static final Logger LOG = LoggerFactory.getLogger(BatchedArrayLoop.class);
 
-    private BatchedArrayLoop() {
-    }
+	private static final Logger LOG = LoggerFactory.getLogger(BatchedArrayLoop.class);
 
-    public static List<String> batches(String json, int batchSize) {
-        return dispatch(json, LoopMode.array(batchSize));
-    }
+	private BatchedArrayLoop() {
+	}
 
-    public static List<String> legacyElements(String json) {
-        return dispatch(json, new ArrayLoopStrategy());
-    }
+	public static List<String> batches(String json, int batchSize) {
+		return dispatch(json, LoopMode.array(batchSize));
+	}
 
-    private static List<String> dispatch(String json, ArrayLoopStrategy strategy) {
-        final Map<String, Object> data = new HashMap<>();
-        data.put(LoopStrategy.MESSAGE_KEY, List.of(ChatMessage.user(json)));
-        data.putAll(strategy.loopInit(new OverAllState(data)));
-        final List<String> messages = new ArrayList<>();
-        while (Boolean.TRUE.equals(data.get(strategy.loopFlagKey()))) {
-            final Map<String, Object> next = strategy.loopDispatch(new OverAllState(data));
-            data.putAll(next);
-            if (Boolean.TRUE.equals(next.get(strategy.loopFlagKey()))) {
-                messages.add(((ChatMessage) next.get(LoopStrategy.MESSAGE_KEY)).text());
-            }
-        }
-        return List.copyOf(messages);
-    }
+	public static List<String> legacyElements(String json) {
+		return dispatch(json, new ArrayLoopStrategy());
+	}
 
-    public static void main(String[] args) {
-        LOG.info("Batches: {}", batches("[1,2,3,4,5]", 2));
-        LOG.info("Explicit batch size one: {}", batches("[1,2]", 1));
-        LOG.info("Legacy element framing: {}", legacyElements("[1,2]"));
-    }
+	private static List<String> dispatch(String json, ArrayLoopStrategy strategy) {
+		final Map<String, Object> data = new HashMap<>();
+		data.put(LoopStrategy.MESSAGE_KEY, List.of(ChatMessage.user(json)));
+		data.putAll(strategy.loopInit(new OverAllState(data)));
+		final List<String> messages = new ArrayList<>();
+		while (Boolean.TRUE.equals(data.get(strategy.loopFlagKey()))) {
+			final Map<String, Object> next = strategy.loopDispatch(new OverAllState(data));
+			data.putAll(next);
+			if (Boolean.TRUE.equals(next.get(strategy.loopFlagKey()))) {
+				messages.add(((ChatMessage) next.get(LoopStrategy.MESSAGE_KEY)).text());
+			}
+		}
+		return List.copyOf(messages);
+	}
+
+	public static void main(String[] args) {
+		LOG.info("Batches: {}", batches("[1,2,3,4,5]", 2));
+		LOG.info("Explicit batch size one: {}", batches("[1,2]", 1));
+		LOG.info("Legacy element framing: {}", legacyElements("[1,2]"));
+	}
+
 }

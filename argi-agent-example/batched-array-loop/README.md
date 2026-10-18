@@ -21,15 +21,15 @@ bash tools/run.sh argi-agent-example/batched-array-loop
 
 [1,2,3,4,5] with batch size 2 yields [1,2], [3,4], [5]. Explicit size 1 keeps array framing; the legacy constructor yields scalar text.
 
-## Verification
+## Build and inspect
 
 ```shell
-bash tools/mvn.sh -B -pl :example-batched-array-loop -am verify
+bash tools/mvn.sh -B -pl :example-batched-array-loop -am -Dmaven.test.skip=true package
 ```
 
-The tests assert the demonstrated behavior and boundary cases. See
-[compatibility.md](../../docs/compatibility.md) for the actual validation record;
-commands listed here are instructions, not a claim that execution occurred.
+Run the entry point above and compare its output with the expected behavior.
+These teaching examples do not add a separate test suite or coverage requirement.
+See [compatibility.md](../../docs/compatibility.md) for the actual validation record.
 
 ## Limits
 

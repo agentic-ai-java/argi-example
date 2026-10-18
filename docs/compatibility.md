@@ -29,15 +29,28 @@ against the new baseline.
 
 ## Current update verification
 
-The complete default reactor (63 example modules, excluding historical AgentScope)
-and its test sources compile with Java 17 using `bash tools/mvn.sh -B -DskipTests package`.
-The catalog check passes with 64 entries, 60 website mappings, 123 main source files
-and 84 test files. Runtime execution and coverage are pending explicit execution
-authorization. The existing results below remain dated historical evidence and must
-not be treated as validation of this update.
+Validation follows the teaching-example workflow: Java formatting, compilation,
+static catalog checks, and explicitly selected runnable entry points. All test
+sources, test-only dependencies and coverage configuration have been removed.
+CI remains enabled with catalog, format, Checkstyle, default-reactor and backend-profile builds.
+The lint, license and secret-check rules are copied from the pinned Core revision.
+Runner setup omits the unused Docker image pull; CLI tooling is installed in an
+isolated directory and secret findings are redacted. Core test, release and Studio
+jobs are not applicable to this example repository.
 
-The catalog now follows the active `argi-website/docs` inventory, while retaining
-existing source-led coverage and historical model/backend validation details.
+The catalog contains 64 modules (63 default plus historical AgentScope), 60 website
+mappings and 123 main source files. The seven new local entry points completed on
+2026-10-18 with the documented authorization, retry, selection, provenance, queue,
+batch and version-admission outcomes. No model or external service was invoked.
+
+The final local checks passed: catalog/link checks, Spring Java Format, Core
+Checkstyle rules, YAML/spelling/newline checks, license headers, redacted secret
+scanning, all 63 default module builds and all 12 optional backend profile builds.
+The seven local entry points were rerun through their documented commands after
+formatting. CI results are tracked on the pull request separately.
+
+The following 2026-10-15 provider results remain historical evidence. They do not
+represent a fresh live-provider validation of the current main revision.
 
 ## Direct replacements from website snippets
 
@@ -80,8 +93,8 @@ that the unmodified upstream pins already contain the fixes.
    check to `NodeExecutor`'s terminal-response filter. The pinned runtime can emit a
    completion event with a full origin response and no visible messages. Its parent
    graph previously accessed `streaming.messages().get(0)`, causing an index error.
-   `RoutingStreamingTest` reproduced that failure before the correction and passes
-   afterward. Routing and embedded support-writer model runs verify the repaired path.
+   Routing and embedded support-writer model runs verified the repaired path in
+   the historical validation below.
 2. **Extensions A2A streaming:** `tools/build_extensions.py` changes the obsolete
    `StreamingOutput.chunk()` call to `StreamingOutput<?>.text()` in the staged copy.
 3. **Extensions Sandbox SDK:** the same script declares Sandbox's direct
@@ -105,22 +118,18 @@ Spring AI request timeouts were set to 120 seconds for the longer model runs.
 | Check | Result |
 | --- | --- |
 | Fixed Core and Extensions dependency builds | Passed with the three staged corrections above |
-| Full example reactor, `bash tools/mvn.sh -B -fae install` | Passed, including verification |
-| Final `bash tools/mvn.sh -B -fae verify` | Passed; 109 tests, 0 failures, 0 errors, 0 skipped |
-| JaCoCo | 1,401 / 1,435 executable lines in 44 measured modules: **97.63%**; every measured module is at least 90% |
-| Unmeasured coverage | 15 modules have no tests/execution data; the measured percentage does **not** represent all 59 modules |
+| Full example reactor, `bash tools/mvn.sh -B -fae install` | Passed |
 | Local entry-point runs | **36 / 36 passed**, including separate persistence prepare/resume processes |
 | Model entry-point cases | **34 / 38 passed**; four incomplete gateway-backed cases are listed below |
 | Studio HTTP/SSE | Passed: HTTP 200 agent discovery and a real-model SSE answer; application stopped afterward |
 | Backend profiles | All 7 memory and 5 vector profiles compiled; backend connectivity was not tested |
-| Catalog/import checks | 59 modules, 54 website mappings, 116 main sources, 79 test sources, 31 additional entry points; no wildcard imports |
-| Remote CI and vulnerability checks | Not run for these working-tree changes; CI and its coverage gate remain enabled |
+| Catalog/import checks | 59 modules, 54 website mappings, 116 main sources, 31 additional entry points; no wildcard imports |
+| Remote CI and vulnerability checks | Not run for these working-tree changes; CI remains enabled |
 
 Counts are distinct entry-point/argument combinations, not model request counts.
 Reruns replace the earlier outcome. A normal process exit alone was insufficient:
 empty answers, swallowed model exceptions, pending reapprovals and failed requests
-were not counted as successful completed answers. Per-module test, coverage and
-runtime outcomes are recorded in [catalog.json](catalog.json).
+were not counted as successful completed answers. Per-module runtime outcomes are recorded in [catalog.json](catalog.json).
 
 Successful real-model paths include all four adapters' basic, asynchronous and
 streaming requests; strict ticket validation and typed output; ordinary and direct
@@ -129,25 +138,25 @@ budgets; long-history summarization; selected and emulated tools; nested delegat
 planner decomposition; bounded revision; routing streams; and support draft review.
 The compaction stress-input example retained seven messages, a summary marker and
 the first user message. The healthy-primary fallback run does not prove a live
-provider failover; injected primary failure is covered by a deterministic test.
+provider failover.
 
 ### Incomplete real-model cases
 
 | Entry point | Observed outcome |
 | --- | --- |
 | `ContextCompaction` | Gateway reset/cancelled the connection during the ordinary four-turn conversation; the separate long-transcript `CompactionScenarios` run passed |
-| `MultiAgent` | Parallel review/writing run failed with request timeout/connection cancellation; deterministic composition tests pass |
-| `ParallelReview` | Gateway reset a parallel review request; deterministic merge/runtime tests pass |
-| `AgentApproval EDITED` | Corrected arguments executed `ORDER-43` and returned `Preparing shipment`, but the gateway reset the subsequent model stream before completion; `APPROVED` and `REJECTED` live runs pass, and all three decision paths pass local tests |
+| `MultiAgent` | Parallel review/writing run failed with request timeout/connection cancellation |
+| `ParallelReview` | Gateway reset a parallel review request |
+| `AgentApproval EDITED` | Corrected arguments executed `ORDER-43` and returned `Preparing shipment`, but the gateway reset the subsequent model stream before completion; `APPROVED` and `REJECTED` live runs pass |
 
 The first three were retried without obtaining a complete validated result. These
-are unresolved live-provider failures, not successful integration tests. The edited
+are unresolved live-provider failures, not successful integration runs. The edited
 approval run additionally exposed a possible second approval request; the example
 now treats a new interruption as unfinished and never approves it automatically.
 
 ### Execution-driven example fixes
 
-- Restored explicit Spring/JUnit/tool annotation imports removed during the earlier
+- Restored explicit Spring/tool annotation imports removed during the earlier
   source-only import cleanup; sorted imports without deleting annotation names.
 - Registered the local observation lifecycle listener and added the MongoDB sync
   driver's direct dependency.

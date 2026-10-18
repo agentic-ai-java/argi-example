@@ -33,7 +33,6 @@ Serves Studio on port 8080 (override SERVER_PORT). The `studio_support` agent is
 ## Source and verification
 
 - [StudioChatbot.java](src/main/java/io/github/agentic/ai/examples/StudioChatbot.java) is the primary entry point.
-- [StudioChatbotTest.java](src/test/java/io/github/agentic/ai/examples/StudioChatbotTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

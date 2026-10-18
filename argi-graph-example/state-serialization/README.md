@@ -24,7 +24,6 @@ The recovered events are `received`, `accepted`, `finished`; status is `done`. M
 ## Source and verification
 
 - [StateSerialization.java](src/main/java/io/github/agentic/ai/examples/StateSerialization.java) is the primary entry point.
-- [StateSerializationTest.java](src/test/java/io/github/agentic/ai/examples/StateSerializationTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

@@ -24,7 +24,6 @@ Consumes token/node events once and commits the final model response into `answe
 ## Source and verification
 
 - [GraphModelStreaming.java](src/main/java/io/github/agentic/ai/examples/GraphModelStreaming.java) is the primary entry point.
-- [GraphModelStreamingTest.java](src/test/java/io/github/agentic/ai/examples/GraphModelStreamingTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

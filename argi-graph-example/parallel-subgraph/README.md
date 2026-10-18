@@ -24,7 +24,6 @@ Expected receipt: `reserved/authorized`. For explicit concurrent branch scheduli
 ## Source and verification
 
 - [ParallelSubgraph.java](src/main/java/io/github/agentic/ai/examples/ParallelSubgraph.java) is the primary entry point.
-- [ParallelSubgraphTest.java](src/test/java/io/github/agentic/ai/examples/ParallelSubgraphTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

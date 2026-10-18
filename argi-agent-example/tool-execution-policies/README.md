@@ -21,15 +21,15 @@ bash tools/run.sh argi-agent-example/tool-execution-policies
 
 Missing identity and revoked permission yield auth-denied with zero callbacks; invalid arguments yield error with zero callbacks; a registered invoice decline yields business-failed; an unregistered decline stays SUCCESS.
 
-## Verification
+## Build and inspect
 
 ```shell
-bash tools/mvn.sh -B -pl :example-tool-execution-policies -am verify
+bash tools/mvn.sh -B -pl :example-tool-execution-policies -am -Dmaven.test.skip=true package
 ```
 
-The tests assert the demonstrated behavior and boundary cases. See
-[compatibility.md](../../docs/compatibility.md) for the actual validation record;
-commands listed here are instructions, not a claim that execution occurred.
+Run the entry point above and compare its output with the expected behavior.
+These teaching examples do not add a separate test suite or coverage requirement.
+See [compatibility.md](../../docs/compatibility.md) for the actual validation record.
 
 ## Limits
 
