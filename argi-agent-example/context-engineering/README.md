@@ -24,7 +24,6 @@ Two turns share `customer-42`. A third model turn in that thread exceeds the con
 ## Source and verification
 
 - [ContextEngineering.java](src/main/java/io/github/agentic/ai/examples/ContextEngineering.java) is the primary entry point.
-- [ContextEngineeringTest.java](src/test/java/io/github/agentic/ai/examples/ContextEngineeringTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

@@ -24,7 +24,6 @@ Expected result: `greeting=Welcome, Ada!`. The workflow has two ordinary Java no
 ## Source and verification
 
 - [HelloGraph.java](src/main/java/io/github/agentic/ai/examples/HelloGraph.java) is the primary entry point.
-- [HelloGraphTest.java](src/test/java/io/github/agentic/ai/examples/HelloGraphTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

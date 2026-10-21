@@ -24,7 +24,6 @@ Severity 4 or 5 selects `on-call`; lower severity selects `business-hours`. The 
 ## Source and verification
 
 - [ConditionalRouting.java](src/main/java/io/github/agentic/ai/examples/ConditionalRouting.java) is the primary entry point.
-- [ConditionalRoutingTest.java](src/test/java/io/github/agentic/ai/examples/ConditionalRoutingTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

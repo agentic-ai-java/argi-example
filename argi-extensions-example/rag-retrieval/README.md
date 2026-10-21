@@ -24,7 +24,6 @@ Calls a real chat model to generate a hypothetical passage, then searches a vect
 ## Source and verification
 
 - [RagRetrieval.java](src/main/java/io/github/agentic/ai/examples/RagRetrieval.java) is the primary entry point.
-- [RagRetrievalTest.java](src/test/java/io/github/agentic/ai/examples/RagRetrievalTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

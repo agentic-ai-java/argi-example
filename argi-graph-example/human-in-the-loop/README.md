@@ -24,7 +24,6 @@ The saved state first contains `awaiting-approval`. Explicit feedback changes th
 ## Source and verification
 
 - [HumanInTheLoop.java](src/main/java/io/github/agentic/ai/examples/HumanInTheLoop.java) is the primary entry point.
-- [HumanInTheLoopTest.java](src/test/java/io/github/agentic/ai/examples/HumanInTheLoopTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

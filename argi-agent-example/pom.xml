@@ -10,6 +10,10 @@
   <artifactId>argi-agent-example</artifactId>
   <packaging>pom</packaging>
   <modules>
+    <module>tool-execution-policies</module>
+    <module>context-provenance</module>
+    <module>background-tasks</module>
+    <module>batched-array-loop</module>
     <module>a2a</module>
     <module>agent-as-tool</module>
     <module>agent-hitl</module>

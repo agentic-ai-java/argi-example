@@ -24,7 +24,6 @@ The `Approval` action interrupts only while `approved` is missing. Supplying fee
 ## Source and verification
 
 - [DynamicApproval.java](src/main/java/io/github/agentic/ai/examples/DynamicApproval.java) is the primary entry point.
-- [DynamicApprovalTest.java](src/test/java/io/github/agentic/ai/examples/DynamicApprovalTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

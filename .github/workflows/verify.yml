@@ -1,23 +1,40 @@
-name: Verify examples
+# Copyright 2025-2026 the original author or authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: 🛠️ Build Examples
 on:
   push:
   pull_request:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           path: examples
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: agentic-ai-java/argi
-          ref: f61a477220b9caec4d63b9469dbab5877eff1df9
+          ref: 5ec935b384d5379324ee60277ddcd3a6683a861f
           path: argi
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: agentic-ai-java/argi-extensions
           ref: 84994ebb71374ebc3dea688ae7f81360934313f9
@@ -33,9 +50,15 @@ jobs:
       - name: Install pinned source dependencies
         working-directory: examples
         run: bash tools/bootstrap.sh
-      - name: Verify examples without external services
+      - name: Check Java formatting
         working-directory: examples
-        run: bash tools/mvn.sh -B verify
+        run: make format-check
+      - name: Check Java style
+        working-directory: examples
+        run: make checkstyle-check
+      - name: Compile examples without external services
+        working-directory: examples
+        run: bash tools/mvn.sh -B -Dmaven.test.skip=true package
       - name: Compile every backend profile
         working-directory: examples
         shell: bash

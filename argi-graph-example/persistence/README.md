@@ -30,7 +30,6 @@ Run `prepare` first, then `resume` in a separate process. Files remain under thi
 ## Source and verification
 
 - [Persistence.java](src/main/java/io/github/agentic/ai/examples/Persistence.java) is the primary entry point.
-- [PersistenceTest.java](src/test/java/io/github/agentic/ai/examples/PersistenceTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

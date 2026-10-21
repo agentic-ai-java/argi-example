@@ -24,7 +24,6 @@ The parent exposes `word_count`; the child-only `tokens` key never enters the pa
 ## Source and verification
 
 - [SubgraphAsNode.java](src/main/java/io/github/agentic/ai/examples/SubgraphAsNode.java) is the primary entry point.
-- [SubgraphAsNodeTest.java](src/test/java/io/github/agentic/ai/examples/SubgraphAsNodeTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

@@ -1,5 +1,12 @@
 # agentscope
 
+> Historical compatibility example: Core main at `5ec935b384d5379324ee60277ddcd3a6683a861f`
+> no longer contains this adapter or manages it in the BOM. This module is excluded
+> from the default reactor. To build it, separately install the adapter from the
+> earlier compatible source `f61a477220b9caec4d63b9469dbab5877eff1df9` and select
+> `-Plegacy-agentscope`. The current bootstrap does not install that historical
+> artifact. No validation of this optional profile is claimed for the new baseline.
+
 Wraps an AgentScope OpenAI-compatible model in the neutral ARGI ChatClient.
 
 ## Requirements
@@ -26,7 +33,6 @@ The model is constructed from ARGI_API_KEY, ARGI_MODEL, and ARGI_BASE_URL. Only 
 ## Source and verification
 
 - [AgentScopeExample.java](src/main/java/io/github/agentic/ai/examples/AgentScopeExample.java) is the primary entry point.
-- [AgentScopeExampleTest.java](src/test/java/io/github/agentic/ai/examples/AgentScopeExampleTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

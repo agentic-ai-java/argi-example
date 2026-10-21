@@ -32,7 +32,6 @@ A running application should retain its NacosPrompt instance and resolve `render
 ## Source and verification
 
 - [NacosPrompt.java](src/main/java/io/github/agentic/ai/examples/NacosPrompt.java) is the primary entry point.
-- [NacosPromptTest.java](src/test/java/io/github/agentic/ai/examples/NacosPromptTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

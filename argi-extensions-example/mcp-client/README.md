@@ -24,7 +24,6 @@ Lists every tools/list page and closes the client. It does not invoke tools. For
 ## Source and verification
 
 - [McpClientExample.java](src/main/java/io/github/agentic/ai/examples/McpClientExample.java) is the primary entry point.
-- [McpClientExampleTest.java](src/test/java/io/github/agentic/ai/examples/McpClientExampleTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

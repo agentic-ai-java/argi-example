@@ -24,7 +24,6 @@ The application owns a small order catalog. The real model requests `track_order
 ## Source and verification
 
 - [ReactTools.java](src/main/java/io/github/agentic/ai/examples/ReactTools.java) is the primary entry point.
-- [ReactToolsTest.java](src/test/java/io/github/agentic/ai/examples/ReactToolsTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

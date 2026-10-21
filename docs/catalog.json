@@ -1,35 +1,16 @@
 {
-  "reviewDate": "2026-10-15",
+  "reviewDate": "2026-10-18",
   "verification": {
-    "date": "2026-10-15",
-    "mode": "local-build-tests-and-partial-live-validation",
+    "date": "2026-10-18",
+    "mode": "format-compile-and-local-entrypoints",
     "buildRun": true,
-    "testsRun": true,
-    "tests": 109,
     "externalServicesStarted": false,
-    "model": "glm-5.3",
-    "backendProfilesCompiled": 12,
     "runtimeSummary": {
       "local": {
-        "passed": 36,
-        "failed": 0
-      },
-      "model": {
-        "passed": 34,
-        "failed": 4
-      },
-      "http-model": {
-        "passed": 1,
+        "passed": 7,
         "failed": 0
       }
     },
-    "measuredCoverage": {
-      "modules": 44,
-      "coveredLines": 1401,
-      "missedLines": 34,
-      "ratio": 0.976307
-    },
-    "unmeasuredModules": 15,
     "remoteCiVerified": false
   },
   "modules": [
@@ -42,10 +23,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/AgentScopeExampleTest.java",
-        "src/test/java/io/github/agentic/ai/examples/AgentScopeScenariosTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/AgentScopeExample.java",
         "src/main/java/io/github/agentic/ai/examples/AgentScopeScenarios.java"
@@ -81,17 +58,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 6,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 69,
-          "missed": 2,
-          "ratio": 0.971831
-        }
+        ]
       }
     },
     {
@@ -103,10 +70,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/GoogleAdkExampleTest.java",
-        "src/test/java/io/github/agentic/ai/examples/GoogleAdkScenariosTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/GoogleAdkExample.java",
         "src/main/java/io/github/agentic/ai/examples/GoogleAdkScenarios.java"
@@ -142,17 +105,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 6,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 69,
-          "missed": 2,
-          "ratio": 0.971831
-        }
+        ]
       }
     },
     {
@@ -164,10 +117,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/LangChain4jExampleTest.java",
-        "src/test/java/io/github/agentic/ai/examples/LangChain4jScenariosTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/LangChain4jExample.java",
         "src/main/java/io/github/agentic/ai/examples/LangChain4jScenarios.java"
@@ -203,17 +152,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 6,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 69,
-          "missed": 2,
-          "ratio": 0.971831
-        }
+        ]
       }
     },
     {
@@ -225,10 +164,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/SpringAiExampleTest.java",
-        "src/test/java/io/github/agentic/ai/examples/SpringAiScenariosTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/SpringAiExample.java",
         "src/main/java/io/github/agentic/ai/examples/SpringAiScenarios.java"
@@ -264,17 +199,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 6,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 76,
-          "missed": 2,
-          "ratio": 0.974359
-        }
+        ]
       }
     },
     {
@@ -286,7 +211,6 @@
       "runtime": "service",
       "requirements": "An existing A2A service with a public agent card; set A2A_BASE_URL.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/A2aExample.java"
       ],
@@ -301,12 +225,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null,
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -319,7 +237,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/AgentAsToolExample.java",
         "src/main/java/io/github/agentic/ai/examples/ReviewRequest.java",
@@ -356,13 +273,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null
+        ]
       }
     },
     {
@@ -374,9 +285,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/AgentApprovalTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/AgentApproval.java"
       ],
@@ -416,17 +324,7 @@
             "status": "failed",
             "detail": "Edited arguments executed ORDER-43 successfully; the gateway reset the subsequent model stream before completion."
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 20,
-          "missed": 1,
-          "ratio": 0.952381
-        }
+        ]
       }
     },
     {
@@ -438,11 +336,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/AgenticRagRuntimeTest.java",
-        "src/test/java/io/github/agentic/ai/examples/DocumentationCorpusTest.java",
-        "src/test/java/io/github/agentic/ai/examples/RetrievalScenariosEntryPointTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/AgenticRag.java",
         "src/main/java/io/github/agentic/ai/examples/DocumentationCorpus.java",
@@ -481,17 +374,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 4,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 56,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -503,7 +386,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/BuiltinToolsExample.java"
       ],
@@ -524,13 +406,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null
+        ]
       }
     },
     {
@@ -542,7 +418,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/CompactionScenarios.java",
         "src/main/java/io/github/agentic/ai/examples/ContextCompaction.java",
@@ -581,13 +456,7 @@
             "status": "passed",
             "detail": "Retained 7 messages, including a summary and the original first user message."
           }
-        ],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null
+        ]
       }
     },
     {
@@ -599,9 +468,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/ContextEngineeringTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/ContextEngineering.java",
         "src/main/java/io/github/agentic/ai/examples/ConversationSessions.java"
@@ -637,17 +503,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 30,
-          "missed": 2,
-          "ratio": 0.9375
-        }
+        ]
       }
     },
     {
@@ -659,10 +515,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/RetryRuntimeTest.java",
-        "src/test/java/io/github/agentic/ai/examples/RetryScenariosTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/FailOnceTrackingTool.java",
         "src/main/java/io/github/agentic/ai/examples/HooksAndRetries.java",
@@ -699,17 +551,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 2,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 32,
-          "missed": 1,
-          "ratio": 0.969697
-        }
+        ]
       }
     },
     {
@@ -721,12 +563,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/ContextEditingScenariosEntryPointTest.java",
-        "src/test/java/io/github/agentic/ai/examples/FallbackAgentTest.java",
-        "src/test/java/io/github/agentic/ai/examples/InterceptorRuntimeTest.java",
-        "src/test/java/io/github/agentic/ai/examples/MessageSanitizerScenariosEntryPointTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/ContextEditingScenarios.java",
         "src/main/java/io/github/agentic/ai/examples/FallbackAgent.java",
@@ -811,17 +647,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 7,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 99,
-          "missed": 1,
-          "ratio": 0.99
-        }
+        ]
       }
     },
     {
@@ -833,10 +659,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/MultiAgentTest.java",
-        "src/test/java/io/github/agentic/ai/examples/ReviewMergeStrategyTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/MultiAgent.java",
         "src/main/java/io/github/agentic/ai/examples/ParallelReview.java",
@@ -888,17 +710,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 2,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 53,
-          "missed": 1,
-          "ratio": 0.981481
-        }
+        ]
       }
     },
     {
@@ -910,11 +722,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/PlanValidationScenariosEntryPointTest.java",
-        "src/test/java/io/github/agentic/ai/examples/PlanValidationScenariosTest.java",
-        "src/test/java/io/github/agentic/ai/examples/PlannerRuntimeTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/PlanValidationScenarios.java",
         "src/main/java/io/github/agentic/ai/examples/PlannerExample.java",
@@ -951,17 +758,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 4,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 23,
-          "missed": 2,
-          "ratio": 0.92
-        }
+        ]
       }
     },
     {
@@ -973,11 +770,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/ReactToolsTest.java",
-        "src/test/java/io/github/agentic/ai/examples/ToolScenariosEntryPointTest.java",
-        "src/test/java/io/github/agentic/ai/examples/TrackingToolTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/DirectTrackingTool.java",
         "src/main/java/io/github/agentic/ai/examples/OrderRecord.java",
@@ -1029,17 +821,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 5,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 57,
-          "missed": 4,
-          "ratio": 0.934426
-        }
+        ]
       }
     },
     {
@@ -1051,9 +833,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/RoutingStreamingTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/RoutingStreaming.java"
       ],
@@ -1074,17 +853,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 15,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -1096,7 +865,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/SkillsExample.java"
       ],
@@ -1117,13 +885,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null
+        ]
       }
     },
     {
@@ -1135,11 +897,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/StructuredOutputTest.java",
-        "src/test/java/io/github/agentic/ai/examples/TicketSchemaTest.java",
-        "src/test/java/io/github/agentic/ai/examples/TicketValidationScenariosEntryPointTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/StructuredOutput.java",
         "src/main/java/io/github/agentic/ai/examples/TicketSchema.java",
@@ -1189,17 +946,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 4,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 36,
-          "missed": 2,
-          "ratio": 0.947368
-        }
+        ]
       }
     },
     {
@@ -1211,9 +958,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/StudioChatbotTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/StudioChatbot.java"
       ],
@@ -1235,17 +979,7 @@
             "status": "passed",
             "detail": "Local HTTP 200 agent discovery and real-model SSE answer; application stopped after validation."
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 5,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -1257,9 +991,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/SupportReviewTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/SupportReview.java",
         "src/main/java/io/github/agentic/ai/examples/SupportTicket.java",
@@ -1296,17 +1027,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 40,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -1318,7 +1039,6 @@
       "runtime": "service",
       "requirements": "Nacos A2A discovery and a registered remote agent; set A2A_AGENT_NAME and NACOS_SERVER_ADDR.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/NacosA2aExample.java"
       ],
@@ -1333,12 +1053,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null,
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -1351,9 +1065,6 @@
       "runtime": "service",
       "requirements": "A running Docker daemon and a pre-pulled Python image; set DOCKER_HOST for the daemon socket and optionally ARGI_DOCKER_IMAGE.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/DockerExecutionTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/DockerExecution.java"
       ],
@@ -1368,16 +1079,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 9,
-          "missed": 0,
-          "ratio": 1.0
-        },
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -1390,11 +1091,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/DocumentIngestionEntryPointTest.java",
-        "src/test/java/io/github/agentic/ai/examples/DocumentIngestionTest.java",
-        "src/test/java/io/github/agentic/ai/examples/DocumentParsingTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/DocumentIngestion.java",
         "src/main/java/io/github/agentic/ai/examples/DocumentParsing.java"
@@ -1432,17 +1128,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 3,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 28,
-          "missed": 2,
-          "ratio": 0.933333
-        }
+        ]
       }
     },
     {
@@ -1454,9 +1140,6 @@
       "runtime": "service",
       "requirements": "An existing tracking HTTP endpoint; set TRACKING_BASE_URL and ALLOW_PRIVATE_NETWORK=true only for a trusted local endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/HttpNodeExampleTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/HttpNodeExample.java"
       ],
@@ -1471,16 +1154,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 10,
-          "missed": 0,
-          "ratio": 1.0
-        },
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -1493,11 +1166,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/JdbcChatMemoryTest.java",
-        "src/test/java/io/github/agentic/ai/examples/JdbcMemoryLifecycleEntryPointTest.java",
-        "src/test/java/io/github/agentic/ai/examples/JdbcMemoryLifecycleTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/JdbcChatMemory.java",
         "src/main/java/io/github/agentic/ai/examples/JdbcMemoryLifecycle.java"
@@ -1533,17 +1201,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 3,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 30,
-          "missed": 2,
-          "ratio": 0.9375
-        }
+        ]
       }
     },
     {
@@ -1555,9 +1213,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/JdbcCheckpointTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/JdbcCheckpoint.java"
       ],
@@ -1578,17 +1233,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 16,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -1600,9 +1245,6 @@
       "runtime": "service",
       "requirements": "An existing Streamable HTTP MCP server; set MCP_BASE_URL and optionally MCP_ENDPOINT.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/McpClientExampleTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/CatalogToolCall.java",
         "src/main/java/io/github/agentic/ai/examples/McpClientExample.java"
@@ -1626,16 +1268,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 3,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 31,
-          "missed": 0,
-          "ratio": 1.0
-        },
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -1648,7 +1280,6 @@
       "runtime": "service",
       "requirements": "Nacos plus the mcp-registry example already running, and model credentials.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/McpDiscoveryAgent.java"
       ],
@@ -1663,12 +1294,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null,
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -1681,7 +1306,6 @@
       "runtime": "service",
       "requirements": "Nacos plus the registered argi-catalog service. This application serves gateway endpoints on port 8093.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/McpGatewayExample.java"
       ],
@@ -1696,12 +1320,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null,
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -1714,7 +1332,6 @@
       "runtime": "service",
       "requirements": "Nacos 3 with MCP registry support; this application serves and registers argi-catalog on port 8092.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/McpRegistryServer.java"
       ],
@@ -1729,12 +1346,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null,
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -1747,7 +1358,6 @@
       "runtime": "service",
       "requirements": "Nacos plus the mcp-registry example, a model endpoint, and an embedding endpoint.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/McpRouterAgent.java"
       ],
@@ -1762,12 +1372,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null,
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -1780,7 +1384,6 @@
       "runtime": "service",
       "requirements": "An existing compatible Mem0 server and model credentials. The startup configures the Mem0 server.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/Mem0MemoryExample.java"
       ],
@@ -1795,12 +1398,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null,
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -1821,10 +1418,6 @@
         "memory-mysql",
         "memory-postgresql"
       ],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/ConversationLifecycleTest.java",
-        "src/test/java/io/github/agentic/ai/examples/MemoryBackendsTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/ConversationLifecycle.java",
         "src/main/java/io/github/agentic/ai/examples/MemoryBackends.java"
@@ -1841,16 +1434,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 2,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 24,
-          "missed": 0,
-          "ratio": 1.0
-        },
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -1863,7 +1446,6 @@
       "runtime": "service",
       "requirements": "An existing MongoDB service; set MONGODB_URI.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/MongoCheckpoint.java",
         "src/main/java/io/github/agentic/ai/examples/MongoRecovery.java"
@@ -1880,12 +1462,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null,
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -1898,9 +1474,6 @@
       "runtime": "service",
       "requirements": "An existing Nacos Config service; set NACOS_SERVER_ADDR and optional NACOS_USERNAME/NACOS_PASSWORD.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/NacosPromptTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/NacosPrompt.java"
       ],
@@ -1915,16 +1488,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 26,
-          "missed": 0,
-          "ratio": 1.0
-        },
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -1937,9 +1500,6 @@
       "runtime": "service",
       "requirements": "A real chat and embedding endpoint; set ARGI_API_KEY, ARGI_MODEL, and optionally ARGI_EMBEDDING_MODEL.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/RagRetrievalTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/RagRetrieval.java"
       ],
@@ -1954,16 +1514,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 24,
-          "missed": 0,
-          "ratio": 1.0
-        },
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -1976,7 +1526,6 @@
       "runtime": "service",
       "requirements": "An existing Redis service; set REDIS_URL and optional REDIS_PASSWORD.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/RedisCheckpoint.java",
         "src/main/java/io/github/agentic/ai/examples/RedisRecovery.java"
@@ -1993,12 +1542,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null,
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -2011,7 +1554,6 @@
       "runtime": "service",
       "requirements": "An existing AgentScope Runtime sandbox manager; set SANDBOX_MANAGER_URL, optional SANDBOX_MANAGER_TOKEN, and model credentials.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/SandboxToolsExample.java"
       ],
@@ -2026,12 +1568,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null,
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -2044,9 +1580,6 @@
       "runtime": "service",
       "requirements": "A Tair Vector-capable service (ordinary Redis is insufficient), real embeddings, TAIR_URI, and matching ARGI_EMBEDDING_DIMENSIONS.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/TairVectorStoreExampleTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/TairVectorStoreExample.java"
       ],
@@ -2061,16 +1594,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 17,
-          "missed": 0,
-          "ratio": 1.0
-        },
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -2089,10 +1612,6 @@
         "vector-tablestore",
         "vector-tair"
       ],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/KnowledgeSearchTest.java",
-        "src/test/java/io/github/agentic/ai/examples/VectorBackendsTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/KnowledgeCorpus.java",
         "src/main/java/io/github/agentic/ai/examples/KnowledgeSearch.java",
@@ -2110,16 +1629,6 @@
         "date": "2026-10-15",
         "compile": "passed",
         "runtime": [],
-        "tests": {
-          "count": 3,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 41,
-          "missed": 1,
-          "ratio": 0.97619
-        },
         "runtimeNote": "Requires external services; no service was started and no live integration result is claimed."
       }
     },
@@ -2132,9 +1641,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/CancellationTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/Cancellation.java"
       ],
@@ -2155,17 +1661,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 21,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -2177,10 +1673,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/ConditionalRoutingTest.java",
-        "src/test/java/io/github/agentic/ai/examples/RoutingScenariosEntryPointTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/ConditionalRouting.java",
         "src/main/java/io/github/agentic/ai/examples/RoutingScenarios.java"
@@ -2216,17 +1708,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 2,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 16,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -2238,9 +1720,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/HelloGraphTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/HelloGraph.java"
       ],
@@ -2261,17 +1740,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 7,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -2283,9 +1752,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/DynamicApprovalTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/DynamicApproval.java"
       ],
@@ -2306,17 +1772,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 12,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -2328,10 +1784,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/ApprovalScenariosEntryPointTest.java",
-        "src/test/java/io/github/agentic/ai/examples/HumanInTheLoopTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/ApprovalScenarios.java",
         "src/main/java/io/github/agentic/ai/examples/HumanInTheLoop.java"
@@ -2367,17 +1819,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 2,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 26,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -2389,9 +1831,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/LocalObservationTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/LocalObservation.java"
       ],
@@ -2412,17 +1851,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 15,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -2434,11 +1863,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/OrderFulfillmentEntryPointTest.java",
-        "src/test/java/io/github/agentic/ai/examples/OrderFulfillmentTest.java",
-        "src/test/java/io/github/agentic/ai/examples/ParallelNodesTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/OrderChecks.java",
         "src/main/java/io/github/agentic/ai/examples/OrderFulfillment.java",
@@ -2475,17 +1899,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 3,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 45,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -2497,9 +1911,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/ParallelSubgraphTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/ParallelSubgraph.java"
       ],
@@ -2520,17 +1931,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 15,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -2542,11 +1943,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/CheckpointInspectorTest.java",
-        "src/test/java/io/github/agentic/ai/examples/PersistenceTest.java",
-        "src/test/java/io/github/agentic/ai/examples/RecoveryScenariosEntryPointTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/CheckpointInspector.java",
         "src/main/java/io/github/agentic/ai/examples/Persistence.java",
@@ -2593,17 +1989,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 3,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 39,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -2615,9 +2001,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/GraphDiagramsTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/GraphDiagrams.java"
       ],
@@ -2638,17 +2021,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 11,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -2665,11 +2038,6 @@
         "src/main/java/io/github/agentic/ai/examples/RunConflictScenarios.java",
         "src/main/java/io/github/agentic/ai/examples/RunExampleContext.java",
         "src/main/java/io/github/agentic/ai/examples/StoredRunWorkflow.java"
-      ],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/RecoverableRunsEntryPointTest.java",
-        "src/test/java/io/github/agentic/ai/examples/RecoverableRunsTest.java",
-        "src/test/java/io/github/agentic/ai/examples/RunConflictScenariosEntryPointTest.java"
       ],
       "demonstratedBehaviors": [
         "Application-owned trusted context and data-only RunSpec round trip; same-submission deduplication; task state transitions; lease handoff and renewal; stale-owner and stale-revision rejection; atomic checkpoint, journal and outbox commits; logical session release."
@@ -2701,17 +2069,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 5,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 79,
-          "missed": 5,
-          "ratio": 0.940476
-        }
+        ]
       }
     },
     {
@@ -2723,11 +2081,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/PreferenceRepositoryTest.java",
-        "src/test/java/io/github/agentic/ai/examples/RuntimeStoreEntryPointTest.java",
-        "src/test/java/io/github/agentic/ai/examples/StoreLifecycleEntryPointTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/PreferenceRepository.java",
         "src/main/java/io/github/agentic/ai/examples/RuntimeStore.java",
@@ -2764,17 +2117,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 4,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 45,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -2786,7 +2129,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/SchedulePolicies.java",
         "src/main/java/io/github/agentic/ai/examples/ScheduledWorkflow.java"
@@ -2809,13 +2151,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 0,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": null
+        ]
       }
     },
     {
@@ -2827,9 +2163,6 @@
       "runtime": "model",
       "requirements": "Set ARGI_API_KEY and ARGI_MODEL; optionally set ARGI_BASE_URL to an OpenAI-compatible /v1 endpoint.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/GraphModelStreamingTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/GraphModelStreaming.java"
       ],
@@ -2850,17 +2183,7 @@
             "runtime": "model",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 7,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -2872,11 +2195,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/MessageRoundTripEntryPointTest.java",
-        "src/test/java/io/github/agentic/ai/examples/MessageRoundTripTest.java",
-        "src/test/java/io/github/agentic/ai/examples/StateSerializationTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/MessageFixtures.java",
         "src/main/java/io/github/agentic/ai/examples/MessageRoundTrip.java",
@@ -2913,17 +2231,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 3,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 34,
-          "missed": 2,
-          "ratio": 0.944444
-        }
+        ]
       }
     },
     {
@@ -2935,9 +2243,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/SubgraphAsCompiledGraphTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/SubgraphAsCompiledGraph.java"
       ],
@@ -2958,17 +2263,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 6,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -2980,9 +2275,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/SubgraphAsNodeTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/SubgraphAsNode.java"
       ],
@@ -3003,17 +2295,7 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
-        },
-        "lineCoverage": {
-          "covered": 9,
-          "missed": 0,
-          "ratio": 1.0
-        }
+        ]
       }
     },
     {
@@ -3025,9 +2307,6 @@
       "runtime": "local",
       "requirements": "No API key, container, or external service is required.",
       "profiles": [],
-      "tests": [
-        "src/test/java/io/github/agentic/ai/examples/SubgraphsTest.java"
-      ],
       "sources": [
         "src/main/java/io/github/agentic/ai/examples/Subgraphs.java"
       ],
@@ -3048,48 +2327,230 @@
             "runtime": "local",
             "status": "passed"
           }
-        ],
-        "tests": {
-          "count": 1,
-          "failures": 0,
-          "errors": 0
+        ]
+      }
+    },
+    {
+      "path": "argi-agent-example/tool-execution-policies",
+      "artifact": "example-tool-execution-policies",
+      "mainClass": "io.github.agentic.ai.examples.ToolExecutionPolicies",
+      "entry": "src/main/java/io/github/agentic/ai/examples/ToolExecutionPolicies.java",
+      "description": "Runs a real AgentToolNode with application-owned trusted identity, opt-in argument validation and explicit business-result mapping.",
+      "runtime": "local",
+      "requirements": "Java 17 and pinned Core RC2 artifacts; no external services.",
+      "profiles": [],
+      "sources": [
+        "src/main/java/io/github/agentic/ai/examples/EffectAwareRetries.java",
+        "src/main/java/io/github/agentic/ai/examples/SelectionFailurePolicies.java",
+        "src/main/java/io/github/agentic/ai/examples/ToolExecutionPolicies.java"
+      ],
+      "demonstratedBehaviors": [
+        "Runs a real AgentToolNode with application-owned trusted identity, opt-in argument validation and explicit business-result mapping.",
+        "Missing identity and revoked permission yield auth-denied with zero callbacks; invalid arguments yield error with zero callbacks; a registered invoice decline yields business-failed; an unregistered decline stays SUCCESS."
+      ],
+      "limitations": [
+        "The ledger is an in-process example. SelectionFailurePolicies deliberately injects selector unavailability; EffectAwareRetries injects an uncertain timeout. No model-quality, real authorization provider or external exactly-once guarantee is demonstrated."
+      ],
+      "scenarios": [
+        {
+          "entry": "src/main/java/io/github/agentic/ai/examples/EffectAwareRetries.java",
+          "mainClass": "io.github.agentic.ai.examples.EffectAwareRetries",
+          "description": "Local controlled failure drill.",
+          "runtime": "local"
         },
-        "lineCoverage": {
-          "covered": 9,
-          "missed": 0,
-          "ratio": 1.0
+        {
+          "entry": "src/main/java/io/github/agentic/ai/examples/SelectionFailurePolicies.java",
+          "mainClass": "io.github.agentic.ai.examples.SelectionFailurePolicies",
+          "description": "Local controlled failure drill.",
+          "runtime": "local"
         }
+      ],
+      "validation": {
+        "date": "2026-10-18",
+        "compile": "passed",
+        "runtime": [
+          {
+            "mainClass": "io.github.agentic.ai.examples.ToolExecutionPolicies",
+            "args": [],
+            "runtime": "local",
+            "status": "passed"
+          },
+          {
+            "mainClass": "io.github.agentic.ai.examples.EffectAwareRetries",
+            "args": [],
+            "runtime": "local",
+            "status": "passed"
+          },
+          {
+            "mainClass": "io.github.agentic.ai.examples.SelectionFailurePolicies",
+            "args": [],
+            "runtime": "local",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "path": "argi-agent-example/context-provenance",
+      "artifact": "example-context-provenance",
+      "mainClass": "io.github.agentic.ai.examples.ContextProvenance",
+      "entry": "src/main/java/io/github/agentic/ai/examples/ContextProvenance.java",
+      "description": "Tags retrieved documents and child output, constructs two summaries and clamps a forged high-trust claim.",
+      "runtime": "local",
+      "requirements": "Java 17 and pinned Core RC2 artifacts; no external services.",
+      "profiles": [],
+      "sources": [
+        "src/main/java/io/github/agentic/ai/examples/ContextProvenance.java"
+      ],
+      "demonstratedBehaviors": [
+        "Tags retrieved documents and child output, constructs two summaries and clamps a forged high-trust claim.",
+        "Application instructions remain trusted; retrieved and child content are untrusted; summaries are derived and retain attribution."
+      ],
+      "limitations": [
+        "Summary text is supplied by the application. This does not run a summarization model, prove prompt-injection immunity or authenticate serialized metadata."
+      ],
+      "scenarios": [],
+      "validation": {
+        "date": "2026-10-18",
+        "compile": "passed",
+        "runtime": [
+          {
+            "mainClass": "io.github.agentic.ai.examples.ContextProvenance",
+            "args": [],
+            "runtime": "local",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "path": "argi-agent-example/background-tasks",
+      "artifact": "example-background-tasks",
+      "mainClass": "io.github.agentic.ai.examples.BackgroundTasks",
+      "entry": "src/main/java/io/github/agentic/ai/examples/BackgroundTasks.java",
+      "description": "Uses one execution slot and one waiting slot to demonstrate capacity and duplicate-ID rejection, completion and explicit result removal.",
+      "runtime": "local",
+      "requirements": "Java 17 and pinned Core RC2 artifacts; no external services.",
+      "profiles": [],
+      "sources": [
+        "src/main/java/io/github/agentic/ai/examples/BackgroundTasks.java"
+      ],
+      "demonstratedBehaviors": [
+        "Uses one execution slot and one waiting slot to demonstrate capacity and duplicate-ID rejection, completion and explicit result removal.",
+        "The third submission and a duplicate ID are rejected; both accepted tasks complete after the gate opens; owned resources close."
+      ],
+      "limitations": [
+        "This is a local JVM repository, without tenant isolation or crash recovery. Results may expire. Cancelling or hiding active work does not immediately free its slot."
+      ],
+      "scenarios": [],
+      "validation": {
+        "date": "2026-10-18",
+        "compile": "passed",
+        "runtime": [
+          {
+            "mainClass": "io.github.agentic.ai.examples.BackgroundTasks",
+            "args": [],
+            "runtime": "local",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "path": "argi-agent-example/batched-array-loop",
+      "artifact": "example-batched-array-loop",
+      "mainClass": "io.github.agentic.ai.examples.BatchedArrayLoop",
+      "entry": "src/main/java/io/github/agentic/ai/examples/BatchedArrayLoop.java",
+      "description": "Drives the actual LoopMode.array initialization and dispatch strategy with ordered JSON input.",
+      "runtime": "local",
+      "requirements": "Java 17 and pinned Core RC2 artifacts; no external services.",
+      "profiles": [],
+      "sources": [
+        "src/main/java/io/github/agentic/ai/examples/BatchedArrayLoop.java"
+      ],
+      "demonstratedBehaviors": [
+        "Drives the actual LoopMode.array initialization and dispatch strategy with ordered JSON input.",
+        "[1,2,3,4,5] with batch size 2 yields [1,2], [3,4], [5]. Explicit size 1 keeps array framing; the legacy constructor yields scalar text."
+      ],
+      "limitations": [
+        "This inspects dispatch without a model-backed child. Batching does not enable parallel execution or establish throughput improvements."
+      ],
+      "scenarios": [],
+      "validation": {
+        "date": "2026-10-18",
+        "compile": "passed",
+        "runtime": [
+          {
+            "mainClass": "io.github.agentic.ai.examples.BatchedArrayLoop",
+            "args": [],
+            "runtime": "local",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "path": "argi-graph-example/versioned-recovery",
+      "artifact": "example-versioned-recovery",
+      "mainClass": "io.github.agentic.ai.examples.VersionedRecovery",
+      "entry": "src/main/java/io/github/agentic/ai/examples/VersionedRecovery.java",
+      "description": "Serializes exact graph, tool catalog, codec and application references and resolves them against an upgraded registry.",
+      "runtime": "local",
+      "requirements": "Java 17 and pinned Core RC2 artifacts; no external services.",
+      "profiles": [],
+      "sources": [
+        "src/main/java/io/github/agentic/ai/examples/VersionedRecovery.java"
+      ],
+      "demonstratedBehaviors": [
+        "Serializes exact graph, tool catalog, codec and application references and resolves them against an upgraded registry.",
+        "A version-one run resolves version one even when version two exists; missing old versions and incompatible codecs are rejected. MemoryRunStore cannot enter durable mode."
+      ],
+      "limitations": [
+        "Registry values are local data definitions. This is an admission contract, not a task runner, persistent backend or cross-JVM recovery demonstration."
+      ],
+      "scenarios": [],
+      "validation": {
+        "date": "2026-10-18",
+        "compile": "passed",
+        "runtime": [
+          {
+            "mainClass": "io.github.agentic.ai.examples.VersionedRecovery",
+            "args": [],
+            "runtime": "local",
+            "status": "passed"
+          }
+        ]
       }
     }
   ],
   "websiteCoverage": [
     {
-      "source": "website/docs/frameworks/graph-core/quick-start.md",
+      "source": "argi-website/docs/frameworks/graph-core/quick-start.md",
       "examples": [
         "argi-graph-example/hello-graph"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/workflow-orchestration.md",
+      "source": "argi-website/docs/frameworks/graph-core/workflow-orchestration.md",
       "examples": [
         "argi-agent-example/support-workflow"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/context-management.md",
+      "source": "argi-website/docs/frameworks/graph-core/context-management.md",
       "examples": [
         "argi-agent-example/context-engineering",
         "argi-graph-example/runtime-store"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/observation.md",
+      "source": "argi-website/docs/frameworks/graph-core/observation.md",
       "examples": [
         "argi-graph-example/observation"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/persistence.md",
+      "source": "argi-website/docs/frameworks/graph-core/persistence.md",
       "examples": [
         "argi-graph-example/persistence",
         "argi-extensions-example/jdbc-checkpoint",
@@ -3098,47 +2559,47 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/runtime-config.md",
+      "source": "argi-website/docs/frameworks/graph-core/runtime-config.md",
       "examples": [
         "argi-graph-example/runtime-store",
         "argi-graph-example/human-in-the-loop"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/scheduling.md",
+      "source": "argi-website/docs/frameworks/graph-core/scheduling.md",
       "examples": [
         "argi-graph-example/scheduling"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/store.md",
+      "source": "argi-website/docs/frameworks/graph-core/store.md",
       "examples": [
         "argi-graph-example/runtime-store"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/streaming.md",
+      "source": "argi-website/docs/frameworks/graph-core/streaming.md",
       "examples": [
         "argi-graph-example/spring-ai-integration",
         "argi-agent-example/routing-streaming"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/concepts/edges.md",
+      "source": "argi-website/docs/frameworks/graph-core/concepts/edges.md",
       "examples": [
         "argi-graph-example/conditional-routing",
         "argi-graph-example/parallel-nodes"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/concepts/graph.md",
+      "source": "argi-website/docs/frameworks/graph-core/concepts/graph.md",
       "examples": [
         "argi-graph-example/hello-graph",
         "argi-graph-example/plantuml"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/concepts/nodes.md",
+      "source": "argi-website/docs/frameworks/graph-core/concepts/nodes.md",
       "examples": [
         "argi-graph-example/spring-ai-integration",
         "argi-extensions-example/http-node",
@@ -3146,94 +2607,94 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/concepts/serializer.md",
+      "source": "argi-website/docs/frameworks/graph-core/concepts/serializer.md",
       "examples": [
         "argi-graph-example/state-serialization"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/concepts/state.md",
+      "source": "argi-website/docs/frameworks/graph-core/concepts/state.md",
       "examples": [
         "argi-graph-example/state-serialization"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/concepts/threads.md",
+      "source": "argi-website/docs/frameworks/graph-core/concepts/threads.md",
       "examples": [
         "argi-agent-example/context-engineering",
         "argi-graph-example/persistence"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/spring-ai-integration.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/spring-ai-integration.md",
       "examples": [
         "argi-graph-example/spring-ai-integration"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/parallel-nodes.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/parallel-nodes.md",
       "examples": [
         "argi-graph-example/parallel-nodes"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/subgraphs.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/subgraphs.md",
       "examples": [
         "argi-graph-example/subgraphs"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/subgraph-as-node.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/subgraph-as-node.md",
       "examples": [
         "argi-graph-example/subgraph-as-node"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/subgraph-as-compiled-graph.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/subgraph-as-compiled-graph.md",
       "examples": [
         "argi-graph-example/subgraph-as-compiled-graph"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/persistence.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/persistence.md",
       "examples": [
         "argi-graph-example/persistence"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/hitl.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/hitl.md",
       "examples": [
         "argi-graph-example/hitl"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/cancellation.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/cancellation.md",
       "examples": [
         "argi-graph-example/cancellation"
       ]
     },
     {
-      "source": "website/docs/frameworks/graph-core/examples/plantuml.md",
+      "source": "argi-website/docs/frameworks/graph-core/examples/plantuml.md",
       "examples": [
         "argi-graph-example/plantuml"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/a2a.md",
+      "source": "argi-website/docs/frameworks/agent-framework/a2a.md",
       "examples": [
         "argi-agent-example/a2a",
         "argi-extensions-example/a2a-nacos"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/agents-intro.md",
+      "source": "argi-website/docs/frameworks/agent-framework/agents-intro.md",
       "examples": [
         "argi-agent-example/react-tools",
         "argi-agent-example/multi-agent"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/builtin-tools.md",
+      "source": "argi-website/docs/frameworks/agent-framework/builtin-tools.md",
       "examples": [
         "argi-agent-example/builtin-tools",
         "argi-extensions-example/docker-execution",
@@ -3241,14 +2702,14 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/hitl.md",
+      "source": "argi-website/docs/frameworks/agent-framework/hitl.md",
       "examples": [
         "argi-agent-example/agent-hitl",
         "argi-agent-example/support-workflow"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/hooks-interceptors.md",
+      "source": "argi-website/docs/frameworks/agent-framework/hooks-interceptors.md",
       "examples": [
         "argi-agent-example/interceptors",
         "argi-agent-example/hooks-and-retries",
@@ -3256,7 +2717,7 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/memory.md",
+      "source": "argi-website/docs/frameworks/agent-framework/memory.md",
       "examples": [
         "argi-agent-example/context-engineering",
         "argi-agent-example/context-compaction",
@@ -3265,14 +2726,14 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/messages.md",
+      "source": "argi-website/docs/frameworks/agent-framework/messages.md",
       "examples": [
         "argi-graph-example/state-serialization",
         "argi-agent-example/routing-streaming"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/multi-agent.md",
+      "source": "argi-website/docs/frameworks/agent-framework/multi-agent.md",
       "examples": [
         "argi-agent-example/multi-agent",
         "argi-agent-example/routing-streaming",
@@ -3280,52 +2741,52 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/quick-start.md",
+      "source": "argi-website/docs/frameworks/agent-framework/quick-start.md",
       "examples": [
         "argi-agent-example/react-tools",
         "argi-agent-example/studio-chatbot"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/rag.md",
+      "source": "argi-website/docs/frameworks/agent-framework/rag.md",
       "examples": [
         "argi-agent-example/agentic-rag",
         "argi-extensions-example/rag-retrieval"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/react-agent-theory.md",
+      "source": "argi-website/docs/frameworks/agent-framework/react-agent-theory.md",
       "examples": [
         "argi-agent-example/react-tools"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/runtime-config.md",
+      "source": "argi-website/docs/frameworks/agent-framework/runtime-config.md",
       "examples": [
         "argi-agent-example/context-engineering",
         "argi-graph-example/runtime-store"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/skills.md",
+      "source": "argi-website/docs/frameworks/agent-framework/skills.md",
       "examples": [
         "argi-agent-example/skills"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/structured-io.md",
+      "source": "argi-website/docs/frameworks/agent-framework/structured-io.md",
       "examples": [
         "argi-agent-example/structured-output"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/tools-as-agent.md",
+      "source": "argi-website/docs/frameworks/agent-framework/tools-as-agent.md",
       "examples": [
         "argi-agent-example/agent-as-tool"
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/tools.md",
+      "source": "argi-website/docs/frameworks/agent-framework/tools.md",
       "examples": [
         "argi-agent-example/react-tools",
         "argi-agent-example/builtin-tools",
@@ -3333,14 +2794,14 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/agent-framework/workflow.md",
+      "source": "argi-website/docs/frameworks/agent-framework/workflow.md",
       "examples": [
         "argi-agent-example/support-workflow",
         "argi-agent-example/multi-agent"
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/chat-memory.md",
+      "source": "argi-website/docs/frameworks/extensions/chat-memory.md",
       "examples": [
         "argi-extensions-example/jdbc-chat-memory",
         "argi-extensions-example/memory-backends",
@@ -3348,19 +2809,19 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/mcp-gateway.md",
+      "source": "argi-website/docs/frameworks/extensions/mcp-gateway.md",
       "examples": [
         "argi-extensions-example/mcp-gateway"
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/mcp-router.md",
+      "source": "argi-website/docs/frameworks/extensions/mcp-router.md",
       "examples": [
         "argi-extensions-example/mcp-router"
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/mcp.md",
+      "source": "argi-website/docs/frameworks/extensions/mcp.md",
       "examples": [
         "argi-extensions-example/mcp-client",
         "argi-extensions-example/mcp-registry",
@@ -3368,19 +2829,19 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/nacos-prompt.md",
+      "source": "argi-website/docs/frameworks/extensions/nacos-prompt.md",
       "examples": [
         "argi-extensions-example/nacos-prompt"
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/observation.md",
+      "source": "argi-website/docs/frameworks/extensions/observation.md",
       "examples": [
         "argi-graph-example/observation"
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/overview.md",
+      "source": "argi-website/docs/frameworks/extensions/overview.md",
       "examples": [
         "argi-extensions-example/memory-backends",
         "argi-extensions-example/vector-backends",
@@ -3389,21 +2850,21 @@
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/rag.md",
+      "source": "argi-website/docs/frameworks/extensions/rag.md",
       "examples": [
         "argi-extensions-example/rag-retrieval",
         "argi-agent-example/agentic-rag"
       ]
     },
     {
-      "source": "website/docs/frameworks/extensions/vector-stores.md",
+      "source": "argi-website/docs/frameworks/extensions/vector-stores.md",
       "examples": [
         "argi-extensions-example/tair-vector-store",
         "argi-extensions-example/vector-backends"
       ]
     },
     {
-      "source": "website/docs/frameworks/studio/quick-start.md",
+      "source": "argi-website/docs/frameworks/studio/quick-start.md",
       "examples": [
         "argi-agent-example/studio-chatbot"
       ]
@@ -3415,17 +2876,58 @@
       ]
     },
     {
-      "source": "website/docs/quick-start.md",
+      "source": "argi-website/docs/quick-start.md",
       "examples": [
         "argi-graph-example/hello-graph",
         "argi-agent-example/react-tools"
       ]
     },
     {
-      "source": "website/docs/overview.md",
+      "source": "argi-website/docs/overview.md",
       "examples": [
         "argi-graph-example/hello-graph",
         "argi-agent-example/react-tools"
+      ]
+    },
+    {
+      "source": "argi-website/docs/frameworks/agent-framework/tool-execution-policies.md",
+      "examples": [
+        "argi-agent-example/tool-execution-policies"
+      ]
+    },
+    {
+      "source": "argi-website/docs/frameworks/agent-framework/context-provenance.md",
+      "examples": [
+        "argi-agent-example/context-provenance"
+      ]
+    },
+    {
+      "source": "argi-website/docs/frameworks/agent-framework/background-tasks.md",
+      "examples": [
+        "argi-agent-example/background-tasks"
+      ]
+    },
+    {
+      "source": "argi-website/docs/frameworks/agent-framework/batched-array-loops.md",
+      "examples": [
+        "argi-agent-example/batched-array-loop"
+      ]
+    },
+    {
+      "source": "argi-website/docs/frameworks/graph-core/versioned-recovery.md",
+      "examples": [
+        "argi-graph-example/versioned-recovery",
+        "argi-graph-example/recoverable-runs"
+      ]
+    },
+    {
+      "source": "argi-website/docs/frameworks/agent-framework/runtime-contracts.md",
+      "examples": [
+        "argi-agent-example/tool-execution-policies",
+        "argi-agent-example/context-provenance",
+        "argi-agent-example/background-tasks",
+        "argi-agent-example/batched-array-loop",
+        "argi-graph-example/versioned-recovery"
       ]
     }
   ],
@@ -3438,5 +2940,10 @@
         "argi-graph-example/recoverable-runs"
       ]
     }
-  ]
+  ],
+  "currentBaseline": {
+    "core": "5ec935b384d5379324ee60277ddcd3a6683a861f",
+    "date": "2026-10-18",
+    "newModulesValidation": "compiled; seven local entry points completed with expected output"
+  }
 }

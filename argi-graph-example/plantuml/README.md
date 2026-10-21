@@ -24,7 +24,6 @@ Writes `target/diagrams/release.puml` and `release.mmd`. Open these with a Plant
 ## Source and verification
 
 - [GraphDiagrams.java](src/main/java/io/github/agentic/ai/examples/GraphDiagrams.java) is the primary entry point.
-- [GraphDiagramsTest.java](src/test/java/io/github/agentic/ai/examples/GraphDiagramsTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

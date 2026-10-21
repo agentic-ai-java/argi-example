@@ -24,7 +24,6 @@ Expected output: `Downstream publication prevented: true`. The example owns a si
 ## Source and verification
 
 - [Cancellation.java](src/main/java/io/github/agentic/ai/examples/Cancellation.java) is the primary entry point.
-- [CancellationTest.java](src/test/java/io/github/agentic/ai/examples/CancellationTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

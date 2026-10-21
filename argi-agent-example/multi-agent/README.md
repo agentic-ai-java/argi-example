@@ -24,7 +24,6 @@ Two reviewers run before the writer. The writer makes two bounded revision passe
 ## Source and verification
 
 - [MultiAgent.java](src/main/java/io/github/agentic/ai/examples/MultiAgent.java) is the primary entry point.
-- [MultiAgentTest.java](src/test/java/io/github/agentic/ai/examples/MultiAgentTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

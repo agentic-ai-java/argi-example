@@ -10,6 +10,7 @@
   <artifactId>argi-graph-example</artifactId>
   <packaging>pom</packaging>
   <modules>
+    <module>versioned-recovery</module>
     <module>cancellation</module>
     <module>conditional-routing</module>
     <module>hello-graph</module>

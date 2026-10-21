@@ -28,7 +28,6 @@ This is the ADK Apigee OpenAI-compatible path, not native Gemini/Vertex AI authe
 ## Source and verification
 
 - [GoogleAdkExample.java](src/main/java/io/github/agentic/ai/examples/GoogleAdkExample.java) is the primary entry point.
-- [GoogleAdkExampleTest.java](src/test/java/io/github/agentic/ai/examples/GoogleAdkExampleTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 

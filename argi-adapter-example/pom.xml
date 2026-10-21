@@ -10,9 +10,16 @@
   <artifactId>argi-adapter-example</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>agentscope</module>
     <module>google-adk</module>
     <module>langchain4j</module>
     <module>spring-ai</module>
   </modules>
+  <profiles>
+    <profile>
+      <id>legacy-agentscope</id>
+      <modules>
+        <module>agentscope</module>
+      </modules>
+    </profile>
+  </profiles>
 </project>

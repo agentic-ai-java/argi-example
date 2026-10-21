@@ -26,7 +26,6 @@ The model is constructed from ARGI_API_KEY, ARGI_MODEL, and ARGI_BASE_URL. Only 
 ## Source and verification
 
 - [SpringAiExample.java](src/main/java/io/github/agentic/ai/examples/SpringAiExample.java) is the primary entry point.
-- [SpringAiExampleTest.java](src/test/java/io/github/agentic/ai/examples/SpringAiExampleTest.java) covers the local contract.
 - [Website coverage](../../docs/website-coverage.md) maps documentation chapters to examples.
 - [Compatibility notes](../../docs/compatibility.md) describe RC2 API changes and the verification boundary.
 
