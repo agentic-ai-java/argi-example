@@ -15,7 +15,7 @@
   <dependencies>
     <dependency>
       <groupId>io.github.agentic-ai-java</groupId>
-      <artifactId>argi-graph-core</artifactId>
+      <artifactId>argi-loop-core</artifactId>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
